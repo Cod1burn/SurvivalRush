@@ -6,6 +6,8 @@ public class Player implements MovableObject{
     PVector blockPosition;
     PVector speed;
 
+    PImage img;
+
     float turnSpeed;
     float angle;
     float speedAngle;
@@ -16,6 +18,8 @@ public class Player implements MovableObject{
     CombatEntity ce;
 
     public Player(Game game) {
+        this.game = game;
+        this.map = game.map;
         ce = new CombatEntity();
         
     }
@@ -57,13 +61,25 @@ public class Player implements MovableObject{
             }
         }
 
-        // Update position
-        position = position.add(speed.copy().mult(second));
+        // Update position in x axis
+        position = position.add(speed.x * second, 0);
         int cx = (int)(position.x / Floor.UNIT);
-        int cy = (int)(position.y / Floor.UNIT);
-        
-        if (cx != coord.x || cy != coord.y) {
+        if (cx != coord.x) {
+            if (!map.getFloor(cx, coord.y).isBlocked) {
+                coord.x = cx;
+            } else {
+                position = position.sub(speed.x * second, 0);
+            }
+        }
 
+        position = position.add(0, speed.y * second);
+        int cy = (int)(position.y / Floor.UNIT);
+        if (cy != coord.y) {
+            if (!map.getFloor(coord.x, cy).isBlocked) {
+                coord.y = cy;
+            } else {
+                position = position.sub(0, speed.y * second);
+            }
         }
     }
 
