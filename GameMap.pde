@@ -11,8 +11,8 @@ public class GameMap {
     }
 
     Floor getFloor(int cx, int cy) {
-        cx %= 10;
-        cy %= 10;
+        cx %= block.W;
+        cy %= block.h;
         return block.getFloor(cx, cy);
     }
 
