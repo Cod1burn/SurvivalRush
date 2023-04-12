@@ -4,7 +4,9 @@ public class Player implements MovableObject{
 
     PVector position;
     PVector blockPosition;
+    PVector direction;
     PVector speed;
+    
 
     PImage img;
 
@@ -21,6 +23,8 @@ public class Player implements MovableObject{
         this.game = game;
         this.map = game.map;
         ce = new CombatEntity();
+        speed = new PVector(0.0, 0.0);
+        direction = new PVector(0.0, 0.0);
         
     }
 
@@ -29,7 +33,16 @@ public class Player implements MovableObject{
         fill(100);
     }
 
-    void movingDirection(PVector direction) {
+    void movingDirection(float x, float y) {
+        direction.add(x, y);
+        // Boundry control
+        if (direction.x > 1.0) direction.x = 1.0;
+        if (direction.x < -1.0) direction.x = -1.0;
+        if (direction.y > 1.0) direction.y = 1.0;
+        if (direction.y < -1.0) direction.y = -1.0;
+    }
+
+    void getFacingAngle(PVector direction) {
         speed = direction.normalize().mult(ce.moveSpeed);
         if (speed.mag() != 0) speedAngle = atan2(speed.y, speed.x);
         if (speedAngle > PI) speedAngle -= 2*PI ;
@@ -81,6 +94,8 @@ public class Player implements MovableObject{
                 position = position.sub(0, speed.y * second);
             }
         }
+
+        map.updateCamera(PVector position);
     }
 
 }

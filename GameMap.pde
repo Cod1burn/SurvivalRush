@@ -7,12 +7,16 @@ public class GameMap {
     }
 
     void draw() {
-
+        
     }
 
     Floor getFloor(int cx, int cy) {
         cx %= 10;
         cy %= 10;
         return block.getFloor(cx, cy);
+    }
+
+    void updateCamera(PVector camera) {
+        this.camera = camera;
     }
 }
