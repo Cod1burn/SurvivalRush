@@ -1,7 +1,7 @@
 from PIL import Image
 import os
 
-def split_image(img_file, n_width, n_height):
+def split_image(img_file, map_folder, n_width, n_height):
     image = Image.open(img_file)
     width, height = image.size
     
@@ -15,4 +15,4 @@ def split_image(img_file, n_width, n_height):
             right = left + per_width
             bottom = top + per_height
             per_image = image.crop((left, top, right, bottom))
-            per_image.save(f'Map_img_{i}{j}.jpg')
+            per_image.save(f'{map_folder}/Map_img_{i}{j}.jpg')

@@ -12,6 +12,6 @@ public class Floor {
     }
 
     void draw() {
-
+        draw(img, coord.x * UNIT, coord.y * UNIT, UNIT, UNIT);
     }
 }
