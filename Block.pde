@@ -7,6 +7,14 @@ public class Block {
         loadMapFromTemplate(template);
     }
 
+    void draw() {
+        for (Floor[] col : floors) {
+            for (Floor f : col) {
+                f.draw();
+            }
+        }
+    }
+
     void loadMapFromTemplate(int num) {
         String filename = "MapTemplates/Map" + template + ".txt";
         String[] floorStrings = loadStrings(filename);
@@ -18,11 +26,13 @@ public class Block {
                 Coord c = new Coord(j, i);
                 switch (floorStrings[i].charAt(j)) {
                     case '1' :
-                        floors[i][j] = new Floor(c, true);
+                        PImage img = loadImage("MapImgs/Map" + num + "/BlockedFloor.jpg");
+                        floors[i][j] = new Floor(c, true, img);
                     break;
 
                     case '0' :
-                        floors[i][j] = new Floor(c, false);
+                        PImage img = loadImage("MapImgs/Map" + num + "/Map_img_" + j + "" + i + ".jpg");
+                        floors[i][j] = new Floor(c, false, img);
                     break;
 
                     default :

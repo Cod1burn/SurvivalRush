@@ -5,7 +5,7 @@ public class Floor {
     boolean blocked;
     PImage img;
 
-    public Floor(Coord coord, boolean blocked, PImage img) {
+    public Floor(Coord coord, boolean blocked) {
         this.coord = coord;
         this.blocked = blocked;
         this.img = img;
