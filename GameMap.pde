@@ -15,9 +15,10 @@ public class GameMap {
         camera.x %= block.w * Floor.UNIT;
         camera.y %= block.h * Floor.UNIT;
 
+        pushMatrix();
         translate(camera);
         block.draw();
-        translate(camera.mult(-1));
+        popMatrix();
 
     }
 

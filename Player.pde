@@ -2,7 +2,8 @@ public class Player implements MovableObject{
     Game game;
     GameMap map;
 
-    static final float RADIUS = 60;
+    static final float RADIUS = 50;
+    static final float ANIMATION_INTERVAL = 0.5;
 
     PVector position;
     PVector blockPosition;
@@ -10,11 +11,11 @@ public class Player implements MovableObject{
     PVector speed;
     
 
+    PImage[] idleIMGs;
+    PImage[] runIMGs;
     PImage img;
 
-    float turnSpeed;
-    float angle;
-    float speedAngle;
+    float animationTimer;
 
     Coord coord; // Coordinates in the map
     Coord blockCoord; // Block coordinates.
@@ -27,16 +28,35 @@ public class Player implements MovableObject{
         ce = new CombatEntity();
         speed = new PVector(0.0, 0.0);
         direction = new PVector(0.0, 0.0);
-        
+        animationTimer = ANIMATION_INTERVAL;
+        loadImageResources();
     }
 
     void draw() {
-        translate(width/2, height/2);
-        rotate(angle);
-        image(img, 0, 0, RADIUS, RADIUS);
-        rotate(-angle);
-        translate(-width/2, -height/2);
+        if (direction.mag() == 0.0) {
+            img = idleIMGs[(int)(animationTimer/(ANIMATION_INTERVAL/2.0))];
+        } else {
+            img = runIMGs[(int)(animationTimer/(ANIMATION_INTERVAL/3.0))];
+        }
 
+        pushMatrix();
+        translate(width/2, height/2);
+        if (direction.x < 0) scale(-1, 1);
+        image(img, 0, 0, RADIUS, RADIUS);
+        popMatrix();
+    }
+
+    void loadImageResources() {
+        idleIMGs = new PImage[2];
+        idleIMGs[0] = loadImage("ObjectImgs/Player/player_idle1.png");
+        idleIMGs[1] = loadImage("ObjectImgs/Player/player_idle2.png");
+
+        // Default facing right
+        runIMGs = new PImage[3];
+        runIMGs[0] = loadImage("ObjectImgs/Player/player_run1.png");
+        runIMGs[1] = loadImage("ObjectImgs/Player/player_run2.png");
+        runIMGs[2] = loadImage("ObjectImgs/Player/player_run3.png");
+        img = idleIMGs[0];
     }
 
     void movingDirection(float x, float y) {
@@ -48,38 +68,14 @@ public class Player implements MovableObject{
         if (direction.y < -1.0) direction.y = -1.0;
     }
 
-    void getFacingAngle(PVector direction) {
-        speed = direction.normalize().mult(ce.moveSpeed);
-        if (speed.mag() != 0) speedAngle = atan2(speed.y, speed.x);
-        if (speedAngle > PI) speedAngle -= 2*PI ;
-        else if (speedAngle < -PI) speedAngle += 2*PI ;  
-    }
-
     void update(float second) {
-        // Update orientation
-        if (angle != speedAngle) {
-            float angleIncr = turnSpeed * second;
+        // update animation
+        animationTimer -= second;
+        if (animationTimer < 0 ) animationTimer = ANIMATION_INTERVAL;
         
-            if (abs(speedAngle - angle) <= angleIncr) {
-                angle = speedAngle;
-            } else {
-                // From Week 6 Lecure: KinematicArriveSketch
-                if (speedAngle < angle) {
-                    if (angle - speedAngle < PI) angle -= angleIncr;
-                    else angle += angleIncr;
-                }
-                else {
-                    if (speedAngle - angle < PI) angle += angleIncr;
-                    else angle -= angleIncr;
-                }
-
-                // Keep in bounds
-                if (angle > PI) angle -= 2*PI ;
-                else if (angle < -PI) angle += 2*PI ;  
-            }
-        }
 
         // Update position in x axis
+        speed = direction.normalize().mult(ce.moveSpeed);
         position = position.add(speed.x * second, 0);
         int cx = (int)(position.x / Floor.UNIT);
         if (cx != coord.x) {
