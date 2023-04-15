@@ -16,7 +16,7 @@ def split_image(img_file, map_folder, n_width, n_height):
             right = left + per_width
             bottom = top + per_height
             per_image = image.crop((left, top, right, bottom))
-            per_image.save(f'{map_folder}/Map_img_{i}{j}.jpg')
+            per_image.save(f'{map_folder}/Map_img_{i}{j}.png')
 
 if __name__ == '__main__':
-    split_image(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+    split_image(sys.argv[1], sys.argv[2], int(sys.argv[3]), int(sys.argv[4]))

@@ -6,7 +6,7 @@ ArrayList<Button> buttons;
 Game game;
 int millis;
 
-/* 
+
 // For test only
 void setup() {
   size(1200,800);
@@ -25,7 +25,7 @@ void draw() {
   } 
 }
 
-*/
+/*
 
 void setup() {
   fullScreen();
@@ -47,6 +47,8 @@ void draw() {
     text("GAME", width/2, height/2);
   }
 }
+
+*/
 
 
 void mousePressed() {
