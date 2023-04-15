@@ -2,6 +2,16 @@ boolean isMenu;
 Menu menu
 int template;
 ArrayList<Button> buttons;
+Game game;
+
+/*
+For test only
+
+void setup() {
+  size(1200,800);
+  frameRate(60);
+  game = new Game();
+}
 
 void setup() {
   fullScreen();
@@ -9,6 +19,8 @@ void setup() {
   menu = new Menu();
   buttons = menu.getButtons();
 }
+
+*/
 
 void draw() {
   // draw menu
