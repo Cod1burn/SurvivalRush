@@ -35,7 +35,10 @@ class Menu {
         buttons.add(button3);
         buttons.add(button4);
 
-        return buttons;
+        // I am not sure if you want to remove the return value or change function return type,
+        // so i just comment it.
+        // -- Yiran
+        // return buttons; 
     }
 
     void drawButtons(){
