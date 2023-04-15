@@ -25,12 +25,12 @@ public class Block {
                 Coord c = new Coord(j, i);
                 switch (floorStrings[i].charAt(j)) {
                     case '1' :
-                        PImage img = loadImage("MapImgs/Map" + num + "/BlockedFloor.jpg");
+                        PImage img = loadImage("MapImgs/Map" + num + "/BlockedFloor.png");
                         floors[i][j] = new Floor(c, true, img);
                     break;
 
                     case '0' :
-                        PImage img = loadImage("MapImgs/Map" + num + "/Map_img_" + j + "" + i + ".jpg");
+                        PImage img = loadImage("MapImgs/Map" + num + "/Map_img_" + j + "" + i + ".png");
                         floors[i][j] = new Floor(c, false, img);
                     break;
 
