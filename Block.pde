@@ -1,5 +1,4 @@
 public class Block {
-    Coord coord;
     Floor[][] floors;
     int w, h;
 

@@ -2,6 +2,8 @@ public class Player implements MovableObject{
     Game game;
     GameMap map;
 
+    static final float RADIUS = 60;
+
     PVector position;
     PVector blockPosition;
     PVector direction;
@@ -29,8 +31,12 @@ public class Player implements MovableObject{
     }
 
     void draw() {
-        storke(0);
-        fill(100);
+        translate(width/2, height/2);
+        rotate(angle);
+        image(img, 0, 0, RADIUS, RADIUS);
+        rotate(-angle);
+        translate(-width/2, -height/2);
+
     }
 
     void movingDirection(float x, float y) {
@@ -49,8 +55,7 @@ public class Player implements MovableObject{
         else if (speedAngle < -PI) speedAngle += 2*PI ;  
     }
 
-    void update(int time) {
-        float second = (float)time/1000.0;
+    void update(float second) {
         // Update orientation
         if (angle != speedAngle) {
             float angleIncr = turnSpeed * second;
@@ -95,7 +100,7 @@ public class Player implements MovableObject{
             }
         }
 
-        map.updateCamera(PVector position);
+        map.updateCamera(position);
     }
 
 }
