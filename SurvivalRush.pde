@@ -1,17 +1,31 @@
 boolean isMenu;
+boolean inGame;
 Menu menu
 int template;
 ArrayList<Button> buttons;
 Game game;
+int millis;
 
-/*
-For test only
-
+/* 
+// For test only
 void setup() {
   size(1200,800);
   frameRate(60);
   game = new Game();
+  inGame = true;
+  millis = millis();
 }
+
+void draw() {
+  int time = millis() - millis;
+  millis = millis();
+  if (inGame) {
+    game.update(time);
+    game.draw();
+  } 
+}
+
+*/
 
 void setup() {
   fullScreen();
@@ -20,7 +34,6 @@ void setup() {
   buttons = menu.getButtons();
 }
 
-*/
 
 void draw() {
   // draw menu
@@ -35,6 +48,7 @@ void draw() {
   }
 }
 
+
 void mousePressed() {
   for (Button button : buttons) {
     if (button.contains(mouseX, mouseY)) {
@@ -48,9 +62,15 @@ void mousePressed() {
   }
 }
 
+
 void keyPressed() {
   // game starts with menu. 
   // space or ENTER to pause or unpause game. 
   // can change if needed. 
   if (key == ' ' || key == ENTER) isMenu = !isMenu;
+  if (inGame) game.keyPressed(key);
+}
+
+void keyReleased() {
+  if (inGame) game.keyReleased(key);
 }
