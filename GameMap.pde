@@ -5,6 +5,7 @@ public class GameMap {
 
     public GameMap(int template) {
         block = new Block(template);
+        camera = new PVector(400,400);
     }
 
     void setPlayer(Player player) {
@@ -16,14 +17,15 @@ public class GameMap {
         camera.y %= block.h * Floor.UNIT;
 
         pushMatrix();
-        translate(camera);
+        translate(camera.x, camera.y);
         block.draw();
+        player.draw();
         popMatrix();
 
     }
 
     Floor getFloor(int cx, int cy) {
-        cx %= block.W;
+        cx %= block.w;
         cy %= block.h;
         return block.getFloor(cx, cy);
     }

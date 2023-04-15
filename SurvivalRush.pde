@@ -1,7 +1,6 @@
 boolean isMenu;
 boolean inGame;
-Menu menu
-int template;
+Menu menu;
 ArrayList<Button> buttons;
 Game game;
 int millis;

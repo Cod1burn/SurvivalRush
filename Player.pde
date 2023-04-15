@@ -6,7 +6,6 @@ public class Player implements MovableObject{
     static final float ANIMATION_INTERVAL = 0.5;
 
     PVector position;
-    PVector blockPosition;
     PVector direction;
     PVector speed;
     
@@ -24,12 +23,17 @@ public class Player implements MovableObject{
 
     public Player(Game game) {
         this.game = game;
-        this.map = game.map;
         ce = new CombatEntity();
+        position = new PVector(400,400);
+        coord = new Coord(5, 5);
         speed = new PVector(0.0, 0.0);
         direction = new PVector(0.0, 0.0);
-        animationTimer = ANIMATION_INTERVAL;
+        animationTimer = ANIMATION_INTERVAL - 0.01;
         loadImageResources();
+    }
+
+    void setMap(GameMap map) {
+        this.map = map;
     }
 
     void draw() {
@@ -71,7 +75,7 @@ public class Player implements MovableObject{
     void update(float second) {
         // update animation
         animationTimer -= second;
-        if (animationTimer < 0 ) animationTimer = ANIMATION_INTERVAL;
+        if (animationTimer < 0 ) animationTimer = ANIMATION_INTERVAL - 0.01;
         
 
         // Update position in x axis
@@ -79,7 +83,7 @@ public class Player implements MovableObject{
         position = position.add(speed.x * second, 0);
         int cx = (int)(position.x / Floor.UNIT);
         if (cx != coord.x) {
-            if (!map.getFloor(cx, coord.y).isBlocked) {
+            if (!map.getFloor(cx, coord.y).blocked) {
                 coord.x = cx;
             } else {
                 position = position.sub(speed.x * second, 0);
@@ -89,7 +93,7 @@ public class Player implements MovableObject{
         position = position.add(0, speed.y * second);
         int cy = (int)(position.y / Floor.UNIT);
         if (cy != coord.y) {
-            if (!map.getFloor(coord.x, cy).isBlocked) {
+            if (!map.getFloor(coord.x, cy).blocked) {
                 coord.y = cy;
             } else {
                 position = position.sub(0, speed.y * second);

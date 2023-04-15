@@ -9,6 +9,8 @@ public class Game {
         int template = 0; // Test template
         player = new Player(this);
         map = new GameMap(template); 
+        
+        player.setMap(map);
         map.setPlayer(player);   
         gameTimer = 15 * 60; // 15 minutes
     }
