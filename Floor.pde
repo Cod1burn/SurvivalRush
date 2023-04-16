@@ -3,13 +3,11 @@ public class Floor {
 
     Coord coord; // Coordinates in the block
     boolean blocked;
-    PImage img;
     PImage blockedImg;
 
-    public Floor(Coord coord, boolean blocked, PImage img) {
+    public Floor(Coord coord, boolean blocked) {
         this.coord = coord;
         this.blocked = blocked;
-        this.img = img;
     }
 
     void setBlockedImg(PImage img) {
@@ -17,7 +15,6 @@ public class Floor {
     }
 
     void draw() {
-        image(img, coord.x * UNIT, coord.y * UNIT, UNIT, UNIT);
         if (blocked) image(blockedImg, coord.x * UNIT, coord.y * UNIT, UNIT, UNIT);
     }
 }

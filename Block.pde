@@ -1,20 +1,23 @@
 public class Block {
     Floor[][] floors;
     int w, h;
+    PImage img;
 
     public Block(int template) {
         loadMapFromTemplate(template);
     }
 
     void draw() {
-        for (Floor[] col : floors) {
-            for (Floor f : col) {
+        image(img, 0, 0, w * Floor.UNIT, h * Floor.UNIT);
+        for (Floor[] fs: floors) {
+            for (Floor f: fs) {
                 f.draw();
             }
         }
     }
 
     void loadMapFromTemplate(int num) {
+        img = loadImage("MapImgs/Map" + num +"/wholemap.png");
         println("block");
         String filename = "MapTemplates/Map" + num + ".txt";
         String[] floorStrings = loadStrings(filename);
@@ -27,16 +30,14 @@ public class Block {
                 PImage img;
                 switch (floorStrings[i].charAt(j)) {
                     case '1' :
-                        img = loadImage("MapImgs/Map" + num + "/Map_img_" + j + "" + i + ".png");
                         PImage blockedImg = loadImage("MapImgs/Map" + num + "/BlockedFloor.png");
-                        Floor f = new Floor(c, true, img);
+                        Floor f = new Floor(c, true);
                         f.setBlockedImg(blockedImg);
                         floors[i][j] = f;
                     break;
 
                     case '0' :
-                        img = loadImage("MapImgs/Map" + num + "/Map_img_" + j + "" + i + ".png");
-                        floors[i][j] = new Floor(c, false, img);
+                        floors[i][j] = new Floor(c, false);
                     break;
 
                     default :

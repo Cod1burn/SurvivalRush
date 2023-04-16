@@ -8,8 +8,8 @@ int millis;
 
 // For test only
 void setup() {
-  size(1200,800);
-  frameRate(60);
+  size(1200, 800);
+  //frameRate(60);
   game = new Game();
   inGame = true;
   millis = millis();
