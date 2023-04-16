@@ -18,7 +18,7 @@ public class CombatEntity {
     **/
     public CombatEntity() {
         isPlayer = true;
-        moveSpeed = 100;
+        moveSpeed = 200;
     }
 
     /**

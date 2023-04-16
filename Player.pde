@@ -2,7 +2,7 @@ public class Player implements MovableObject{
     Game game;
     GameMap map;
 
-    static final float RADIUS = 50;
+    static final float RADIUS = 70;
     static final float ANIMATION_INTERVAL = 0.5;
 
     PVector position;
@@ -10,8 +10,11 @@ public class Player implements MovableObject{
     PVector speed;
     
 
-    PImage[] idleIMGs;
-    PImage[] runIMGs;
+    PImage[] fronts;
+    PImage[] lefts;
+    PImage[] rights;
+    PImage[] backs;
+    PImage[] idles;
     PImage img;
 
     float animationTimer;
@@ -38,31 +41,50 @@ public class Player implements MovableObject{
 
     void draw() {
         if (direction.mag() == 0.0) {
-            img = idleIMGs[(int)(animationTimer/(ANIMATION_INTERVAL/2.0))];
+            img = idles[(int)(animationTimer/(ANIMATION_INTERVAL/(float)idles.length))];
         } else {
-            img = runIMGs[(int)(animationTimer/(ANIMATION_INTERVAL/3.0))];
+            if (direction.y < 0) {
+                img = backs[(int)(animationTimer/(ANIMATION_INTERVAL/(float)backs.length))];
+            } else if (direction.x == 0) {
+                img = fronts[(int)(animationTimer/(ANIMATION_INTERVAL/(float)fronts.length))];
+            } else if (direction.x < 0) {
+                img = lefts[(int)(animationTimer/(ANIMATION_INTERVAL/(float)lefts.length))];
+            } else {
+                img = rights[(int)(animationTimer/(ANIMATION_INTERVAL/(float)rights.length))];
+            }
         }
 
         pushMatrix();
         translate(width/2, height/2);
-        if (direction.x < 0) scale(-1, 1);
-        if (direction.y < 0) rotate(-PI/6.0);
-        else if (direction.y > 0) rotate(PI/9.0);
         image(img, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
         popMatrix();
     }
 
     void loadImageResources() {
-        idleIMGs = new PImage[2];
-        idleIMGs[0] = loadImage("ObjectImgs/Player/player_idle1.png");
-        idleIMGs[1] = loadImage("ObjectImgs/Player/player_idle2.png");
+        idles = new PImage[2];
+        idles[0] = loadImage("ObjectImgs/Player/player_idle1.png");
+        idles[1] = loadImage("ObjectImgs/Player/player_idle2.png");
 
-        // Default facing right
-        runIMGs = new PImage[3];
-        runIMGs[0] = loadImage("ObjectImgs/Player/player_run1.png");
-        runIMGs[1] = loadImage("ObjectImgs/Player/player_run2.png");
-        runIMGs[2] = loadImage("ObjectImgs/Player/player_run3.png");
-        img = idleIMGs[0];
+        lefts = new PImage[4];
+        for (int i = 0; i < lefts.length; i++){
+            lefts[i] = loadImage("ObjectImgs/Player/player_left"+(i+1)+".png");
+        }
+
+        rights = new PImage[4];
+        for (int i = 0; i < rights.length; i++){
+            rights[i] = loadImage("ObjectImgs/Player/player_right"+(i+1)+".png");
+        }
+
+        fronts = new PImage[2];
+        for (int i = 0; i < fronts.length; i++){
+            fronts[i] = loadImage("ObjectImgs/Player/player_front"+(i+1)+".png");
+        }
+
+        backs = new PImage[2];
+        for (int i = 0; i < backs.length; i++){
+            backs[i] = loadImage("ObjectImgs/Player/player_back"+(i+1)+".png");
+        }
+        img = idles[0];
     }
 
     void movingDirection(float x, float y) {

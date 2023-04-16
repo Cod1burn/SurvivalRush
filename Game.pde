@@ -16,12 +16,13 @@ public class Game {
     }
 
     void draw() {
+        background(0);
         // Draw map
         map.draw();
         // Draw UI
         textSize(20);
         stroke(0);
-        text("position: "+ player.position.x + ","+ player.position.y, 50, 50);
+        text("fps: "+frameRate, 50, 50);
         if (pause) {
             // Draw pause menu
         }

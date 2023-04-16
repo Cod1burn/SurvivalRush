@@ -15,6 +15,7 @@ public class Block {
     }
 
     void loadMapFromTemplate(int num) {
+        println("block");
         String filename = "MapTemplates/Map" + num + ".txt";
         String[] floorStrings = loadStrings(filename);
         w = floorStrings[0].length();
