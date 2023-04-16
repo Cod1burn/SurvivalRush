@@ -46,6 +46,8 @@ public class Player implements MovableObject{
         pushMatrix();
         translate(width/2, height/2);
         if (direction.x < 0) scale(-1, 1);
+        if (direction.y < 0) rotate(-PI/6.0);
+        else if (direction.y > 0) rotate(PI/9.0);
         image(img, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
         popMatrix();
     }
