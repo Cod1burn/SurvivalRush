@@ -14,7 +14,9 @@ public class GameMap {
 
     void draw() {
         camera.x %= block.w * Floor.UNIT;
+        camera.x = camera.x < 0 ? block.w * Floor.UNIT + camera.x : camera.x;
         camera.y %= block.h * Floor.UNIT;
+        camera.y = camera.y < 0 ? block.h * Floor.UNIT + camera.y : camera.y;
 
         pushMatrix();
         translate(-camera.x, -camera.y);
@@ -88,13 +90,17 @@ public class GameMap {
 
     }
 
-    Floor getFloor(int cx, int cy) {
+    boolean canBeEntered(int cx, int cy) {
         cx %= block.w;
+        cx = cx < 0 ? block.w + cx : cx;
+
         cy %= block.h;
-        return block.getFloor(cx, cy);
+        cy = cy < 0 ? block.h + cy : cy;
+
+        return !block.getFloor(cx, cy).blocked;
     }
 
-    void updateCamera(PVector camera) {
-        this.camera = camera;
+    void updateCamera(PVector position) {
+        this.camera = position.copy();
     }
 }

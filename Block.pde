@@ -49,6 +49,7 @@ public class Block {
         if (cy >= 0 && cy < floors.length && cx >= 0 && cx < floors[0].length) {
             return floors[cy][cx];
         } else {
+            println("Invalid coordinates: " + cx + "," + cy);
             return null;
         }
     } 

@@ -79,11 +79,11 @@ public class Player implements MovableObject{
         
 
         // Update position in x axis
-        speed = direction.normalize().mult(ce.moveSpeed);
+        speed = direction.copy().normalize().mult(ce.moveSpeed);
         position = position.add(speed.x * second, 0);
         int cx = (int)(position.x / Floor.UNIT);
         if (cx != coord.x) {
-            if (!map.getFloor(cx, coord.y).blocked) {
+            if (map.canBeEntered(cx, coord.y)) {
                 coord.x = cx;
             } else {
                 position = position.sub(speed.x * second, 0);
@@ -93,7 +93,7 @@ public class Player implements MovableObject{
         position = position.add(0, speed.y * second);
         int cy = (int)(position.y / Floor.UNIT);
         if (cy != coord.y) {
-            if (!map.getFloor(coord.x, cy).blocked) {
+            if (map.canBeEntered(coord.x, cy)) {
                 coord.y = cy;
             } else {
                 position = position.sub(0, speed.y * second);

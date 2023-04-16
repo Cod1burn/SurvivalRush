@@ -9,7 +9,7 @@ public class Game {
         int template = 0; // Test template
         player = new Player(this);
         map = new GameMap(template); 
-        
+
         player.setMap(map);
         map.setPlayer(player);   
         gameTimer = 15 * 60; // 15 minutes
@@ -19,6 +19,9 @@ public class Game {
         // Draw map
         map.draw();
         // Draw UI
+        textSize(20);
+        stroke(0);
+        text("position: "+ player.position.x + ","+ player.position.y, 50, 50);
         if (pause) {
             // Draw pause menu
         }
@@ -32,7 +35,7 @@ public class Game {
         gameTimer -= second;
         if (gameTimer <= 0) timeOut();
 
-        player.update(time);
+        player.update(second);
         
     }
 
