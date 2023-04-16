@@ -24,8 +24,8 @@ public class Player implements MovableObject{
     public Player(Game game) {
         this.game = game;
         ce = new CombatEntity();
-        position = new PVector(400,400);
-        coord = new Coord(5, 5);
+        position = new PVector(700,700);
+        coord = new Coord(6, 6);
         speed = new PVector(0.0, 0.0);
         direction = new PVector(0.0, 0.0);
         animationTimer = ANIMATION_INTERVAL - 0.01;
@@ -46,7 +46,7 @@ public class Player implements MovableObject{
         pushMatrix();
         translate(width/2, height/2);
         if (direction.x < 0) scale(-1, 1);
-        image(img, 0, 0, RADIUS, RADIUS);
+        image(img, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
         popMatrix();
     }
 
