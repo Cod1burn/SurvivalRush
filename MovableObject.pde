@@ -1,4 +1,4 @@
 public interface MovableObject{
     void draw();
-    void update();
+    void update(float second);
 }

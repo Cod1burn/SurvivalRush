@@ -1,7 +1,6 @@
 boolean isMenu;
 boolean inGame;
-Menu menu
-int template;
+Menu menu;
 ArrayList<Button> buttons;
 Game game;
 int millis;
@@ -14,6 +13,10 @@ void setup() {
   game = new Game();
   inGame = true;
   millis = millis();
+
+  int a = -12;
+  a %= 5;
+  println(a);
 }
 
 void draw() {
@@ -48,7 +51,6 @@ void draw() {
   }
 }
 
-*/
 
 
 void mousePressed() {
@@ -63,6 +65,7 @@ void mousePressed() {
     }
   }
 }
+*/
 
 
 void keyPressed() {
