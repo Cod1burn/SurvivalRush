@@ -85,6 +85,7 @@ public class Player implements MovableObject{
             backs[i] = loadImage("ObjectImgs/Player/player_back"+(i+1)+".png");
         }
         img = idles[0];
+        
     }
 
     void movingDirection(float x, float y) {

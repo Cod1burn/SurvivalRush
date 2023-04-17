@@ -17,7 +17,7 @@ public class Block {
     }
 
     void loadMapFromTemplate(int num) {
-        img = loadImage("MapImgs/Map" + num +"/wholemap.png");
+        img = loadImage("MapImgs/Map" + num +"/wholemap.jpg");
         println("block");
         String filename = "MapTemplates/Map" + num + ".txt";
         String[] floorStrings = loadStrings(filename);
