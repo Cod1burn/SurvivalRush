@@ -13,10 +13,13 @@ public class CombatEntity {
     float maxExp;
     int level;
 
+    MovableObject obj;
+
     /**
     * For Player
     **/
-    public CombatEntity() {
+    public CombatEntity(MovableObject obj) {
+        this.obj = obj;
         isPlayer = true;
         moveSpeed = 200;
     }
@@ -24,7 +27,12 @@ public class CombatEntity {
     /**
     * For Enemy
     **/
-    public CombatEntity(int template) {
+    public CombatEntity(String template) {
         isPlayer = false;
+        loadEntityFromTemplate(template);
+    }
+
+    void loadEntityFromTemplate(String template) {
+
     }
 }
