@@ -8,7 +8,7 @@ public class Block {
     }
 
     void draw() {
-        image(img, 0, 0, w * Floor.UNIT, h * Floor.UNIT);
+        image(img, 0, 0);
         for (Floor[] fs: floors) {
             for (Floor f: fs) {
                 f.draw();
@@ -18,7 +18,7 @@ public class Block {
 
     void loadMapFromTemplate(int num) {
         img = loadImage("MapImgs/Map" + num +"/wholemap.jpg");
-        println("block");
+
         String filename = "MapTemplates/Map" + num + ".txt";
         String[] floorStrings = loadStrings(filename);
         w = floorStrings[0].length();

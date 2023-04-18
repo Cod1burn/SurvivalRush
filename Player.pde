@@ -4,6 +4,7 @@ public class Player implements MovableObject{
 
     static final float RADIUS = 70;
     static final float ANIMATION_INTERVAL = 0.5;
+    static final float HURT_ANIMATION_INTERVAL = 0.15;
 
     PVector position;
     PVector direction;
@@ -18,6 +19,7 @@ public class Player implements MovableObject{
     PImage img;
 
     float animationTimer;
+    float hurtTimer;
 
     Coord coord; // Coordinates in the map
     Coord blockCoord; // Block coordinates.
@@ -26,12 +28,13 @@ public class Player implements MovableObject{
 
     public Player(Game game) {
         this.game = game;
-        ce = new CombatEntity();
+        ce = new CombatEntity(this);
         position = new PVector(700,700);
         coord = new Coord(6, 6);
         speed = new PVector(0.0, 0.0);
         direction = new PVector(0.0, 0.0);
         animationTimer = ANIMATION_INTERVAL - 0.01;
+        hurtTimer = 0.0;
         loadImageResources();
     }
 
@@ -56,7 +59,9 @@ public class Player implements MovableObject{
 
         pushMatrix();
         translate(width/2, height/2);
+        if (hurtTimer > 0) tint(230, 50, 50);
         image(img, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
+        noTint();
         popMatrix();
     }
 
@@ -95,16 +100,22 @@ public class Player implements MovableObject{
         if (direction.x < -1.0) direction.x = -1.0;
         if (direction.y > 1.0) direction.y = 1.0;
         if (direction.y < -1.0) direction.y = -1.0;
+        speed = direction.copy().normalize().mult(ce.moveSpeed);
+    }
+
+    void applyForce(PVector force) {
+        speed = speed.add(force);
     }
 
     void update(float second) {
         // update animation
         animationTimer -= second;
         if (animationTimer < 0 ) animationTimer = ANIMATION_INTERVAL - 0.01;
+
+        if (hurtTimer > 0) hurtTimer -= second;
         
 
         // Update position in x axis
-        speed = direction.copy().normalize().mult(ce.moveSpeed);
         position = position.add(speed.x * second, 0);
         int cx = (int)(position.x / Floor.UNIT);
         if (cx != coord.x) {
@@ -126,6 +137,10 @@ public class Player implements MovableObject{
         }
 
         map.updateCamera(position);
+    }
+
+    void getHurtAnimation() {
+        hurtTimer = HURT_ANIMATION_INTERVAL;
     }
 
 }
