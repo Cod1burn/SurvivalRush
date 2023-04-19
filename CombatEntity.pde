@@ -13,6 +13,8 @@ public class CombatEntity {
     float maxExp;
     int level;
 
+    float attackTimer;
+
     MovableObject obj;
 
     /**
@@ -34,5 +36,12 @@ public class CombatEntity {
 
     void loadEntityFromTemplate(String template) {
 
+    }
+
+    void update(float second) {
+        health += healthRegen * second;
+        if (health >= maxHealth) health = maxHealth;
+
+        if (attackTimer > 0) attackTimer -= second;
     }
 }

@@ -5,20 +5,35 @@ public class Game {
     float gameTimer;
     boolean isOver;
 
+    ArrayList<Enemy> enemies;
+
+    PVector camera;
+
+
     public Game () {
         int template = 0; // Test template
         player = new Player(this);
         map = new GameMap(template); 
 
         player.setMap(map);
-        map.setPlayer(player);   
         gameTimer = 15 * 60; // 15 minutes
+
+        camera = new PVector(0,0);
+
+        enemies = new ArrayList<>();
     }
 
     void draw() {
+        camera.x %= block.w * Floor.UNIT;
+        camera.x = camera.x < 0 ? block.w * Floor.UNIT + camera.x : camera.x;
+        camera.y %= block.h * Floor.UNIT;
+        camera.y = camera.y < 0 ? block.h * Floor.UNIT + camera.y : camera.y;
+
         background(0);
         // Draw map
-        map.draw();
+        map.draw(camera);
+        
+        player.draw();
         // Draw UI
         textSize(20);
         stroke(0);
@@ -42,6 +57,10 @@ public class Game {
 
     void timeOut() {
 
+    }
+
+    void updateCamera(PVector camera) {
+        this.camera = camera.copy();
     }
 
     void keyPressed(char keyChar) {

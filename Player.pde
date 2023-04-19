@@ -1,15 +1,10 @@
-public class Player implements MovableObject{
+public class Player extends MovableObject{
     Game game;
     GameMap map;
 
     static final float RADIUS = 70;
     static final float ANIMATION_INTERVAL = 0.5;
     static final float HURT_ANIMATION_INTERVAL = 0.15;
-
-    PVector position;
-    PVector direction;
-    PVector speed;
-    
 
     PImage[] fronts;
     PImage[] lefts;
@@ -21,9 +16,6 @@ public class Player implements MovableObject{
     float animationTimer;
     float hurtTimer;
 
-    Coord coord; // Coordinates in the map
-    Coord blockCoord; // Block coordinates.
-
     CombatEntity ce;
 
     public Player(Game game) {
@@ -34,7 +26,9 @@ public class Player implements MovableObject{
         speed = new PVector(0.0, 0.0);
         direction = new PVector(0.0, 0.0);
         animationTimer = ANIMATION_INTERVAL - 0.01;
+        collideRadius = RADIUS * 0.8;
         hurtTimer = 0.0;
+        inCamera = true;
         loadImageResources();
     }
 
@@ -42,6 +36,7 @@ public class Player implements MovableObject{
         this.map = map;
     }
 
+    @Override
     void draw() {
         if (direction.mag() == 0.0) {
             img = idles[(int)(animationTimer/(ANIMATION_INTERVAL/(float)idles.length))];
@@ -103,10 +98,7 @@ public class Player implements MovableObject{
         speed = direction.copy().normalize().mult(ce.moveSpeed);
     }
 
-    void applyForce(PVector force) {
-        speed = speed.add(force);
-    }
-
+    @Override
     void update(float second) {
         // update animation
         animationTimer -= second;
@@ -136,7 +128,7 @@ public class Player implements MovableObject{
             }
         }
 
-        map.updateCamera(position);
+        game.updateCamera(position);
     }
 
     void getHurtAnimation() {
