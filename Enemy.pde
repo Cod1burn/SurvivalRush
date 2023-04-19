@@ -19,11 +19,16 @@ public class Enemy extends MovableObject {
         speed = new PVector(0, 0);
         cameraPosition = new PVector(0, 0);
         collideRadius = RADIUS;
+        loadImageAssets(name);
         inCamera = true;
     }
 
     void setMap(GameMap map) {
         this.map = map;
+    }
+
+    void loadImageAssets(String name) {
+        img = loadImage("ObjectImgs/"+name+".png");
     }
 
     void draw(PVector camera) {
@@ -32,7 +37,9 @@ public class Enemy extends MovableObject {
         pushMatrix();
 
         translate(width/2, height/2);
-        image(img, cameraPosition.x, cameraPosition.y, RADIUS, RADIUS);
+        translate(-cameraPosition.x, -cameraPosition.y);
+        if (direction.x < 0) scale(-1, 1);
+        image(img, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
 
         popMatrix();
 
@@ -72,6 +79,10 @@ public class Enemy extends MovableObject {
                 position = position.sub(0, speed.y * second);
             }
         }
-    }    
+    }  
+
+    @Override
+    void die() {
+    }  
 
 }

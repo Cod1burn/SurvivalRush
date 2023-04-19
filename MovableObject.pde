@@ -20,4 +20,6 @@ public abstract class MovableObject{
     boolean isCollide(MovableObject obj) {
         return position.copy().sub(obj.position).mag() <= (collideRadius + obj.collideRadius);
     }
+
+    void die() {}
 }

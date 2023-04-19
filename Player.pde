@@ -135,4 +135,9 @@ public class Player extends MovableObject{
         hurtTimer = HURT_ANIMATION_INTERVAL;
     }
 
+    @Override
+    void die() {
+        game.playerDie();
+    }
+
 }

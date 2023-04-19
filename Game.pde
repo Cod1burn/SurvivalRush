@@ -30,6 +30,7 @@ public class Game {
         camera.y %= map.blockHeight;
         camera.y = camera.y < 0 ? map.blockHeight + camera.y : camera.y;
 
+
         background(0);
         // Draw map
         map.draw(camera);
@@ -38,7 +39,7 @@ public class Game {
         // Draw UI
         textSize(20);
         stroke(0);
-        text("fps: "+frameRate, 50, 50);
+        text("camera: "+ camera.x + "," + camera.y, 50, 50);
         if (pause) {
             // Draw pause menu
         }
@@ -64,6 +65,15 @@ public class Game {
 
     void timeOut() {
 
+    }
+
+    void playerDie() {
+
+    }
+
+    void enemyDie(Enemy enemy) {
+        enemies.remove(enemy);
+        // Drop loot
     }
 
     void updateCamera(PVector camera) {
