@@ -3,6 +3,7 @@ public class Enemy extends MovableObject {
     GameMap map;
 
     float RADIUS;
+    PVector cameraPosition;
     
     PImage img;
 
@@ -16,6 +17,7 @@ public class Enemy extends MovableObject {
         ce = new CombatEntity(name);
         direction = new PVector(0, 0);
         speed = new PVector(0, 0);
+        cameraPosition = new PVector(0, 0);
         collideRadius = RADIUS;
         inCamera = true;
     }
@@ -24,14 +26,22 @@ public class Enemy extends MovableObject {
         this.map = map;
     }
 
-    @Override
-    void draw() {
+    void draw(PVector camera) {
+        if (!inCamera) return;
+
+        pushMatrix();
+
+        translate(width/2, height/2);
+        image(img, cameraPosition.x, cameraPosition.y, RADIUS, RADIUS);
+
+        popMatrix();
 
     }
 
     boolean isInCamera(PVector camera){
         inCamera = min(abs(camera.x - position.x - RADIUS), abs(camera.x - position.x + RADIUS)) <= width/2.0
                 && min(abs(camera.y - position.y - RADIUS), abs(camera.y - position.y - RADIUS)) <= height/2.0;
+        if (inCamera) cameraPosition = position.copy().sub(camera);
         return inCamera;
     }
 

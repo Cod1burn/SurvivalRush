@@ -1,8 +1,11 @@
 public class GameMap {
     Block block;
+    float blockWidth, blockHeight;
 
     public GameMap(int template) {
         block = new Block(template);
+        blockWidth = block.w * Floor.UNIT;
+        blockHeight = block.h * Floor.UNIT;
     }
 
     void draw(PVector camera) {
@@ -84,5 +87,5 @@ public class GameMap {
 
         return !block.getFloor(cx, cy).blocked;
     }
-    
+
 }

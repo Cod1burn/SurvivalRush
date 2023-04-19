@@ -24,15 +24,16 @@ public class Game {
     }
 
     void draw() {
-        camera.x %= block.w * Floor.UNIT;
-        camera.x = camera.x < 0 ? block.w * Floor.UNIT + camera.x : camera.x;
-        camera.y %= block.h * Floor.UNIT;
-        camera.y = camera.y < 0 ? block.h * Floor.UNIT + camera.y : camera.y;
+
+        camera.x %= map.blockWidth;
+        camera.x = camera.x < 0 ? map.blockWidth + camera.x : camera.x;
+        camera.y %= map.blockHeight;
+        camera.y = camera.y < 0 ? map.blockHeight + camera.y : camera.y;
 
         background(0);
         // Draw map
         map.draw(camera);
-        
+        enemies.forEach((e) -> {e.draw(camera);});
         player.draw();
         // Draw UI
         textSize(20);
@@ -52,6 +53,12 @@ public class Game {
         if (gameTimer <= 0) timeOut();
 
         player.update(second);
+        enemies.forEach((e) -> {e.update(second);});
+        // update Projectiles
+
+        // Collision Detection
+        // Projectiles with enemies
+        // Enemies with player
         
     }
 
