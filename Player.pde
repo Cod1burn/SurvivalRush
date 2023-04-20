@@ -16,9 +16,16 @@ public class Player extends MovableObject{
     float animationTimer;
     float hurtTimer;
 
+    ArrayList<Weapon> weapons; 
+    ArrayList<Projectile> projectiles;
+
+
+
     public Player(Game game, PVector position) {
         this.game = game;
         ce = new CombatEntity(this);
+        weapons = new ArrayList<>();
+        projectiles = new ArrayList<>();
         this.position = position;
         this.coord = new Coord((int)(position.x / Floor.UNIT), (int)(position.y/Floor.UNIT));
         speed = new PVector(0.0, 0.0);

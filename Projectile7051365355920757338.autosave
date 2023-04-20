@@ -1,3 +1,5 @@
+package weapons
+
 public class Projectile extends MovableObject {
     float attack;
     float hitInterval;
@@ -9,14 +11,14 @@ public class Projectile extends MovableObject {
     PImage img;
 
     public Projectile(Player owner, PVector direction, float radius) {
-        this.owner = owner;
+        this.player = owner;
         this.RADIUS = radius;
         position = owner.position.copy();
         this.direction = direction.copy();
     }
     
     void draw() {
-        
+
     }
 
     void update(float second) {

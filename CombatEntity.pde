@@ -60,6 +60,11 @@ public class CombatEntity {
         attackTimer = baseAttackInterval * (1 + attackSpeed/100.0);
     }
 
+    void hit(CombatEntity ce) {
+        float damage = attack * (1 - ce.defence/100.0);
+        ce.takeDamage(damage);
+    }
+
     void takeDamage(float damage) {
         health -= damage;
         if (isPlayer) ((Player)obj).getHurtAnimation();
@@ -69,7 +74,7 @@ public class CombatEntity {
     void update(float second) {
         health += healthRegen * second;
         if (health >= maxHealth) health = maxHealth;
-        
+
         if (attackTimer > 0) attackTimer -= second;
     }
 }
