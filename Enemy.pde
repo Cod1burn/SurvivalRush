@@ -13,7 +13,7 @@ public class Enemy extends MovableObject {
         this.name = name;
         this.game = game;
         this.position = position.copy();
-        this.coord = new Coord((int)(position.x / Floor.UNIT), (int)(position.y / Floor.UNIT));
+        this.coord = new Coord(position.x / Floor.UNIT, position.y / Floor.UNIT);
         ce = new CombatEntity(name);
         direction = new PVector(0, 0);
         speed = new PVector(0, 0);
