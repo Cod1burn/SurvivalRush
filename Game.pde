@@ -58,13 +58,24 @@ public class Game {
             e.update(second, camera);
             e.movingDirection(player.position.copy().sub(e.position));
             });
-        // update Projectiles
 
-        // Collision Detection
-        // Projectiles with enemies
-        // Enemies with player
+        // Collision Detection:
+        // 1. Projectiles with enemies
+        player.projectiles.forEach((p) -> {
+            if (p.hitTimer <= 0.0) {
+                int hits = p.hits;
+                enemies.forEach((e) -> {
+                    if (e.inCamera && e.isCollide(p, true)) {
+                        p.hit(e);
+                    }
+                });
+                if (p.hits != hits) p.runHitTimer();
+            } 
+        });
+        player.projectiles.removeIf(p -> !p.active);
+        // 2. Enemies with player
         enemies.forEach((e) -> {
-            if (e.isCollide(player, true)) e.hit(player);
+            if (e.isCollide(player, false)) e.hit(player);
         });
         
     }
