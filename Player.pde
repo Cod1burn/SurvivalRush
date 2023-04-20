@@ -27,7 +27,7 @@ public class Player extends MovableObject{
         weapons = new ArrayList<>();
         projectiles = new ArrayList<>();
         this.position = position;
-        this.coord = new Coord((int)(position.x / Floor.UNIT), (int)(position.y/Floor.UNIT));
+        this.coord = new Coord(position.x / Floor.UNIT, position.y/Floor.UNIT);
         speed = new PVector(0.0, 0.0);
         direction = new PVector(0.0, 0.0);
         animationTimer = ANIMATION_INTERVAL - 0.01;
@@ -61,6 +61,7 @@ public class Player extends MovableObject{
         if (hurtTimer > 0) tint(230, 50, 50);
         image(img, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
         noTint();
+        projectiles.forEach(Projectile::draw);
         popMatrix();
     }
 
@@ -134,6 +135,8 @@ public class Player extends MovableObject{
         }
 
         game.updateCamera(position);
+
+        projectiles.forEach((p) -> {p.update(second);});
     }
 
     void getHurtAnimation() {

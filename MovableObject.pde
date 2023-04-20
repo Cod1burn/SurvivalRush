@@ -16,8 +16,8 @@ public abstract class MovableObject{
     }
 
     boolean isCollide(MovableObject obj, boolean loose) {
-        if(loose) return position.copy().sub(obj.position).mag() <= min(collideRadius, obj.collideRadius);
-        else return position.copy().sub(obj.position).mag() <= max(collideRadius, obj.collideRadius);
+        if(loose) return position.copy().sub(obj.position).mag() <= max(collideRadius, obj.collideRadius);
+        else return position.copy().sub(obj.position).mag() <= min(collideRadius, obj.collideRadius);
     }
 
     void die() {}
