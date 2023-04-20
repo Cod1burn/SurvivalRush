@@ -44,7 +44,7 @@ public class CombatEntity {
     }
 
     void loadTestTemplate() {
-        moveSpeed = 120;
+        moveSpeed = 60;
         baseAttackInterval = 1.0;
         attack = 5;
         attackSpeed = 0.0;
@@ -69,7 +69,7 @@ public class CombatEntity {
     void update(float second) {
         health += healthRegen * second;
         if (health >= maxHealth) health = maxHealth;
-
+        
         if (attackTimer > 0) attackTimer -= second;
     }
 }

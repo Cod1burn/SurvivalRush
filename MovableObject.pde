@@ -11,16 +11,13 @@ public abstract class MovableObject{
     
     boolean inCamera;
 
-    void draw() {}
-
-    void update(float second) {}
-
     void applyForce(PVector force) {
         speed.add(force);
     }
 
-    boolean isCollide(MovableObject obj) {
-        return position.copy().sub(obj.position).mag() <= (collideRadius + obj.collideRadius);
+    boolean isCollide(MovableObject obj, boolean loose) {
+        if(loose) return position.copy().sub(obj.position).mag() <= min(collideRadius, obj.collideRadius);
+        else return position.copy().sub(obj.position).mag() <= max(collideRadius, obj.collideRadius);
     }
 
     void die() {}

@@ -16,15 +16,15 @@ public class Player extends MovableObject{
     float animationTimer;
     float hurtTimer;
 
-    public Player(Game game) {
+    public Player(Game game, PVector position) {
         this.game = game;
         ce = new CombatEntity(this);
-        position = new PVector(700,700);
-        coord = new Coord(6, 6);
+        this.position = position;
+        this.coord = new Coord((int)(position.x / Floor.UNIT), (int)(position.y/Floor.UNIT));
         speed = new PVector(0.0, 0.0);
         direction = new PVector(0.0, 0.0);
         animationTimer = ANIMATION_INTERVAL - 0.01;
-        collideRadius = RADIUS * 0.8;
+        collideRadius = RADIUS * 0.75;
         hurtTimer = 0.0;
         inCamera = true;
         loadImageResources();
@@ -34,7 +34,6 @@ public class Player extends MovableObject{
         this.map = map;
     }
 
-    @Override
     void draw() {
         if (direction.mag() == 0.0) {
             img = idles[(int)(animationTimer/(ANIMATION_INTERVAL/(float)idles.length))];
@@ -96,7 +95,6 @@ public class Player extends MovableObject{
         speed = direction.copy().normalize().mult(ce.moveSpeed);
     }
 
-    @Override
     void update(float second) {
         ce.update(second);
 

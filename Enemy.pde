@@ -13,12 +13,13 @@ public class Enemy extends MovableObject {
         this.name = name;
         this.game = game;
         this.position = position.copy();
+        this.coord = new Coord((int)(position.x / Floor.UNIT), (int)(position.y / Floor.UNIT));
         ce = new CombatEntity(name);
         direction = new PVector(0, 0);
         speed = new PVector(0, 0);
         cameraPosition = new PVector(0, 0);
         RADIUS = 55;
-        collideRadius = RADIUS;
+        collideRadius = RADIUS * 0.9;
         loadImageAssets(name);
         inCamera = true;
     }
@@ -28,7 +29,7 @@ public class Enemy extends MovableObject {
     }
 
     void loadImageAssets(String name) {
-        img = loadImage("ObjectImgs/"+name+".png");
+        img = loadImage("ObjectImgs/Enemies/"+name+".png");
     }
 
     void draw(PVector camera) {
@@ -37,7 +38,7 @@ public class Enemy extends MovableObject {
         pushMatrix();
 
         translate(width/2, height/2);
-        translate(-cameraPosition.x, -cameraPosition.y);
+        translate(cameraPosition.x, cameraPosition.y);
         if (direction.x < 0) scale(-1, 1);
         image(img, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
 
@@ -57,8 +58,7 @@ public class Enemy extends MovableObject {
         speed = direction.copy().normalize().mult(ce.moveSpeed);
     }
 
-    @Override
-    void update(float second) {
+    void update(float second, PVector camera) {
         ce.update(second);
 
         // Update position in x axis
@@ -81,6 +81,8 @@ public class Enemy extends MovableObject {
                 position = position.sub(0, speed.y * second);
             }
         }
+
+        isInCamera(camera);
     }  
 
     void hit(MovableObject obj) {

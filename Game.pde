@@ -12,7 +12,7 @@ public class Game {
 
     public Game () {
         int template = 0; // Test template
-        player = new Player(this);
+        player = new Player(this, new PVector(600, 600));
         map = new GameMap(template); 
 
         player.setMap(map);
@@ -39,7 +39,7 @@ public class Game {
         // Draw UI
         textSize(20);
         stroke(0);
-        text("camera: "+ camera.x + "," + camera.y, 50, 50);
+        text("fps: "+ frameRate, 50, 50);
         if (pause) {
             // Draw pause menu
         }
@@ -55,7 +55,7 @@ public class Game {
 
         player.update(second);
         enemies.forEach((e) -> {
-            e.update(second);
+            e.update(second, camera);
             e.movingDirection(player.position.copy().sub(e.position));
             });
         // update Projectiles
@@ -63,6 +63,9 @@ public class Game {
         // Collision Detection
         // Projectiles with enemies
         // Enemies with player
+        enemies.forEach((e) -> {
+            if (e.isCollide(player, true)) e.hit(player);
+        });
         
     }
 
@@ -79,6 +82,12 @@ public class Game {
         // Drop loot
     }
 
+    void generateEnemy(String name, PVector position) {
+        Enemy enemy = new Enemy(name, this, position);
+        enemy.setMap(map);
+        enemies.add(enemy);
+    }
+
     void updateCamera(PVector camera) {
         this.camera = camera.copy();
     }
@@ -89,7 +98,7 @@ public class Game {
             if (keyChar == 'a' || keyChar == 'A') player.movingDirection(-1, 0);
             if (keyChar == 'w' || keyChar == 'W') player.movingDirection(0, -1);
             if (keyChar == 's' || keyChar == 'S') player.movingDirection(0, 1);
-            if (keyChar == 'f') player.getHurtAnimation();
+            if (keyChar == 'c') generateEnemy("test", player.position.copy().add(200, 200));
         }
     }
 
