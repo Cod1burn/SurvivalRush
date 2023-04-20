@@ -7,6 +7,11 @@ class Coord {
         this.y = y;
     }
 
+    public Coord(float fx, float fy) {
+        this.x = (int)fx;
+        this.y = (int)fy;
+    }
+
 
     /*
         Euclidean Distance
