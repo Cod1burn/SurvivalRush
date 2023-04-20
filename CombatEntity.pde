@@ -49,6 +49,9 @@ public class CombatEntity {
         attack = 5;
         attackSpeed = 0.0;
 
+        health = 30;
+        healthRegen = 0;
+
     }
 
     void attack(CombatEntity ce) {
@@ -59,6 +62,7 @@ public class CombatEntity {
 
     void takeDamage(float damage) {
         health -= damage;
+        if (isPlayer) ((Player)obj).getHurtAnimation();
         if (health <= 0) obj.die();
     }
 

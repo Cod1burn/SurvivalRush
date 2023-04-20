@@ -4,6 +4,8 @@ public abstract class MovableObject{
     PVector speed;
     float collideRadius;
 
+    CombatEntity ce;
+
     Coord coord;
     Coord blockCoord;
     

@@ -8,7 +8,6 @@ public class Enemy extends MovableObject {
     PImage img;
 
     String name;
-    CombatEntity ce;
 
     public Enemy(String name, Game game, PVector position) {
         this.name = name;
@@ -18,6 +17,7 @@ public class Enemy extends MovableObject {
         direction = new PVector(0, 0);
         speed = new PVector(0, 0);
         cameraPosition = new PVector(0, 0);
+        RADIUS = 55;
         collideRadius = RADIUS;
         loadImageAssets(name);
         inCamera = true;
@@ -54,11 +54,13 @@ public class Enemy extends MovableObject {
 
     void movingDirection(PVector direction) {
         this.direction = direction;
-        speed = direction.copy().mult(ce.moveSpeed);
+        speed = direction.copy().normalize().mult(ce.moveSpeed);
     }
 
     @Override
     void update(float second) {
+        ce.update(second);
+
         // Update position in x axis
         position = position.add(speed.x * second, 0);
         int cx = (int)(position.x / Floor.UNIT);
@@ -80,6 +82,10 @@ public class Enemy extends MovableObject {
             }
         }
     }  
+
+    void hit(MovableObject obj) {
+        if (ce.attackTimer <= 0) ce.attack(obj.ce);
+    }
 
     @Override
     void die() {

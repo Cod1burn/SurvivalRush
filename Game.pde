@@ -54,7 +54,10 @@ public class Game {
         if (gameTimer <= 0) timeOut();
 
         player.update(second);
-        enemies.forEach((e) -> {e.update(second);});
+        enemies.forEach((e) -> {
+            e.update(second);
+            e.movingDirection(player.position.copy().sub(e.position));
+            });
         // update Projectiles
 
         // Collision Detection

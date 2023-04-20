@@ -16,8 +16,6 @@ public class Player extends MovableObject{
     float animationTimer;
     float hurtTimer;
 
-    CombatEntity ce;
-
     public Player(Game game) {
         this.game = game;
         ce = new CombatEntity(this);
@@ -100,6 +98,8 @@ public class Player extends MovableObject{
 
     @Override
     void update(float second) {
+        ce.update(second);
+
         // update animation
         animationTimer -= second;
         if (animationTimer < 0 ) animationTimer = ANIMATION_INTERVAL - 0.01;
