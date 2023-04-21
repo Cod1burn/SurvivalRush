@@ -51,7 +51,6 @@ public class Projectile extends MovableObject {
         speed = direction.copy().mult(scalarSpeed);
         if (hitTimer > 0) hitTimer -= second;
         position.add(speed.x * second, speed.y * second);
-        relatedPosition = position.copy().sub(owner.position);
         if (range > 0) {
             if (position.copy().sub(owner.position).mag() > range) die();
         }

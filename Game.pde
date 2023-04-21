@@ -39,7 +39,8 @@ public class Game {
         // Draw UI
         textSize(20);
         stroke(0);
-        text("fps: "+ frameRate, 50, 50);
+        text("position:" + player.position, 50, 70);
+        text("coord: "+ player.coord, 50, 50);
         if (pause) {
             // Draw pause menu
         }
@@ -99,6 +100,14 @@ public class Game {
         enemies.add(enemy);
     }
 
+    void addWeapon(WeaponType type) {
+        player.ce.addWeapon(type);
+    }
+
+    void levelUpWeapon(WeaponType type) {
+        player.ce.levelUpWeapon(type);
+    }
+
     void updateCamera(PVector camera) {
         this.camera = camera.copy();
     }
@@ -110,6 +119,7 @@ public class Game {
             if (keyChar == 'w' || keyChar == 'W') player.movingDirection(0, -1);
             if (keyChar == 's' || keyChar == 'S') player.movingDirection(0, 1);
             if (keyChar == 'c') generateEnemy("test", player.position.copy().add(200, 200));
+            if (keyChar == 'x') addWeapon(WeaponType.MAGICWAND);
         }
     }
 

@@ -3,13 +3,12 @@ public class MagicWand extends Weapon {
     int shootCount;
     float projectileSpeed;
     float projectileRadius;
-    int level;
     float ATTACK_MULTIPLIER;
     float BASE_ATTACK_INTERVAL;
     final float BASE_PROJECTILE_SPEED = 700;
     final float MINIMAL_SHOOT_INTERVAL = 0.15;
     final float BASE_PROJECTILE_RADIUS = 15;
-    final float MAX_LEVEL = 10;
+    
     public MagicWand(Player player) {
         super(player);
         shootNum = 1;
@@ -19,8 +18,13 @@ public class MagicWand extends Weapon {
         BASE_ATTACK_INTERVAL = 1.0;
         projectileSpeed = BASE_PROJECTILE_SPEED;
         projectileRadius = BASE_PROJECTILE_RADIUS;
+        TYPE = WeaponType.MAGICWAND;
+        MAX_LEVEL = 10;
+
+        loadProjectileImage("blue_orb");
     }
 
+    @Override
     void update(float second) {
         super.update(second);
         attack = player.ce.attack * ATTACK_MULTIPLIER;
@@ -29,10 +33,17 @@ public class MagicWand extends Weapon {
     }
 
     void shootMagicOrb() {
-        MagicOrb orb = new MagicOrb(player, player.direction, projectileSpeed, projectileRadius, attack);
+        MagicOrb orb;
+        if (player.direction.mag() != 0) {
+            orb = new MagicOrb(player, player.direction, projectileSpeed, projectileRadius, attack);
+        } else {
+            orb = new MagicOrb(player, player.lastDirection, projectileSpeed, projectileRadius, attack);
+        }
+
+        orb.setImage(projectileImage);
         player.projectiles.add(orb);
+        shootCount++;
         if (shootCount < shootNum) {
-            shootNum++;
             attackTimer = MINIMAL_SHOOT_INTERVAL;
         } else {
             shootCount = 0;
@@ -40,13 +51,7 @@ public class MagicWand extends Weapon {
         }
     }
 
-    void levelUp() {
-        if (level < MAX_LEVEL) {
-            level ++;
-            getLevelBonus();
-        }
-    }
-
+    @Override
     void getLevelBonus() {
         switch (level) {
             case 2 :

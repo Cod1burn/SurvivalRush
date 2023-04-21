@@ -1,6 +1,7 @@
 public abstract class MovableObject{
     PVector position;
     PVector direction;
+    PVector lastDirection;
     PVector speed;
     float collideRadius;
 
@@ -17,6 +18,7 @@ public abstract class MovableObject{
     public MovableObject() {
         knockBackForce = null;
         knockBackTimer = 0.0;
+        lastDirection = new PVector(0.0, 1.0);
     }
 
     void knockBack(PVector force, float time) {

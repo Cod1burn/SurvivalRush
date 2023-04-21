@@ -16,9 +16,9 @@ public class MagicOrb extends Projectile {
     void update(float second) {
         super.update(second);
         if (pierceBlock) return;
-        int cx, cy;
-        cx = (int)(position.x / Floor.UNIT);
-        cy = (int)(position.y / Floor.UNIT);
+
+        int cx = coord.vectorToCoord(position.x, Floor.UNIT);
+        int cy = coord.vectorToCoord(position.y, Floor.UNIT);
         if (!owner.map.canBeEntered(cx, cy)) die();
     }
 }

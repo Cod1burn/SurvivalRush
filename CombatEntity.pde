@@ -18,6 +18,9 @@ public class CombatEntity {
 
     MovableObject obj;
 
+    ArrayList<Weapon> weapons;
+    static final int MAX_WEAPONS = 5;
+
     /**
         For Player
     **/
@@ -25,8 +28,13 @@ public class CombatEntity {
         this.obj = obj;
         isPlayer = true;
         moveSpeed = 200;
+        attackSpeed = 0.0;
         health = 100;
         maxHealth = 100;
+        healthRegen = 1.0;
+        attack = 10.0;
+        defence = 0.0;
+        weapons = new ArrayList<>();
     }
 
     /**
@@ -76,5 +84,32 @@ public class CombatEntity {
         if (health >= maxHealth) health = maxHealth;
 
         if (attackTimer > 0) attackTimer -= second;
+
+        weapons.forEach((w) -> {w.update(second);});
+    }
+
+    void addWeapon(WeaponType type) {
+        if (weapons.size() >= MAX_WEAPONS) return;
+
+        for (Weapon w : weapons) {
+            if (w.TYPE == type) return;
+        }
+
+        switch (type) {
+            case MAGICWAND :
+                MagicWand w = new MagicWand((Player)obj);
+                weapons.add(w);
+            break;	
+
+            default :
+                
+            break;	
+        }
+    }
+
+    void levelUpWeapon(WeaponType type) {
+        weapons.forEach((w) -> {
+            if (w.TYPE == type) w.levelUp();
+        });
     }
 }
