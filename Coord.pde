@@ -1,4 +1,4 @@
-class Coord {
+public class Coord {
     int x;
     int y;
 
@@ -11,7 +11,6 @@ class Coord {
         this.x = (int)fx;
         this.y = (int)fy;
     }
-
 
     /*
         Euclidean Distance
@@ -34,5 +33,19 @@ class Coord {
 
     public boolean equals(Coord c2) {
         return x == c2.x && y == c2.y;
+    }
+
+        
+    public int vectorToCoord(float v, float unit) {
+        float cv = v / unit;
+        if (cv >= 0) return (int)cv;
+        else if (cv % 1.0 == 0.0) return (int)cv;
+        else return (int)cv - 1;
+    }
+
+
+    @Override
+    public String toString() {
+        return "(" + x + "," + y + ")";
     }
 }

@@ -16,15 +16,12 @@ public class Player extends MovableObject{
     float animationTimer;
     float hurtTimer;
 
-    ArrayList<Weapon> weapons; 
     ArrayList<Projectile> projectiles;
-
 
 
     public Player(Game game, PVector position) {
         this.game = game;
         ce = new CombatEntity(this);
-        weapons = new ArrayList<>();
         projectiles = new ArrayList<>();
         this.position = position;
         this.coord = new Coord(position.x / Floor.UNIT, position.y/Floor.UNIT);
@@ -101,6 +98,7 @@ public class Player extends MovableObject{
         if (direction.y > 1.0) direction.y = 1.0;
         if (direction.y < -1.0) direction.y = -1.0;
         speed = direction.copy().normalize().mult(ce.moveSpeed);
+        if (direction.mag() != 0.0) lastDirection = direction.copy();
         if (knockBackForce != null) speed.add(knockBackForce);
     }
 
@@ -117,7 +115,7 @@ public class Player extends MovableObject{
 
         // Update position in x axis
         position = position.add(speed.x * second, 0);
-        int cx = (int)(position.x / Floor.UNIT);
+        int cx = coord.vectorToCoord(position.x, Floor.UNIT);
         if (cx != coord.x) {
             if (map.canBeEntered(cx, coord.y)) {
                 coord.x = cx;
@@ -127,7 +125,7 @@ public class Player extends MovableObject{
         }
 
         position = position.add(0, speed.y * second);
-        int cy = (int)(position.y / Floor.UNIT);
+        int cy = coord.vectorToCoord(position.y, Floor.UNIT);
         if (cy != coord.y) {
             if (map.canBeEntered(coord.x, cy)) {
                 coord.y = cy;
@@ -149,5 +147,4 @@ public class Player extends MovableObject{
     void die() {
         game.playerDie();
     }
-
 }

@@ -67,7 +67,7 @@ public class Enemy extends MovableObject {
 
         // Update position in x axis
         position = position.add(speed.x * second, 0);
-        int cx = (int)(position.x / Floor.UNIT);
+        int cx = coord.vectorToCoord(position.x, Floor.UNIT);
         if (cx != coord.x) {
             if (map.canBeEntered(cx, coord.y)) {
                 coord.x = cx;
@@ -77,7 +77,7 @@ public class Enemy extends MovableObject {
         }
 
         position = position.add(0, speed.y * second);
-        int cy = (int)(position.y / Floor.UNIT);
+        int cy = coord.vectorToCoord(position.y, Floor.UNIT);
         if (cy != coord.y) {
             if (map.canBeEntered(coord.x, cy)) {
                 coord.y = cy;
