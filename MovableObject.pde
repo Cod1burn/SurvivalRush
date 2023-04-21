@@ -11,8 +11,25 @@ public abstract class MovableObject{
     
     boolean inCamera;
 
-    void applyForce(PVector force) {
-        speed.add(force);
+    PVector knockBackForce;
+    float knockBackTimer;
+
+    public MovableObject() {
+        knockBackForce = null;
+        knockBackTimer = 0.0;
+    }
+
+    void knockBack(PVector force, float time) {
+        if (knockBackForce != null && force.mag() <= knockBackForce.mag()) return;
+        knockBackForce = force.copy();
+        knockBackTimer = time;
+    }
+
+    void update(float second) {
+        if (knockBackTimer > 0) {
+            knockBackTimer -= second;
+            if (knockBackTimer <= 0) knockBackForce = null;
+        }
     }
 
     boolean isCollide(MovableObject obj, boolean loose) {

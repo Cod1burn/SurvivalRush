@@ -4,10 +4,12 @@ public class Projectile extends MovableObject {
     float range;
     float scalarSpeed;
     float hitInterval;
+    float knockBackMultiplier;
+    float knockBackTime;
     int hits;
     
     Player owner;
-    float relatedPosition;
+    PVector relatedPosition;
 
     float hitTimer;
 
@@ -20,14 +22,21 @@ public class Projectile extends MovableObject {
         this.RADIUS = radius;
         collideRadius = RADIUS;
         this.scalarSpeed = 0.0;
-        this.range = null;
+        this.range = 0.0;
         hitTimer = 0.0;
+        knockBackMultiplier = 0.0;
+        knockBackTime = 0.0;
         
         position = owner.position.copy();
         relatedPosition = new PVector(0,0);
         this.direction = direction.copy();
 
         active = true;
+    }
+
+    void setKnockBack(float mutliplier, float time) {
+        knockBackMultiplier = mutliplier;
+        knockBackTime = time;
     }
     
     void draw() {
@@ -39,19 +48,19 @@ public class Projectile extends MovableObject {
     }
 
     void update(float second) {
+        speed = direction.copy().mult(scalarSpeed);
         if (hitTimer > 0) hitTimer -= second;
         position.add(speed.x * second, speed.y * second);
-        if (range!=null) {
+        if (range > 0) {
             if (position.copy().sub(owner.position).mag() > range) die();
         }
     }
 
     void hit(MovableObject obj) {
-        if (hit > 0) {
-            obj.takeDamage(attack);
-            hit--;
-            if (hit <= 0) die();
-        }
+        obj.ce.takeDamage(attack);
+        if (knockBackTime > 0) obj.knockBack(speed.copy().mult(knockBackMultiplier), knockBackTime);
+        hit--;
+        if (hit <= 0) die();
     }
 
     void runHitTimer() {

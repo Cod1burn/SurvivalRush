@@ -9,6 +9,8 @@ public class Enemy extends MovableObject {
 
     String name;
 
+
+
     public Enemy(String name, Game game, PVector position) {
         this.name = name;
         this.game = game;
@@ -56,9 +58,11 @@ public class Enemy extends MovableObject {
     void movingDirection(PVector direction) {
         this.direction = direction;
         speed = direction.copy().normalize().mult(ce.moveSpeed);
+        if (knockBackForce != null) speed.add(knockBackForce);
     }
 
     void update(float second, PVector camera) {
+        super.update(second);
         ce.update(second);
 
         // Update position in x axis
@@ -88,6 +92,7 @@ public class Enemy extends MovableObject {
     void hit(MovableObject obj) {
         if (ce.attackTimer <= 0) ce.attack(obj.ce);
     }
+
 
     @Override
     void die() {

@@ -101,9 +101,11 @@ public class Player extends MovableObject{
         if (direction.y > 1.0) direction.y = 1.0;
         if (direction.y < -1.0) direction.y = -1.0;
         speed = direction.copy().normalize().mult(ce.moveSpeed);
+        if (knockBackForce != null) speed.add(knockBackForce);
     }
 
     void update(float second) {
+        super.update(second);
         ce.update(second);
 
         // update animation
