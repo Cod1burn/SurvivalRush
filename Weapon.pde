@@ -12,9 +12,4 @@ public class Weapon {
     void update(float second) {
         if (attackTimer > 0) attackTimer -= second;
     }
-
-    void shootProjectile(Projectile p) {
-        player.projectiles.add(p);
-        attackTimer = attackInterval;
-    }
 }

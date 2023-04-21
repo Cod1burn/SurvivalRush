@@ -66,7 +66,7 @@ public class Game {
                 int hits = p.hits;
                 enemies.forEach((e) -> {
                     if (e.inCamera && e.isCollide(p, true)) {
-                        p.hit(e);
+                        if(p.active) p.hit(e);
                     }
                 });
                 if (p.hits != hits) p.runHitTimer();
