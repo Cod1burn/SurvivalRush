@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<enemies>
+    <orc>
+        <name>Orc Warrior</name>
+        <image>orc</image>
+        <radius>50</radius>
+        <health>20</health>
+        <healthRegen>0.0</healthRegen>
+        <attack>5.0</attack>
+        <defence>0.0</defence>
+        <moveSpeed>60</moveSpeed>
+        <attackInterval>1.0</attackInterval>
+        <attackSpeed>0.0</attackSpeed>
+    </orc>
+
+    <vampire>
+        <name>Vampire</name>
+        <image>vampire</image>
+        <radius>60</radius>
+        <health>35</health>
+        <healthRegen>0.0</healthRegen>
+        <attack>7.5</attack>
+        <defence>0.0</defence>
+        <moveSpeed>45</moveSpeed>
+        <attackInterval>1.0</attackInterval>
+        <attackSpeed>0.0</attackSpeed>
+    </vampire>
+</enemies>
