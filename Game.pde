@@ -2,9 +2,13 @@ public class Game {
     GameMap map;
     boolean pause;
     Player player;
+
+    static final float MAX_TIME = 15 * 60.0;
     float gameTimer;
+    int level;
     boolean isOver;
 
+    EnemyGenerator eg;
     ArrayList<Enemy> enemies;
 
     PVector camera;
@@ -16,10 +20,12 @@ public class Game {
         map = new GameMap(template); 
 
         player.setMap(map);
-        gameTimer = 15 * 60; // 15 minutes
+        gameTimer = MAX_TIME;
+        level = 1;
 
         camera = new PVector(0,0);
 
+        eg = new EnemyGenerator(this);
         enemies = new ArrayList<>();
     }
 
@@ -52,6 +58,8 @@ public class Game {
         float second = time / 1000.0;
 
         gameTimer -= second;
+        level = 1 + (int)((MAX_TIME - gameTimer) / 180);
+
         if (gameTimer <= 0) timeOut();
 
         player.update(second);
@@ -94,10 +102,8 @@ public class Game {
         // Drop loot
     }
 
-    void generateEnemy(String name, PVector position) {
-        Enemy enemy = new Enemy(name, this, position);
-        enemy.setMap(map);
-        enemies.add(enemy);
+    void generateEnemy(EnemyType et, PVector position) {
+        enemies.add(eg.generateEnemy(et, level, position));
     }
 
     void addWeapon(WeaponType type) {

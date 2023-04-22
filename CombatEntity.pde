@@ -1,4 +1,6 @@
 public class CombatEntity {
+    String name;
+
     boolean isPlayer;
     
     float health;
@@ -9,6 +11,7 @@ public class CombatEntity {
     float moveSpeed;
     float attackSpeed;
     float baseAttackInterval;
+    float radius;
     
     float exp;
     float maxExp;
@@ -25,6 +28,7 @@ public class CombatEntity {
         For Player
     **/
     public CombatEntity(MovableObject obj) {
+        name = "Player";
         this.obj = obj;
         isPlayer = true;
         moveSpeed = 200;
@@ -40,9 +44,24 @@ public class CombatEntity {
     /**
         For Enemy
     **/
-    public CombatEntity(String template) {
+    public CombatEntity() {
         isPlayer = false;
-        loadEntityFromTemplate(template);
+    }
+
+    void CombatEntity copy(int copyLevel) {
+        copyLevel -= level;
+        CombatEntity ce = new CombatEntity();
+        ce.name = name;
+        ce.isPlayer = isPlayer;
+        ce.maxHealth = maxHealth * pow(1.2, copyLevel);
+        ce.health = ce.maxHealth;  
+        ce.healthRegen = healthRegen * pow(1.2, copyLevel);
+        ce.attack = attack * pow(1.2, copyLevel);
+        ce.defence = defence * (1 + 0.2 * copyLevel);
+        ce.moveSpeed = moveSpeed;
+        ce.radius = radius;
+        ce.attackSpeed = attackSpeed;
+        ce.baseAttackInterval = baseAttackInterval;
     }
 
     void loadEntityFromTemplate(String template) {
