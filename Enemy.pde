@@ -5,33 +5,36 @@ public class Enemy extends MovableObject {
     float RADIUS;
     PVector cameraPosition;
     
-    PImage img;
+    PImage img1, img2;
+    float animationTimer;
+    static final ANIMATION_INTERVAL = 0.3;
 
     String name;
 
-
-
-    public Enemy(String name, Game game, PVector position) {
-        this.name = name;
+    public Enemy(CombatEntity ce, Game game, PVector position) {
+        this.name = ce.name;
         this.game = game;
         this.position = position.copy();
         this.coord = new Coord(position.x / Floor.UNIT, position.y / Floor.UNIT);
-        ce = new CombatEntity(name);
+        this.ce = ce;
         direction = new PVector(0, 0);
         speed = new PVector(0, 0);
         cameraPosition = new PVector(0, 0);
-        RADIUS = 55;
-        collideRadius = RADIUS * 0.9;
+        RADIUS = ce.radius;
+        collideRadius = RADIUS;
         loadImageAssets(name);
         inCamera = true;
+
+        animationTimer = ANIMATION_INTERVAL;
     }
 
     void setMap(GameMap map) {
         this.map = map;
     }
 
-    void loadImageAssets(String name) {
-        img = loadImage("ObjectImgs/Enemies/"+name+".png");
+    void setImage(PImage img1, PImage img2) {
+        this.img1 = img1;
+        this.img2 = img2;
     }
 
     void draw(PVector camera) {
@@ -42,8 +45,8 @@ public class Enemy extends MovableObject {
         translate(width/2, height/2);
         translate(cameraPosition.x, cameraPosition.y);
         if (direction.x < 0) scale(-1, 1);
-        image(img, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
-
+        if (animationTimer > ANIMATION_INTERVAL/2.0) image(img1, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
+        else image(img2, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
         popMatrix();
 
     }
@@ -64,6 +67,9 @@ public class Enemy extends MovableObject {
     void update(float second, PVector camera) {
         super.update(second);
         ce.update(second);
+
+        animationTimer -= second;
+        if (animationTimer < 0) animationTimer = ANIMATION_INTERVAL;
 
         // Update position in x axis
         position = position.add(speed.x * second, 0);
