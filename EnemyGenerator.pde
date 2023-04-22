@@ -13,30 +13,31 @@ public class EnemyGenerator {
         CombatEntity ce = ceMap.get(et).copy(level);
         Enemy enemy = new Enemy(ce, game, position);
         enemy.setImage(imageMap.get(et.label+"1"), imageMap.get(et.label+"2"));
+        return enemy;
     }
 
     void initialMaps() {
-        ceMap = new HashMap<String, CombatEntity>();
+        ceMap = new HashMap<EnemyType, CombatEntity>();
         imageMap = new HashMap<String, PImage>();
 
-        XML xml = loadXML("EnemyTemplats/enemies.xml");
+        XML xml = loadXML("EnemyTemplates/enemies.xml");
         for (EnemyType et : EnemyType.values()) {
             String label = et.label;          
-            ce = new CombatEntity();
+            CombatEntity ce = new CombatEntity();
             XML enemyXML = xml.getChildren(label)[0];
-            ce.name = enemyXML.getChildren("name").getContent();
-            ce.maxHealth = enemyXML.getChildren("health").getFloatContent();
-            ce.health = maxHealth;
-            ce.radius = enemyXML.getChildren("radius").getFloatContent();
-            ce.healthRegen = enemyXML.getChildren("healthRegen").getFloatContent();
-            ce.attack = enemyXML.getChildren("attack").getFloatContent();
-            ce.defence = enemyXML.getChildren("defence").getFloatContent();
-            ce.moveSpeed = enemyXML.getChildren("moveSpeed").getFloatContent();
-            ce.attackInterval = enemyXML.getChildren("attackInterval").getFloatContent();
-            ce.attackSpeed = enemyXML.getChildren("attackSpeed").getFloatContent();
+            ce.name = enemyXML.getChildren("name")[0].getContent();
+            ce.maxHealth = enemyXML.getChildren("health")[0].getFloatContent();
+            ce.health = ce.maxHealth;
+            ce.radius = enemyXML.getChildren("radius")[0].getFloatContent();
+            ce.healthRegen = enemyXML.getChildren("healthRegen")[0].getFloatContent();
+            ce.attack = enemyXML.getChildren("attack")[0].getFloatContent();
+            ce.defence = enemyXML.getChildren("defence")[0].getFloatContent();
+            ce.moveSpeed = enemyXML.getChildren("moveSpeed")[0].getFloatContent();
+            ce.baseAttackInterval = enemyXML.getChildren("attackInterval")[0].getFloatContent();
+            ce.attackSpeed = enemyXML.getChildren("attackSpeed")[0].getFloatContent();
             ceMap.put(et, ce);
 
-            String imgPath = "ObjectImgs/Enemies/"enemyXML.getChildren("image").getContent();
+            String imgPath = "ObjectImgs/Enemies/" + enemyXML.getChildren("image")[0].getContent();
             PImage img1 = loadImage(imgPath + "1.png");
             PImage img2 = loadImage(imgPath + "2.png");
             imageMap.put(label + "1", img1);

@@ -75,13 +75,16 @@ public class Game {
                 int hits = p.hits;
                 enemies.forEach((e) -> {
                     if (e.inCamera && e.isCollide(p, true)) {
-                        if(p.active) p.hit(e);
+                        if(p.alive) p.hit(e);
                     }
                 });
                 if (p.hits != hits) p.runHitTimer();
             } 
         });
-        player.projectiles.removeIf(p -> !p.active);
+        // Remove dead projectiles and enemies
+        player.projectiles.removeIf(p -> !p.alive);
+        enemies.removeIf(e -> !e.alive);
+        
         // 2. Enemies with player
         enemies.forEach((e) -> {
             if (e.isCollide(player, false)) e.hit(player);
@@ -124,7 +127,7 @@ public class Game {
             if (keyChar == 'a' || keyChar == 'A') player.movingDirection(-1, 0);
             if (keyChar == 'w' || keyChar == 'W') player.movingDirection(0, -1);
             if (keyChar == 's' || keyChar == 'S') player.movingDirection(0, 1);
-            if (keyChar == 'c') generateEnemy("test", player.position.copy().add(200, 200));
+            if (keyChar == 'c') generateEnemy(EnemyType.ORC, player.position.copy().add(200, 200));
             if (keyChar == 'x') addWeapon(WeaponType.MAGICWAND);
         }
     }

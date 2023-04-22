@@ -20,6 +20,7 @@ public class Player extends MovableObject{
 
 
     public Player(Game game, PVector position) {
+        super();
         this.game = game;
         ce = new CombatEntity(this);
         projectiles = new ArrayList<>();
@@ -145,6 +146,7 @@ public class Player extends MovableObject{
 
     @Override
     void die() {
+        super.die();
         game.playerDie();
     }
 }

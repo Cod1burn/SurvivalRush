@@ -15,10 +15,13 @@ public abstract class MovableObject{
     PVector knockBackForce;
     float knockBackTimer;
 
+    boolean alive;
+
     public MovableObject() {
         knockBackForce = null;
         knockBackTimer = 0.0;
         lastDirection = new PVector(0.0, 1.0);
+        alive = true;
     }
 
     void knockBack(PVector force, float time) {
@@ -39,5 +42,7 @@ public abstract class MovableObject{
         else return position.copy().sub(obj.position).mag() <= min(collideRadius, obj.collideRadius);
     }
 
-    void die() {}
+    void die() {
+        alive = false;
+    }
 }

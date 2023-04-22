@@ -8,8 +8,8 @@ public class Coord {
     }
 
     public Coord(float fx, float fy) {
-        this.x = (int)fx;
-        this.y = (int)fy;
+        this.x = vectorToCoord(fx, Floor.UNIT);
+        this.y = vectorToCoord(fy, Floor.UNIT);
     }
 
     /*

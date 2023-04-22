@@ -48,7 +48,7 @@ public class CombatEntity {
         isPlayer = false;
     }
 
-    void CombatEntity copy(int copyLevel) {
+    CombatEntity copy(int copyLevel) {
         copyLevel -= level;
         CombatEntity ce = new CombatEntity();
         ce.name = name;
@@ -62,6 +62,7 @@ public class CombatEntity {
         ce.radius = radius;
         ce.attackSpeed = attackSpeed;
         ce.baseAttackInterval = baseAttackInterval;
+        return ce;
     }
 
     void loadEntityFromTemplate(String template) {
@@ -104,7 +105,7 @@ public class CombatEntity {
 
         if (attackTimer > 0) attackTimer -= second;
 
-        weapons.forEach((w) -> {w.update(second);});
+        if (isPlayer) weapons.forEach((w) -> {w.update(second);});
     }
 
     void addWeapon(WeaponType type) {

@@ -7,29 +7,26 @@ public class Enemy extends MovableObject {
     
     PImage img1, img2;
     float animationTimer;
-    static final ANIMATION_INTERVAL = 0.3;
+    static final float ANIMATION_INTERVAL = 0.3;
 
     String name;
 
     public Enemy(CombatEntity ce, Game game, PVector position) {
         this.name = ce.name;
         this.game = game;
+        this.map = game.map;
         this.position = position.copy();
         this.coord = new Coord(position.x / Floor.UNIT, position.y / Floor.UNIT);
         this.ce = ce;
+        ce.obj = this;
         direction = new PVector(0, 0);
         speed = new PVector(0, 0);
         cameraPosition = new PVector(0, 0);
         RADIUS = ce.radius;
         collideRadius = RADIUS;
-        loadImageAssets(name);
         inCamera = true;
 
         animationTimer = ANIMATION_INTERVAL;
-    }
-
-    void setMap(GameMap map) {
-        this.map = map;
     }
 
     void setImage(PImage img1, PImage img2) {
@@ -39,6 +36,7 @@ public class Enemy extends MovableObject {
 
     void draw(PVector camera) {
         if (!inCamera) return;
+        if (!alive) return;
 
         pushMatrix();
 
@@ -98,10 +96,5 @@ public class Enemy extends MovableObject {
     void hit(MovableObject obj) {
         if (ce.attackTimer <= 0) ce.attack(obj.ce);
     }
-
-
-    @Override
-    void die() {
-    }  
 
 }

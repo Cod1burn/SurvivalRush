@@ -13,8 +13,6 @@ public class Projectile extends MovableObject {
 
     float hitTimer;
 
-    boolean active;
-
     PImage img;
 
     public Projectile(Player owner, PVector direction, float radius) {
@@ -30,8 +28,6 @@ public class Projectile extends MovableObject {
         position = owner.position.copy();
         relatedPosition = new PVector(0,0);
         this.direction = direction.copy();
-
-        active = true;
     }
 
     void setKnockBack(float mutliplier, float time) {
@@ -40,7 +36,7 @@ public class Projectile extends MovableObject {
     }
     
     void draw() {
-        image(img, relatedPosition.x - RADIUS/2.0, relatedPosition.y - RADIUS/2.0, RADIUS, RADIUS);
+        if(alive) image(img, relatedPosition.x - RADIUS/2.0, relatedPosition.y - RADIUS/2.0, RADIUS, RADIUS);
     }
 
     void setImage(PImage image) {
@@ -67,10 +63,4 @@ public class Projectile extends MovableObject {
     void runHitTimer() {
         hitTimer = hitInterval;
     }
-
-    void die() {
-        active = false;
-    }
-
-
 }
