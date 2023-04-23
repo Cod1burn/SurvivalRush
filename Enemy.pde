@@ -34,7 +34,7 @@ public class Enemy extends MovableObject {
         this.img2 = img2;
     }
 
-    void draw(PVector camera) {
+    void draw() {
         if (!inCamera) return;
         if (!alive) return;
 
