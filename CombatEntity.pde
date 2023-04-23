@@ -1,6 +1,6 @@
 public class CombatEntity {
     String name;
-
+    MovableObject obj;
     boolean isPlayer;
     
     float health;
@@ -12,14 +12,18 @@ public class CombatEntity {
     float attackSpeed;
     float baseAttackInterval;
     float radius;
-    
-    float exp;
+        
+    float exp; // For player, current exp; For enemy, exp on die;
     float maxExp;
     int level;
 
+    // Only for enemy
     float attackTimer;
 
-    MovableObject obj;
+    // Only for player
+    float absorbRadius; 
+    Game game;
+
 
     ArrayList<Weapon> weapons;
     static final int MAX_WEAPONS = 5;
@@ -27,7 +31,7 @@ public class CombatEntity {
     /**
         For Player
     **/
-    public CombatEntity(MovableObject obj) {
+    public CombatEntity(MovableObject obj, Game game) {
         name = "Player";
         this.obj = obj;
         isPlayer = true;
@@ -38,7 +42,14 @@ public class CombatEntity {
         healthRegen = 1.0;
         attack = 10.0;
         defence = 0.0;
+
+        exp = 0.0;
+        maxExp = 50.0;
+        level = 1;
+
+        absorbRadius = 250;
         weapons = new ArrayList<>();
+        this.game = game;
     }
 
     /**
@@ -80,6 +91,20 @@ public class CombatEntity {
         health = 30;
         healthRegen = 0;
 
+    }
+
+    void getExp(float value) {
+        if (value < maxExp - exp) {
+            exp += value;
+        } else {
+            value -= maxExp;
+            levelUp();
+            getExp(value);
+        }
+    }
+
+    void levelUp() {
+        level ++;
     }
 
     void attack(CombatEntity ce) {

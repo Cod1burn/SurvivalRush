@@ -2,14 +2,16 @@ public class Game {
     GameMap map;
     boolean pause;
     Player player;
+    int playerLastLevel;
 
     static final float MAX_TIME = 15 * 60.0;
     float gameTimer;
-    int level;
+    int gameLevel;
     boolean isOver;
 
     EnemyGenerator eg;
     ArrayList<Enemy> enemies;
+    ArrayList<Item> items;
 
     PVector camera;
 
@@ -17,16 +19,18 @@ public class Game {
     public Game () {
         int template = 0; // Test template
         player = new Player(this, new PVector(600, 600));
+        playerLastLevel = player.level;
         map = new GameMap(template); 
 
         player.setMap(map);
         gameTimer = MAX_TIME;
-        level = 1;
+        gameLevel = 1;
 
         camera = new PVector(0,0);
 
         eg = new EnemyGenerator(this);
         enemies = new ArrayList<>();
+        items = new ArrayList<>();
     }
 
     void draw() {
@@ -40,7 +44,8 @@ public class Game {
         background(0);
         // Draw map
         map.draw(camera);
-        enemies.forEach((e) -> {e.draw(camera);});
+        enemies.forEach(Enemy::draw);
+        items.forEach(Item::draw);
         player.draw();
         // Draw UI
         textSize(20);
@@ -53,12 +58,14 @@ public class Game {
     }
 
     void update(int time) {
+        if (playerLastLevel < player.level) pause();
+        
         if (pause) return;
 
         float second = time / 1000.0;
 
         gameTimer -= second;
-        level = 1 + (int)((MAX_TIME - gameTimer) / 180);
+        gameLevel = 1 + (int)((MAX_TIME - gameTimer) / 180);
 
         if (gameTimer <= 0) timeOut();
 
@@ -67,6 +74,9 @@ public class Game {
             e.update(second, camera);
             e.movingDirection(player.position.copy().sub(e.position));
             });
+        items.forEach((i) -> {
+            i.update(second, camera);
+        });
 
         // Collision Detection:
         // 1. Projectiles with enemies
@@ -84,7 +94,18 @@ public class Game {
         // Remove dead projectiles and enemies
         player.projectiles.removeIf(p -> !p.alive);
         enemies.removeIf(e -> !e.alive);
-        
+
+        // 2. Items with player
+        items.forEach((i) -> {
+            float distance = player.position.copy().sub(i.position).mag();
+            if (distance <= player.collideRadius) {
+                i.getCollected(player);
+            } else if (!i.absorbing && distance <= player.ce.absorbRadius) {
+                i.getAbsorbed(player);
+            }
+        });
+        items.removeIf(i -> !i.alive);
+
         // 2. Enemies with player
         enemies.forEach((e) -> {
             if (e.isCollide(player, false)) e.hit(player);
@@ -106,7 +127,7 @@ public class Game {
     }
 
     void generateEnemy(EnemyType et, PVector position) {
-        enemies.add(eg.generateEnemy(et, level, position));
+        enemies.add(eg.generateEnemy(et, gameLevel, position));
     }
 
     void addWeapon(WeaponType type) {
@@ -120,6 +141,10 @@ public class Game {
     void updateCamera(PVector camera) {
         this.camera = camera.copy();
     }
+
+    void pause() {pause = true;}
+
+    void unpause() {pause = false;}
 
     void keyPressed(char keyChar) {
         if (!pause) {
