@@ -15,6 +15,6 @@ public class Floor {
     }
 
     void draw() {
-        if (blocked) image(blockedImg, coord.x * UNIT, coord.y * UNIT, UNIT, UNIT);
+        if (blocked) image(blockedImg, coord.x * UNIT, coord.y * UNIT, UNIT * 1.2, UNIT * 1.2);
     }
 }
