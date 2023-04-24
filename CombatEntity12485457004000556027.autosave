@@ -48,6 +48,7 @@ public class CombatEntity {
 
         absorbRadius = 250;
         weapons = new ArrayList<>();
+        this.game = game
     }
 
     /**

@@ -8,7 +8,7 @@ public class Block {
     }
 
     void draw() {
-        image(img, 0, 0);
+        image(img, 0, 0, w * Floor.UNIT, h * Floor.UNIT);
         for (Floor[] fs: floors) {
             for (Floor f: fs) {
                 f.draw();

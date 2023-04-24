@@ -1,12 +1,12 @@
 public class ItemGenerator {
     Game game;
     HashMap<ItemType, PImage> imageMap;
-    public EnemyGenerator(Game game) {
+    public ItemGenerator(Game game) {
         this.game = game;
-        initialMaps();
+        initialMap();
     }
 
-    public initialMap() {
+    void initialMap() {
         imageMap = new HashMap<ItemType, PImage>();
         for (ItemType it: ItemType.values()) {
             String path = it.imagePath;
@@ -15,12 +15,17 @@ public class ItemGenerator {
         }
     }
 
-    Enemy generateItem(ItemType it, int level, PVector position) {
+    Item generateItem(ItemType it, float value, PVector position) {
         PImage img = imageMap.get(it);
+        Item item = null;
         switch (it) {
             case EXPORB :
-
+                item = new ExpOrb(position, value);
             break;	
+            
+            default:
+            break;
         }
+        return item;
     }
 }

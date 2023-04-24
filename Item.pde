@@ -25,13 +25,13 @@ public class Item {
         this.obj = null;
     }
 
-    void draw(PVector camera) {
+    void draw() {
         if (!inCamera) return;
 
         pushMatrix();
         translate(width/2, height/2);
         translate(cameraPosition.x, cameraPosition.y);
-        image(img1, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
+        image(img, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
         popMatrix();
     }
 

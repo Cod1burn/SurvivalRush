@@ -10,6 +10,7 @@ public class Game {
     boolean isOver;
 
     EnemyGenerator eg;
+    ItemGenerator ig;
     ArrayList<Enemy> enemies;
     ArrayList<Item> items;
 
@@ -19,7 +20,7 @@ public class Game {
     public Game () {
         int template = 0; // Test template
         player = new Player(this, new PVector(600, 600));
-        playerLastLevel = player.level;
+        playerLastLevel = player.ce.level;
         map = new GameMap(template); 
 
         player.setMap(map);
@@ -29,6 +30,8 @@ public class Game {
         camera = new PVector(0,0);
 
         eg = new EnemyGenerator(this);
+        ig = new ItemGenerator(this);
+
         enemies = new ArrayList<>();
         items = new ArrayList<>();
     }
@@ -50,15 +53,16 @@ public class Game {
         // Draw UI
         textSize(20);
         stroke(0);
-        text("position:" + player.position, 50, 70);
-        text("coord: "+ player.coord, 50, 50);
+        text("fps:" + frameRate, 50, 70);
+        //text("position:" + player.position, 50, 70);
+        //text("coord: "+ player.coord, 50, 50);
         if (pause) {
             // Draw pause menu
         }
     }
 
     void update(int time) {
-        if (playerLastLevel < player.level) pause();
+        if (playerLastLevel < player.ce.level) pause();
         
         if (pause) return;
 
@@ -128,6 +132,10 @@ public class Game {
 
     void generateEnemy(EnemyType et, PVector position) {
         enemies.add(eg.generateEnemy(et, gameLevel, position));
+    }
+
+    void generateItem(ItemType it, float value, PVector position) {
+        items.add(ig.generateItem(it, value, position));
     }
 
     void addWeapon(WeaponType type) {

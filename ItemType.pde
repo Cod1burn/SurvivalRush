@@ -1,10 +1,11 @@
-public class ItemType {
+public enum ItemType {
     EXPORB ("exporb"),
     POTION("potion"),
     FEATHER("feather"),
     BOOK ("book");
     
-    public ItemType(String imagePath) {
+    String imagePath;
+    private ItemType(String imagePath) {
         this.imagePath = imagePath;
     }
 }

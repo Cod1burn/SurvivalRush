@@ -7,6 +7,6 @@ public class ExpOrb extends Item {
     @Override
     void getCollected(MovableObject obj) {
         super.getCollected(obj);
-        
+        obj.ce.getExp(value);
     }
 }
