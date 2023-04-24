@@ -24,8 +24,8 @@ public class EnemyGenerator {
         for (EnemyType et : EnemyType.values()) {
             String label = et.label;          
             CombatEntity ce = new CombatEntity();
+            ce.type = et;
             XML enemyXML = xml.getChildren(label)[0];
-            ce.name = enemyXML.getChildren("name")[0].getContent();
             ce.maxHealth = enemyXML.getChildren("health")[0].getFloatContent();
             ce.health = ce.maxHealth;
             ce.radius = enemyXML.getChildren("radius")[0].getFloatContent();
