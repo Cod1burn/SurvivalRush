@@ -2,6 +2,7 @@ public class Projectile extends MovableObject {
     float attack;
     float RADIUS;
     float range;
+    float duration;
     float scalarSpeed;
     float hitInterval;
     float knockBackMultiplier;
@@ -11,6 +12,7 @@ public class Projectile extends MovableObject {
     Player owner;
     PVector relatedPosition;
 
+    float lifeTimer;
     float hitTimer;
 
     PImage img;
@@ -21,6 +23,7 @@ public class Projectile extends MovableObject {
         collideRadius = RADIUS;
         this.scalarSpeed = 0.0;
         this.range = 0.0;
+        this.duration = 0.0;
         hitTimer = 0.0;
         knockBackMultiplier = 0.0;
         knockBackTime = 0.0;
@@ -46,6 +49,13 @@ public class Projectile extends MovableObject {
     void update(float second) {
         speed = direction.copy().mult(scalarSpeed);
         if (hitTimer > 0) hitTimer -= second;
+        if (duration > 0) {
+            lifeTimer += scalarSpeed;
+            if (lifeTimer > duration) {
+                die();
+                return;
+            }
+        }
         position.add(speed.x * second, speed.y * second);
         relatedPosition = position.copy().sub(owner.position);
         if (range > 0) {
