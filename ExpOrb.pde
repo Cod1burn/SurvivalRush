@@ -2,6 +2,7 @@ public class ExpOrb extends Item {
     public ExpOrb(PVector position, float value) {
         super(position);
         this.value = value;
+        RADIUS = 20;
     }
 
     @Override
