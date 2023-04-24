@@ -1,5 +1,4 @@
 public class CombatEntity {
-    String name;
     MovableObject obj;
     boolean isPlayer;
     
@@ -19,6 +18,7 @@ public class CombatEntity {
 
     // Only for enemy
     float attackTimer;
+    EnemyType type;
 
     // Only for player
     float absorbRadius; 
@@ -31,7 +31,6 @@ public class CombatEntity {
         For Player
     **/
     public CombatEntity(MovableObject obj) {
-        name = "Player";
         this.obj = obj;
         isPlayer = true;
         moveSpeed = 200;
@@ -46,7 +45,7 @@ public class CombatEntity {
         maxExp = 50.0;
         level = 1;
 
-        absorbRadius = 250;
+        absorbRadius = 100;
         weapons = new ArrayList<>();
     }
 
@@ -60,7 +59,7 @@ public class CombatEntity {
     CombatEntity copy(int copyLevel) {
         copyLevel -= level;
         CombatEntity ce = new CombatEntity();
-        ce.name = name;
+        ce.type = type;
         ce.isPlayer = isPlayer;
         ce.maxHealth = maxHealth * pow(1.2, copyLevel);
         ce.health = ce.maxHealth;  
@@ -118,7 +117,7 @@ public class CombatEntity {
 
     void takeDamage(float damage) {
         health -= damage;
-        if (isPlayer) ((Player)obj).getHurtAnimation();
+        obj.getHurt();
         if (health <= 0) obj.die();
     }
 

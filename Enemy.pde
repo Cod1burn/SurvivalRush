@@ -1,4 +1,6 @@
 public class Enemy extends MovableObject {
+    EnemyType type;
+
     Game game;
     GameMap map;
 
@@ -7,12 +9,13 @@ public class Enemy extends MovableObject {
     
     PImage img1, img2;
     float animationTimer;
-    static final float ANIMATION_INTERVAL = 0.3;
+    float hurtTimer;
 
-    String name;
+    static final float ANIMATION_INTERVAL = 0.3;
+    static final float HURT_ANIMATION_INTERVAL = 0.1;
 
     public Enemy(CombatEntity ce, Game game, PVector position) {
-        this.name = ce.name;
+        this.type = ce.type;
         this.game = game;
         this.map = game.map;
         this.position = position.copy();
@@ -27,6 +30,7 @@ public class Enemy extends MovableObject {
         inCamera = true;
 
         animationTimer = ANIMATION_INTERVAL;
+        hurtTimer = 0.0;
     }
 
     void setImage(PImage img1, PImage img2) {
@@ -43,8 +47,10 @@ public class Enemy extends MovableObject {
         translate(width/2, height/2);
         translate(cameraPosition.x, cameraPosition.y);
         if (direction.x < 0) scale(-1, 1);
+        if (hurtTimer > 0) tint(255, 255, 255, 30);
         if (animationTimer > ANIMATION_INTERVAL/2.0) image(img1, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
         else image(img2, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
+        noTint();
         popMatrix();
 
     }
@@ -68,6 +74,8 @@ public class Enemy extends MovableObject {
 
         animationTimer -= second;
         if (animationTimer < 0) animationTimer = ANIMATION_INTERVAL;
+
+        if (hurtTimer > 0) hurtTimer -= second;
 
         // Update position in x axis
         position = position.add(speed.x * second, 0);
@@ -97,4 +105,13 @@ public class Enemy extends MovableObject {
         if (ce.attackTimer <= 0) ce.attack(obj.ce);
     }
 
+    void getHurt() {
+        hurtTimer = HURT_ANIMATION_INTERVAL;
+    }
+
+    @Override
+    void die() {
+        super.die();
+        game.generateItem(ItemType.EXPORB, 30, position.copy());
+    }
 }

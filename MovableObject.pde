@@ -42,6 +42,8 @@ public abstract class MovableObject{
         else return position.copy().sub(obj.position).mag() <= min(collideRadius, obj.collideRadius);
     }
 
+    void getHurt() {}
+
     void die() {
         alive = false;
     }
