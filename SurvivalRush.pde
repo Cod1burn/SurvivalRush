@@ -7,7 +7,7 @@ int millis;
 
 // For test only
 void setup() {
-  size(1200, 800, P2D);
+  size(1720, 1080, P2D);
   frameRate(60);
   game = new Game();
   inGame = true;
@@ -19,7 +19,9 @@ void draw() {
   millis = millis();
   if (inGame) {
     game.update(time);
+    pushMatrix();
     game.draw();
+    popMatrix();
   } 
 }
 
