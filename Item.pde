@@ -19,6 +19,7 @@ public class Item {
     public Item(PVector position) {
         this.position = position.copy();
         cameraPosition = new PVector(0.0, 0.0);
+        scalarSpeed = 300;
         this.alive = true;
 
         this.absorbing = false;

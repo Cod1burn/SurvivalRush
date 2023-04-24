@@ -21,6 +21,7 @@ public class ItemGenerator {
         switch (it) {
             case EXPORB :
                 item = new ExpOrb(position, value);
+                item.setImage(imageMap.get(it));
             break;	
             
             default:

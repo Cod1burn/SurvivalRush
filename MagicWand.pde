@@ -6,7 +6,7 @@ public class MagicWand extends Weapon {
     float ATTACK_MULTIPLIER;
     float BASE_ATTACK_INTERVAL;
     final float BASE_PROJECTILE_SPEED = 700;
-    final float MINIMAL_SHOOT_INTERVAL = 0.15;
+    final float MINIMAL_SHOOT_INTERVAL = 0.12;
     final float BASE_PROJECTILE_RADIUS = 15;
     
     public MagicWand(Player player) {
@@ -59,7 +59,7 @@ public class MagicWand extends Weapon {
             break;	
 
             case 3 :
-                BASE_ATTACK_INTERVAL = 0.8;
+                BASE_ATTACK_INTERVAL = 0.85;
             break;
 
             case 4 :
@@ -67,8 +67,32 @@ public class MagicWand extends Weapon {
             break;
 
             case 5 :
-                ATTACK_MULTIPLIER = 1.5;
+                ATTACK_MULTIPLIER = 1.4;
             break;
+
+            case 6 :
+                shootNum ++;
+                BASE_ATTACK_INTERVAL = 0.75;
+            break;
+
+            case 7 :
+                ATTACK_MULTIPLIER = 1.6;
+            break;
+
+            case 8 :
+                shootNum ++;
+            break;	
+
+            case 9 :
+                BASE_ATTACK_INTERVAL = 0.65;
+            break;	
+
+            case 10:
+                shootNum ++;
+                BASE_ATTACK_INTERVAL = 0.5;
+                ATTACK_MULTIPLIER = 1.8;
+            break;
+
 
 
         }

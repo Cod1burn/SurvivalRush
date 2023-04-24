@@ -57,6 +57,9 @@ public class Game {
         //text("position:" + player.position, 50, 70);
         //text("coord: "+ player.coord, 50, 50);
         if (pause) {
+            textSize(80);
+            textAlign(CENTER, CENTER);
+            text("PAUSE", width/2, height/2);
             // Draw pause menu
         }
     }
@@ -162,6 +165,7 @@ public class Game {
             if (keyChar == 's' || keyChar == 'S') player.movingDirection(0, 1);
             if (keyChar == 'c') generateEnemy(EnemyType.ORC, player.position.copy().add(200, 200));
             if (keyChar == 'x') addWeapon(WeaponType.MAGICWAND);
+            if (keyChar == 'z') levelUpWeapon(WeaponType.MAGICWAND);
         }
     }
 

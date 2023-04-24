@@ -4,7 +4,7 @@ public class Player extends MovableObject{
 
     static final float RADIUS = 70;
     static final float ANIMATION_INTERVAL = 0.5;
-    static final float HURT_ANIMATION_INTERVAL = 0.15;
+    static final float HURT_ANIMATION_INTERVAL = 0.1;
 
     PImage[] fronts;
     PImage[] lefts;
@@ -56,7 +56,7 @@ public class Player extends MovableObject{
 
         pushMatrix();
         translate(width/2, height/2);
-        if (hurtTimer > 0) tint(230, 50, 50);
+        if (hurtTimer > 0) tint(230, 50, 50, 150);
         image(img, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
         noTint();
         projectiles.forEach(Projectile::draw);
@@ -140,7 +140,7 @@ public class Player extends MovableObject{
         projectiles.forEach((p) -> {p.update(second);});
     }
 
-    void getHurtAnimation() {
+    void getHurt() {
         hurtTimer = HURT_ANIMATION_INTERVAL;
     }
 
