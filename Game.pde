@@ -159,10 +159,10 @@ public class Game {
 
     void keyPressed(char keyChar) {
         if (!pause) {
-            if (keyChar == 'd' || keyChar == 'D') player.movingDirection(1, 0);
-            if (keyChar == 'a' || keyChar == 'A') player.movingDirection(-1, 0);
-            if (keyChar == 'w' || keyChar == 'W') player.movingDirection(0, -1);
-            if (keyChar == 's' || keyChar == 'S') player.movingDirection(0, 1);
+            if (keyChar == 'd' || keyChar == 'D' || keyCode == LEFT) player.movingDirection(1, 0);
+            if (keyChar == 'a' || keyChar == 'A' || keyCode == RIGHT) player.movingDirection(-1, 0);
+            if (keyChar == 'w' || keyChar == 'W' || keyCode == UP) player.movingDirection(0, -1);
+            if (keyChar == 's' || keyChar == 'S' || keyCode == DOWN) player.movingDirection(0, 1);
             if (keyChar == 'c') generateEnemy(EnemyType.ORC, player.position.copy().add(200, 200));
             if (keyChar == 'x') addWeapon(WeaponType.MAGICWAND);
             if (keyChar == 'z') levelUpWeapon(WeaponType.MAGICWAND);
