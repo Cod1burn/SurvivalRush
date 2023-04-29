@@ -1,5 +1,5 @@
 public enum WeaponType {
     MAGICWAND,
-    FIREWAND,
+    ASTERWAND,
     SPIKEWAND;
 }
