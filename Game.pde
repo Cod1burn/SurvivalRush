@@ -170,6 +170,18 @@ public class Game {
         this.camera = camera.copy();
     }
 
+    void addAllWeapons() {
+        for (WeaponType wt : WeaponType.values()) {
+            player.ce.addWeapon(wt);
+        }
+    }
+
+    void levelUpAllWeapons() {
+        for (WeaponType wt : WeaponType.values()) {
+            player.ce.levelUpWeapon(wt);
+        }
+    }
+
     void pause() {pause = true;}
 
     void unpause() {pause = false;}
@@ -181,8 +193,8 @@ public class Game {
             if (keyChar == 'w' || keyChar == 'W' || keyCode == UP) player.movingDirection(0, -1);
             if (keyChar == 's' || keyChar == 'S' || keyCode == DOWN) player.movingDirection(0, 1);
             if (keyChar == 'c') generateEnemy(EnemyType.ORC, player.position.copy().add(200, 200));
-            if (keyChar == 'x') addWeapon(WeaponType.ASTERWAND);
-            if (keyChar == 'z') levelUpWeapon(WeaponType.ASTERWAND);
+            if (keyChar == 'x') addAllWeapons();
+            if (keyChar == 'z') levelUpAllWeapons();
         }
     }
 

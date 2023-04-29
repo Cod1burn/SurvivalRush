@@ -153,6 +153,11 @@ public class CombatEntity {
                 weapons.add(aw);
             break;	
 
+            case SHARDSTAFF :
+                ShardStaff ss = new ShardStaff((Player)obj);
+                weapons.add(ss);
+            break;	
+
             default :
                 
             break;	
