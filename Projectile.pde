@@ -8,6 +8,7 @@ public class Projectile extends MovableObject {
     float knockBackMultiplier;
     float knockBackTime;
     int hits;
+    boolean hasHit;
     
     Player owner;
     PVector relatedPosition;
@@ -27,6 +28,7 @@ public class Projectile extends MovableObject {
         hitTimer = 0.0;
         knockBackMultiplier = 0.0;
         knockBackTime = 0.0;
+        hasHit = false;
         
         position = owner.position.copy();
         relatedPosition = new PVector(0,0);
@@ -48,7 +50,9 @@ public class Projectile extends MovableObject {
 
     void update(float second) {
         speed = direction.copy().mult(scalarSpeed);
-        if (hitTimer > 0) hitTimer -= second;
+        if (hitTimer > 0) {
+            hitTimer -= second;
+        }
         if (duration > 0) {
             lifeTimer += scalarSpeed;
             if (lifeTimer > duration) {

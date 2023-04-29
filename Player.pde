@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Player extends MovableObject{
     Game game;
     GameMap map;
@@ -138,6 +140,10 @@ public class Player extends MovableObject{
         game.updateCamera(position);
 
         projectiles.forEach((p) -> {p.update(second);});
+    }
+
+    List<Enemy> findEnemies(int num) {
+        return game.getRandomEnemies(num);
     }
 
     void getHurt() {

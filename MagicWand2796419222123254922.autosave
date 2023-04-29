@@ -93,51 +93,46 @@ public class MagicWand extends Weapon {
     
     @Override
     String getDescription(int level) {
-        String s = "";
         switch (level) {
             case 1 :
-                s = "Fire magic orbs through your direction.";
+                return "Fire magic orbs through your direction.";
             break;	
 
             case 2 :
-                s =  "Damage +20%";
+                return "Damage +20%";
             break;
 
             case 3 :
-                s = "Shooting Interval -0.15s";
+                return "Shooting Interval -0.15s";
             break;	
 
             case 4 :
-                s = "Shoot one more orb";
+                return "Shoot one more orb";
             break;	
 
             case 5 :
-                s = "Damage +20%";
+                return "Damage +20%";
             break;	
 
             case 6 :
-                s = "Shoot one more orb, \n Shooting Interval -0.1s%";
+                return "Shoot one more orb, \n Shooting Interval -0.1s%";
             break;
 
             case 7 :
-                s = "Damage +20%";
+                return "Damage +20%";
             break;		
 
             case 8 :
-                s = "Shoot one more orb";
+                return "Shoot one more orb";
             break; 
 
             case 9 :
-                s = "Shooting Interval -0.15s%";
+                return "Shooting Interval -0.15s%";
             break;	
 
             case 10 :
-                s = "Shoot one more orb, \nShooting Interval -0.15s, \nDamage +20%";
+                return "Shoot one more orb, \nShooting Interval -0.15s, \nDamage +20%";
             break;	
-
-            default :
-            break;
         }
-        return s;
     }
 }
