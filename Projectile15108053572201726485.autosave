@@ -8,7 +8,7 @@ public class Projectile extends MovableObject {
 
     PVector knockBackForce;
     float knockBackTime;
-
+    
     int hits;
     boolean hasHit;
     

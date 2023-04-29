@@ -151,7 +151,7 @@ public class Game {
             .collect(Collectors.toList());
 
         Collections.shuffle(visibleEnemies);
-        if (num < visibleEnemies.size()) return visibleEnemies;
+        if (num >= visibleEnemies.size()) return visibleEnemies;
         return visibleEnemies.subList(0, num);
     }
 
@@ -182,8 +182,8 @@ public class Game {
             if (keyChar == 'w' || keyChar == 'W' || keyCode == UP) player.movingDirection(0, -1);
             if (keyChar == 's' || keyChar == 'S' || keyCode == DOWN) player.movingDirection(0, 1);
             if (keyChar == 'c') generateEnemy(EnemyType.ORC, player.position.copy().add(200, 200));
-            if (keyChar == 'x') addWeapon(WeaponType.SPIKEWAND);
-            if (keyChar == 'z') levelUpWeapon(WeaponType.SPIKEWAND);
+            if (keyChar == 'x') addWeapon(WeaponType.MAGICWAND);
+            if (keyChar == 'z') levelUpWeapon(WeaponType.MAGICWAND);
         }
     }
 

@@ -47,7 +47,7 @@ public class Enemy extends MovableObject {
         translate(width/2, height/2);
         translate(cameraPosition.x, cameraPosition.y);
         if (direction.x < 0) scale(-1, 1);
-        if (hurtTimer > 0) tint(255, 255, 255, 30);
+        if (hurtTimer > 0) tint(255, 255, 255, 150);
         if (animationTimer > ANIMATION_INTERVAL/2.0) image(img1, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
         else image(img2, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
         noTint();

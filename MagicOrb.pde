@@ -10,6 +10,9 @@ public class MagicOrb extends Projectile {
         coord = new Coord(position.x / Floor.UNIT, position.y / Floor.UNIT);
         speed = direction.copy().mult(scalarSpeed);
         pierceBlock = false;
+
+        knockBackForce = direction.copy().mult(0.6 * scalarSpeed);
+        knockBackTime = 0.08;
     }
 
     @Override

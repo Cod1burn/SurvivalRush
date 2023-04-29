@@ -14,7 +14,7 @@ public class Spikewand extends Weapon {
         ATTACK_MULTIPLIER = 0.5;
         BASE_SHOOT_INTERVAL = 5.0;
         PROJ_HIT_INTERVAL = 0.5;
-        PROJ_RADIUS = 60;
+        PROJ_RADIUS = 40;
         PROJ_DURATION = 2.0;
 
         loadProjectileImage("spike");
@@ -24,7 +24,7 @@ public class Spikewand extends Weapon {
     void update(float second) {
         super.update(second);
         attackInterval = BASE_SHOOT_INTERVAL / (1 + player.ce.attackSpeed / 100.0);
-        if (attackTimer <= 0) shootSpikes(player.findEnemies(PROJ_NUM));
+        if (attackTimer < 0) shootSpikes(player.findEnemies(PROJ_NUM));
     }
 
     void shootSpikes(List<Enemy> enemies) {
@@ -45,7 +45,7 @@ public class Spikewand extends Weapon {
     }
 
     void shootSpike(PVector position) {
-        Spike spike = new Spike(player, position, PROJ_RADIUS, PROJ_DURATION, attack, PROJ_HIT_INTERVAL);
+        Spike spike = new Spike(player, position, PROJ_RADIUS, PROJ_RADIUS, attack, PROJ_HIT_INTERVAL);
         spike.setImage(projectileImage);
         player.projectiles.add(spike);
     }
@@ -63,7 +63,7 @@ public class Spikewand extends Weapon {
 
             case 4 :
                 PROJ_DURATION = 2.5;
-                PROJ_RADIUS = 80;
+                PROJ_RADIUS = 50;
             break;
 
             case 5 :
@@ -77,7 +77,7 @@ public class Spikewand extends Weapon {
 
             case 7 :
                 ATTACK_MULTIPLIER = 0.65;
-                PROJ_RADIUS = 100;
+                PROJ_RADIUS = 60;
             break;
 
             case 8 :
@@ -113,7 +113,7 @@ public class Spikewand extends Weapon {
             break;	
 
             case 4 :
-                s = "Spike duration +0.5s, \nSpike Radius +20%";
+                s = "Spike duration +0.5s, \nSpike Radius +25%";
             break;	
 
             case 5 :
@@ -125,7 +125,7 @@ public class Spikewand extends Weapon {
             break;
 
             case 7 :
-                s = "Damage +10%, \nSpike Radius +20";
+                s = "Damage +10%, \nSpike Radius +25%";
             break;		
 
             case 8 :
