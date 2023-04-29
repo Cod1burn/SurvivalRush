@@ -1,3 +1,8 @@
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+
 public class Game {
     GameMap map;
     boolean pause;
@@ -137,6 +142,19 @@ public class Game {
         enemies.add(eg.generateEnemy(et, gameLevel, position));
     }
 
+    /**
+        Get a Specific number of random visible enemies from enemies list.
+    **/
+    List<Enemy> getRandomEnemies(int num) {
+        List<Enemy> visibleEnemies = enemies.stream()
+            .filter(e -> e.inCamera)
+            .collect(Collectors.toList());
+
+        Collections.shuffle(visibleEnemies);
+        if (num < visibleEnemies.size()) return visibleEnemies;
+        return visibleEnemies.subList(0, num);
+    }
+
     void generateItem(ItemType it, float value, PVector position) {
         items.add(ig.generateItem(it, value, position));
     }
@@ -164,8 +182,8 @@ public class Game {
             if (keyChar == 'w' || keyChar == 'W') player.movingDirection(0, -1);
             if (keyChar == 's' || keyChar == 'S') player.movingDirection(0, 1);
             if (keyChar == 'c') generateEnemy(EnemyType.ORC, player.position.copy().add(200, 200));
-            if (keyChar == 'x') addWeapon(WeaponType.MAGICWAND);
-            if (keyChar == 'z') levelUpWeapon(WeaponType.MAGICWAND);
+            if (keyChar == 'x') addWeapon(WeaponType.SPIKEWAND);
+            if (keyChar == 'z') levelUpWeapon(WeaponType.SPIKEWAND);
         }
     }
 

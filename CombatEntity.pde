@@ -139,10 +139,13 @@ public class CombatEntity {
 
         switch (type) {
             case MAGICWAND :
-                MagicWand w = new MagicWand((Player)obj);
-                weapons.add(w);
+                MagicWand mw = new MagicWand((Player)obj);
+                weapons.add(mw);
             break;	
-
+            
+            case SPIKEWAND :
+                Spikewand sw = new Spikewand((Player)obj);
+                weapons.add(sw);
             default :
                 
             break;	
