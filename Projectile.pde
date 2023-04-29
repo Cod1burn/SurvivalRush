@@ -10,6 +10,7 @@ public class Projectile extends MovableObject {
     float knockBackTime;
 
     int hits;
+    boolean infiniteHits;
     boolean hasHit;
     
     Player owner;
@@ -30,6 +31,7 @@ public class Projectile extends MovableObject {
         hitTimer = 0.0;
         knockBackForce = new PVector(0.0, 0.0);
         knockBackTime = 0.0;
+        infiniteHits = false;
         hasHit = false;
         
         position = owner.position.copy();
@@ -48,6 +50,7 @@ public class Projectile extends MovableObject {
     void update(float second) {
         speed = direction.copy().mult(scalarSpeed);
         if (hitTimer > 0) {
+            hasHit = false;
             hitTimer -= second;
         }
         if (duration > 0) {
@@ -67,8 +70,11 @@ public class Projectile extends MovableObject {
     void hit(MovableObject obj) {
         obj.ce.takeDamage(attack);
         if (knockBackTime > 0) obj.knockBack(knockBackForce, knockBackTime);
-        hits--;
-        if (hits <= 0) die();
+        if (!infiniteHits) {
+            hits--;
+            if (hits <= 0) die();
+        }
+        hasHit = true;
     }
 
     void runHitTimer() {

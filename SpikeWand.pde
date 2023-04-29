@@ -71,25 +71,24 @@ public class Spikewand extends Weapon {
             break;
 
             case 6 :
-                BASE_SHOOT_INTERVAL = 4.5;
+                ATTACK_MULTIPLIER = 0.65;
                 PROJ_NUM++;
             break;
 
             case 7 :
-                ATTACK_MULTIPLIER = 0.65;
                 PROJ_RADIUS = 100;
             break;
 
             case 8 :
-                 PROJ_HIT_INTERVAL = 0.3;
+                PROJ_HIT_INTERVAL = 0.3;
             break;	
 
             case 9 :
-                BASE_SHOOT_INTERVAL = 4.0;
+                PROJ_NUM++;
             break;	
 
             case 10:
-                PROJ_NUM++;
+                player.ce.defence += 5; 
                 PROJ_DURATION = 3.0;
                 ATTACK_MULTIPLIER = 0.8;
             break;
@@ -121,11 +120,11 @@ public class Spikewand extends Weapon {
             break;	
 
             case 6 :
-                s = "Summon Interval -0.5s, \nSummon one more spike";
+                s = "Damage +10%, \nSummon one more spike";
             break;
 
             case 7 :
-                s = "Damage +10%, \nSpike Radius +20";
+                s = "Spike Radius +20";
             break;		
 
             case 8 :
@@ -133,11 +132,11 @@ public class Spikewand extends Weapon {
             break; 
 
             case 9 :
-                s = "Summon Interval -0.5";
+                s = "Summon one more spike";
             break;	
 
             case 10 :
-                s = "Summon one more spike, \nSpike duration +0.5s, \nDamage +30%";
+                s = "defence +10, \nSpike duration +0.5s, \nDamage +30%";
             break;
 
             default:

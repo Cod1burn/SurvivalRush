@@ -146,6 +146,13 @@ public class CombatEntity {
             case SPIKEWAND :
                 Spikewand sw = new Spikewand((Player)obj);
                 weapons.add(sw);
+            break;
+
+            case ASTERWAND :
+                AsterWand aw = new AsterWand((Player)obj);
+                weapons.add(aw);
+            break;	
+
             default :
                 
             break;	
