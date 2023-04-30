@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class GameMap {
     Block block;
     float blockWidth, blockHeight;
@@ -66,5 +68,19 @@ public class GameMap {
 
         return !block.getFloor(cx, cy).blocked;
     }
+
+    List<PVector> getAvailablePositions(PVector start, int num, float minDistance, float maxDistance) {
+        List<PVector> positions = new ArrayList<>();
+        while (positions.size() < num) {
+            float distance = random(minDistance, maxDistance);
+            float angle = random(0, 2 * PI);
+            PVector nPosition = start.copy().add(PVector.fromAngle(angle).mult(distance));
+            Coord c = new Coord(nPosition.x, nPosition.y);
+            if (canBeEntered(c.x, c.y)) {
+                positions.add(nPosition);
+            }
+        }
+        return positions;
+    } 
 
 }

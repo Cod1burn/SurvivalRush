@@ -121,6 +121,8 @@ public class Game {
         enemies.forEach((e) -> {
             if (e.isCollide(player, false)) e.hit(player);
         });
+
+        if (!player.alive) player.die();
         
     }
 
@@ -158,6 +160,10 @@ public class Game {
         items.add(ig.generateItem(it, value, position));
     }
 
+    void generateEnemies(EnemyType et, int num, float minDistance, float maxDistance) {
+        map.getAvailablePositions(player.position, num, minDistance, maxDistance).forEach((p) -> {generateEnemy(et, p);});
+    }
+
     void addWeapon(WeaponType type) {
         player.ce.addWeapon(type);
     }
@@ -192,7 +198,7 @@ public class Game {
             if (keyChar == 'a' || keyChar == 'A' || keyCode == RIGHT) player.movingDirection(-1, 0);
             if (keyChar == 'w' || keyChar == 'W' || keyCode == UP) player.movingDirection(0, -1);
             if (keyChar == 's' || keyChar == 'S' || keyCode == DOWN) player.movingDirection(0, 1);
-            if (keyChar == 'c') generateEnemy(EnemyType.ORC, player.position.copy().add(200, 200));
+            if (keyChar == 'c') generateEnemies(EnemyType.MEGAORC, 3, 700, 2000);
             if (keyChar == 'x') addAllWeapons();
             if (keyChar == 'z') levelUpAllWeapons();
         }

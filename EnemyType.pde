@@ -1,6 +1,7 @@
 public enum EnemyType {
     ORC ("orc"),
-    VAMPIRE ("vampire");
+    VAMPIRE ("vampire"),
+    MEGAORC ("megaOrc");
 
     String label;
     EnemyType(String label) {

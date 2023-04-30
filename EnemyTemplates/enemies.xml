@@ -24,4 +24,16 @@
         <attackInterval>1.0</attackInterval>
         <attackSpeed>0.0</attackSpeed>
     </vampire>
+
+    <megaOrc>
+        <image>orc</image>
+        <radius>120</radius>
+        <health>200</health>
+        <healthRegen>0.0</healthRegen>
+        <attack>12.0</attack>
+        <defence>0.0</defence>
+        <moveSpeed>50</moveSpeed>
+        <attackInterval>1.0</attackInterval>
+        <attackSpeed>0.0</attackSpeed>
+    </megaOrc>
 </enemies>
