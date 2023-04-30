@@ -3,6 +3,7 @@ boolean inGame;
 Menu menu;
 ArrayList<Button> buttons;
 Game game;
+LevelUpMenu lpMenu;
 int millis;
 
 // For test only
@@ -10,6 +11,7 @@ void setup() {
   size(1720, 1080, P2D);
   frameRate(60);
   game = new Game();
+  lpMenu = new LevelUpMenu(game, game.player)
   inGame = true;
   millis = millis();
 }
@@ -22,7 +24,10 @@ void draw() {
     pushMatrix();
     game.draw();
     popMatrix();
-  } 
+  }
+  else {
+    lpMenu.draw();
+  }
 }
 
 /*
@@ -64,13 +69,16 @@ void mousePressed() {
 }
 */
 
-
 void keyPressed() {
   // game starts with menu. 
   // space or ENTER to pause or unpause game. 
   // can change if needed. 
   if (key == ' ' || key == ENTER) isMenu = !isMenu;
   if (inGame) game.keyPressed(key);
+  // level up menu
+  else {
+    lpMenu.keyPressed(key);
+  }
 }
 
 void keyReleased() {
