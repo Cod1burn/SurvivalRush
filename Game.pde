@@ -19,6 +19,8 @@ public class Game {
     ArrayList<Enemy> enemies;
     ArrayList<Item> items;
 
+    LevelUpMenu lpMenu;
+
     PVector camera;
 
 
@@ -66,13 +68,19 @@ public class Game {
             textAlign(CENTER, CENTER);
             text("PAUSE", width/2, height/2);
             // Draw pause menu
+            if (lpMenu != null) lpMenu.draw();
         }
     }
 
     void update(int time) {
-        if (playerLastLevel < player.ce.level) pause();
-        
         if (pause) return;
+
+        if (playerLastLevel < player.ce.level) {
+            pause();
+            lpMenu = new LevelUpMenu(this, player);
+        } else if (lpMenu != null) {
+            lpMenu = null;
+        }
 
         float second = time / 1000.0;
 
@@ -201,6 +209,9 @@ public class Game {
             if (keyChar == 'c') generateEnemies(EnemyType.MEGAORC, 3, 700, 2000);
             if (keyChar == 'x') addAllWeapons();
             if (keyChar == 'z') levelUpAllWeapons();
+            if (keyChar == 'l' || keyChar == 'L') player.ce.levelUp();
+        } else {
+            if (lpMenu != null) lpMenu.keyPressed(keyChar);
         }
     }
 

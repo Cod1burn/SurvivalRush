@@ -11,7 +11,6 @@ void setup() {
   size(1720, 1080, P2D);
   frameRate(60);
   game = new Game();
-  lpMenu = new LevelUpMenu(game, game.player)
   inGame = true;
   millis = millis();
 }
@@ -24,9 +23,6 @@ void draw() {
     pushMatrix();
     game.draw();
     popMatrix();
-  }
-  else {
-    lpMenu.draw();
   }
 }
 
