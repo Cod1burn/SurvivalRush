@@ -209,7 +209,7 @@ public class Game {
             if (keyChar == 'c') generateEnemies(EnemyType.MEGAORC, 3, 700, 2000);
             if (keyChar == 'x') addAllWeapons();
             if (keyChar == 'z') levelUpAllWeapons();
-            if (keyChar == 'l' || keyChar == 'L') player.ce.levelUp();
+            if (keyChar == 'l' || keyChar == 'L') player.ce.levelUp(); // Press L to test level up menu
         } else {
             if (lpMenu != null) lpMenu.keyPressed(keyChar);
         }
