@@ -3,6 +3,7 @@ public class LevelUpMenu {
     Game game;
     Player player;
     CombatEntity ce;
+    WeaponType[] values;
     ArrayList<Button> buttons; 
     ArrayList<String> options;
 
@@ -12,6 +13,7 @@ public class LevelUpMenu {
         this.ce = player.ce;
         options = new ArrayList<>();
         buttons = new ArrayList<>();
+        values = WeaponType.values();
         setup();
     }
     void setup() {
@@ -37,7 +39,6 @@ public class LevelUpMenu {
 
     // generate the options for the player.
     void generateOptions() { 
-        WeaponType[] values = WeaponType.values();
         List<WeaponType> valuesArray = Arrays.asList(values);
         // upgrade options
         for(Weapon w : ce.weapons) {
@@ -52,15 +53,17 @@ public class LevelUpMenu {
     }
 
     void selectOption(String option) {
-        // String[] s = option.split(' ');
-        WeaponType wt = WeaponType.MAGICWAND;
-        switch (option) {
+        //print(option);
+        String[] s = option.split(" ");
+        switch (s[0]) {
             case "add":
-                //ce.addWeapon(wt.randomWeapon());
+                // ADD WEAPON
+                ce.addWeapon(WeaponType.valueOf(s[1]));
             break;
             
             case "upgrade":
-                // ce.levelUpWeapon(wt.randomWeapon());
+                // UPGRADE WEAPON
+                ce.levelUpWeapon(WeaponType.valueOf(s[1]));
             break;
             
             default:
@@ -86,11 +89,11 @@ public class LevelUpMenu {
     void keyPressed(char keyChar) {
         
         int input = 100;
-        if(keyChar >= '0' && keyChar <= '9') {
-            input = int(keyChar) - int('0');
+        if(keyChar >= '1' && keyChar <= '5') {
+            input = int(keyChar) - int('1');
         }
         // number of options generated
-        if(input <= buttons.size()) { 
+        if(input <= buttons.size()) {
             selectOption(options.get(input));
         }
     }
