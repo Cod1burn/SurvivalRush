@@ -58,9 +58,8 @@ public class Game {
         items.forEach(Item::draw);
         player.draw();
         // Draw UI
-        textSize(20);
         stroke(0);
-        text("fps:" + frameRate, 50, 70);
+        displayInfo();
         //text("position:" + player.position, 50, 70);
         //text("coord: "+ player.coord, 50, 50);
         if (pause) {
@@ -70,6 +69,23 @@ public class Game {
             // Draw pause menu
             if (lpMenu != null) lpMenu.draw();
         }
+    }
+    // method to draw the user info
+    void displayInfo() {
+        // exp
+        textSize(16);
+        stroke(0);
+        text("exp: " + player.ce.exp, 50, 50);
+        // player level
+        text("level: " + player.ce.level, 50, 70);
+        // health
+        text("health: ", 50, 90);
+        noStroke();
+        // fill(255,0,0);
+        rect(100, 80, player.ce.health, 10);
+        // weapons
+
+        // time left
     }
 
     void update(int time) {
