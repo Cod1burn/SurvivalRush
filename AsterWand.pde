@@ -29,13 +29,13 @@ public class AsterWand extends Weapon {
 
     void summonAsters(int num) {
         float angle = 0.0;
-        for (int i = 0; i < min(num, 3); i ++) {
+        for (int i = 0; i < min(num, 4); i ++) {
             summonAster(angle, PROJ_SPIN_RADIUS);
-            angle += 2 * PI / min(num, 3);
+            angle += 2 * PI / min(num, 4);
         }
-        if (num <= 3) return;
-        num -= 3;
-        angle = 0.0;
+        if (num <= 4) return;
+        num -= 4;
+        angle = PI / 4.0;
         for (int i = 0; i < num; i ++) {
             summonAster(angle, 2 * PROJ_SPIN_RADIUS);
             angle += 2 * PI / num;
@@ -71,7 +71,7 @@ public class AsterWand extends Weapon {
             break;
 
             case 4 :
-                PROJ_NUM++;
+                PROJ_NUM ++;
             break;
 
             case 5 :
@@ -81,7 +81,7 @@ public class AsterWand extends Weapon {
 
             case 6 :
                 ATTACK_MULTIPLIER = 0.4;
-                PROJ_NUM++;
+                PROJ_NUM += 2;
             break;
 
             case 7 :
@@ -99,7 +99,7 @@ public class AsterWand extends Weapon {
             break;	
 
             case 10:
-                PROJ_NUM++;
+                PROJ_NUM += 2;
                 ATTACK_MULTIPLIER = 0.5;
                 player.ce.moveSpeed += 50;
             break;

@@ -12,7 +12,7 @@ public class MagicOrb extends Projectile {
         pierceBlock = false;
 
         knockBackForce = direction.copy().mult(0.8 * scalarSpeed);
-        knockBackTime = 0.08;
+        knockBackTime = 0.05;
     }
 
     @Override

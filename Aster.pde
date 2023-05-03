@@ -23,6 +23,5 @@ public class Aster extends Projectile {
         if (angle >= 2*PI) angle -= 2*PI;
         relatedPosition = PVector.fromAngle(angle).mult(spinRadius);
         position = owner.position.copy().add(relatedPosition);
-        println(relatedPosition);
     } 
 }
