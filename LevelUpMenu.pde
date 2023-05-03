@@ -53,7 +53,6 @@ public class LevelUpMenu {
         for(Weapon w : ce.weapons) {
             options.add("upgrade " + w.TYPE.name());
             valuesArray.remove(w.TYPE);
-            break; // leave loop after option added
         }
         // add options
         for(WeaponType wt : valuesArray) {
@@ -103,7 +102,7 @@ public class LevelUpMenu {
             case "upgrade":
                 // UPGRADE WEAPON
                 ce.levelUpWeapon(WeaponType.valueOf(s[1]));
-                
+                System.out.println(WeaponType.valueOf(s[1]));
                 ce.weapons.forEach((w) -> {
                     if(w.TYPE == WeaponType.valueOf(s[1])) description = w.getDescription(w.level);
                 });
@@ -142,30 +141,10 @@ public class LevelUpMenu {
 
             break;
         }
-        selected = true;
-        drawSelected();
         game.unpause();
-    }
-
-    void drawSelected() {
-        background(255);
-        fill(0);
-        textSize(32);
-        text("You have chosen to " + option + ".", width/2, height/2);
-        textSize(16);
-        text(option.split(" ")[1] + " : " + description, width/2, height/2 + 50);
+        // selected = true;
     }
     void draw() {
-        background(255);
-        fill(0);
-        // if(selected) {
-        //     textSize(32);
-        //     text("You have chosen to " + option + ".", width/2, height/2);
-        //     textSize(16);
-        //     text(option.split(" ")[1] + " : " + description, width/2, height/2 + 50);
-
-        // }
-        // else {
         background(255);
         fill(0);
         textSize(64);
@@ -176,7 +155,6 @@ public class LevelUpMenu {
         textSize(16);
         text("Use the numbers 1-5 for the corresponding option", width/2, height/2 + 150);
         drawButtons();
-        // }
     }
 
     void keyPressed(char keyChar) {
