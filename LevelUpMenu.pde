@@ -39,7 +39,7 @@ public class LevelUpMenu {
         // new weapon options
         if(ce.weapons.size() < ce.MAX_WEAPONS) options.add("add");
         else {
-            options.add("upgrade")
+            options.add("upgrade");
             // for (Weapon w : weapons) {
             //     String s = "upgrade " + w.TYPE.toString();
             //     options.add(s);
@@ -50,12 +50,12 @@ public class LevelUpMenu {
     void selectOption(String option) {
         // String[] s = option.split(' ');
         switch (option) {
-            case 'add':
-                ce.addWeapon(random(WeaponType.values()));
+            case "add":
+                //ce.addWeapon(random(WeaponType.values()));
             break;
             
-            case 'upgrade':
-                ce.levelUpWeapon(random(WeaponType.values()))
+            case "upgrade":
+                //ce.levelUpWeapon(random(WeaponType.values()));
             break;
             
             default:
@@ -81,13 +81,13 @@ public class LevelUpMenu {
 
     void keyPressed(char keyChar) {
         
-        int input;
+        int input = 0;
         if(keyChar >= '0' && keyChar <= '9') {
             input = int(keyChar) - int('0');
         }
         // number of options generated
         if(input <= buttons.size()) {
-            selectOption(options.get(input))
+            selectOption(options.get(input));
         }
     }
 
