@@ -102,7 +102,7 @@ public class LevelUpMenu {
             case "upgrade":
                 // UPGRADE WEAPON
                 ce.levelUpWeapon(WeaponType.valueOf(s[1]));
-                System.out.println(WeaponType.valueOf(s[1]));
+                
                 ce.weapons.forEach((w) -> {
                     if(w.TYPE == WeaponType.valueOf(s[1])) description = w.getDescription(w.level);
                 });
