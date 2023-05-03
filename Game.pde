@@ -73,8 +73,9 @@ public class Game {
     // method to draw the user info
     void displayInfo() {
         // exp
+
         textSize(16);
-        stroke(0);
+        stroke(255);
         text("exp: " + player.ce.exp, 50, 50);
         // player level
         text("level: " + player.ce.level, 50, 70);
@@ -82,6 +83,7 @@ public class Game {
         text("health: ", 50, 90);
         noStroke();
         // fill(255,0,0);
+        // bug that shifts the health bar after level up. 
         rect(100, 80, player.ce.health, 10);
         text((int) player.ce.health, 105 + player.ce.health, 90);
         // weapons icons
@@ -91,6 +93,11 @@ public class Game {
         int timeSec = (int) gameTimer;
         int min = (int) timeSec / 60;
         int sec = timeSec % 60 ;
+        // recently updated
+        // textSize(32);
+        // text("You have chosen to " + option + ".", width/2, height/2);
+        // textSize(16);
+        // text(option.split(" ")[1] + " : " + description, width/2, height/2 + 50);
         
         text(min + ":" + sec, width/2, 50);
     }
