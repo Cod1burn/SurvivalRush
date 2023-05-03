@@ -157,7 +157,11 @@ public class CombatEntity {
                 ShardStaff ss = new ShardStaff((Player)obj);
                 weapons.add(ss);
             break;	
-
+            
+            case BOOMRANG:
+                Boomrang br = new Boomrang((Player)obj);
+                weapons.add(br);
+            break;
             default :
                 
             break;	
