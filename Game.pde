@@ -84,7 +84,7 @@ public class Game {
         // fill(255,0,0);
         rect(100, 80, player.ce.health, 10);
         text((int) player.ce.health, 105 + player.ce.health, 90);
-        // weapons
+        // weapons icons
 
         // time left
         textSize(32);
@@ -101,6 +101,7 @@ public class Game {
         if (playerLastLevel < player.ce.level) {
             pause();
             lpMenu = new LevelUpMenu(this, player);
+            playerLastLevel++;
         } else if (lpMenu != null) {
             lpMenu = null;
         }
