@@ -21,7 +21,7 @@ public class LevelUpMenu {
 
     void createButtons() {
         for(int i = 0; i < options.size(); i++) {
-            Button button = new Button(width/2 - 50, (height/6 + 100 * i), 150, 50, options.get(i));
+            Button button = new Button(350 + 250 * i, (height/2 + 200), 150, 50, options.get(i));
             buttons.add(button);
         }
     }

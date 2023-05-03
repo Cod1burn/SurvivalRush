@@ -27,12 +27,14 @@ public class Boomrang extends Weapon {
         super.update(second);
         attack = player.ce.attack * ATTACK_MULTIPLIER;
         attackInterval = BASE_SHOOT_INTERVAL / (1 + player.ce.attackSpeed/100.0);
-        if (attackTimer <= 0) shootMagicOrb();
+        // ADI -- Created a syntax error. Non-existent method so I am commenting it out. 
+        //if (attackTimer <= 0) shootMagicOrb();
     }
 
     void shootBoomrang(PVector direction) {
         BoomrangProj br;
-        br = new BoomrangProj(owner, direction, PROJ_SPEED, PROJ_RANGE,
+        // ADI : changed owner to player. Was causing a syntax error. 
+        br = new BoomrangProj(player, direction, PROJ_SPEED, PROJ_RANGE,
         PROJ_RADIUS, attack);
         br.setImage(projectileImage);
         player.projectiles.add(br);
