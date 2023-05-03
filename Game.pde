@@ -83,6 +83,7 @@ public class Game {
         noStroke();
         // fill(255,0,0);
         rect(100, 80, player.ce.health, 10);
+        text((int) player.ce.health, 105 + player.ce.health, 90);
         // weapons
 
         // time left
