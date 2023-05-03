@@ -86,6 +86,12 @@ public class Game {
         // weapons
 
         // time left
+        textSize(32);
+        int timeSec = (int) gameTimer;
+        int min = (int) timeSec / 60;
+        int sec = timeSec % 60 ;
+        
+        text(min + ":" + sec, width/2, 50);
     }
 
     void update(int time) {
