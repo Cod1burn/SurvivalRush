@@ -202,8 +202,8 @@ public class Game {
 
     void keyPressed(char keyChar) {
         if (!pause) {
-            if (keyChar == 'd' || keyChar == 'D' || keyCode == LEFT) player.movingDirection(1, 0);
-            if (keyChar == 'a' || keyChar == 'A' || keyCode == RIGHT) player.movingDirection(-1, 0);
+            if (keyChar == 'd' || keyChar == 'D' || keyCode == RIGHT) player.movingDirection(1, 0);
+            if (keyChar == 'a' || keyChar == 'A' || keyCode == LEFT) player.movingDirection(-1, 0);
             if (keyChar == 'w' || keyChar == 'W' || keyCode == UP) player.movingDirection(0, -1);
             if (keyChar == 's' || keyChar == 'S' || keyCode == DOWN) player.movingDirection(0, 1);
             if (keyChar == 'c') generateEnemies(EnemyType.MEGAORC, 3, 700, 2000);
@@ -217,8 +217,8 @@ public class Game {
 
     void keyReleased(char keyChar) {
         if (!pause) {
-            if (keyChar == 'd' || keyChar == 'D' || keyCode == LEFT) player.movingDirection(-1, 0);
-            if (keyChar == 'a' || keyChar == 'A' || keyCode == RIGHT) player.movingDirection(1, 0);
+            if (keyChar == 'd' || keyChar == 'D' || keyCode == RIGHT) player.movingDirection(-1, 0);
+            if (keyChar == 'a' || keyChar == 'A' || keyCode == LEFT) player.movingDirection(1, 0);
             if (keyChar == 'w' || keyChar == 'W' || keyCode == UP) player.movingDirection(0, 1);
             if (keyChar == 's' || keyChar == 'S' || keyCode == DOWN) player.movingDirection(0, -1);
         }

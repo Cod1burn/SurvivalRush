@@ -1,3 +1,4 @@
+import java.util.Arrays;
 public class LevelUpMenu {
     Game game;
     Player player;
@@ -11,7 +12,7 @@ public class LevelUpMenu {
         this.ce = player.ce;
         options = new ArrayList<>();
         buttons = new ArrayList<>();
-        
+        setup();
     }
     void setup() {
         generateOptions();
@@ -20,7 +21,7 @@ public class LevelUpMenu {
 
     void createButtons() {
         for(int i = 0; i < options.size(); i++) {
-            Button button = new Button(width/2 - 50, (height/6 + 100 * i), 100, 50, options.get(i));
+            Button button = new Button(width/2 - 50, (height/6 + 100 * i), 150, 50, options.get(i));
             buttons.add(button);
         }
     }
@@ -36,26 +37,30 @@ public class LevelUpMenu {
 
     // generate the options for the player.
     void generateOptions() { 
-        // new weapon options
-        if(ce.weapons.size() < ce.MAX_WEAPONS) options.add("add");
-        else {
-            options.add("upgrade")
-            // for (Weapon w : weapons) {
-            //     String s = "upgrade " + w.TYPE.toString();
-            //     options.add(s);
-            // }
+        WeaponType[] values = WeaponType.values();
+        List<WeaponType> valuesArray = Arrays.asList(values);
+        // upgrade options
+        for(Weapon w : ce.weapons) {
+            options.add("upgrade " + w.TYPE.name());
+            valuesArray.remove(w.TYPE);
+            break; // leave loop after option added
+        }
+        // add options
+        for(WeaponType wt : valuesArray) {
+            options.add("add " + wt.name());
         }
     }
 
     void selectOption(String option) {
         // String[] s = option.split(' ');
+        WeaponType wt = WeaponType.MAGICWAND;
         switch (option) {
-            case 'add':
-                ce.addWeapon(random(WeaponType.values()));
+            case "add":
+                //ce.addWeapon(wt.randomWeapon());
             break;
             
-            case 'upgrade':
-                ce.levelUpWeapon(random(WeaponType.values()))
+            case "upgrade":
+                // ce.levelUpWeapon(wt.randomWeapon());
             break;
             
             default:
@@ -66,7 +71,6 @@ public class LevelUpMenu {
     }
 
     void draw() {
-        setup();
         background(255);
         fill(0);
         textSize(64);
@@ -81,13 +85,13 @@ public class LevelUpMenu {
 
     void keyPressed(char keyChar) {
         
-        int input;
+        int input = 100;
         if(keyChar >= '0' && keyChar <= '9') {
             input = int(keyChar) - int('0');
         }
         // number of options generated
-        if(input <= buttons.size()) {
-            selectOption(options.get(input))
+        if(input <= buttons.size()) { 
+            selectOption(options.get(input));
         }
     }
 
