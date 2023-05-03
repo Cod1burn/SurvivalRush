@@ -27,12 +27,12 @@ public class Boomrang extends Weapon {
         super.update(second);
         attack = player.ce.attack * ATTACK_MULTIPLIER;
         attackInterval = BASE_SHOOT_INTERVAL / (1 + player.ce.attackSpeed/100.0);
-        if (attackTimer <= 0) shootMagicOrb();
+        if (attackTimer <= 0) shootBoomrangs(player.findEnemies(PROJ_NUM));
     }
 
     void shootBoomrang(PVector direction) {
         BoomrangProj br;
-        br = new BoomrangProj(owner, direction, PROJ_SPEED, PROJ_RANGE,
+        br = new BoomrangProj(player, direction, PROJ_SPEED, PROJ_RANGE,
         PROJ_RADIUS, attack);
         br.setImage(projectileImage);
         player.projectiles.add(br);
