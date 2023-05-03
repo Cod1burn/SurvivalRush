@@ -158,6 +158,10 @@ public class CombatEntity {
                 weapons.add(ss);
             break;	
 
+            case BOOMRANG:
+                Boomrang br = new Boomrang((Player)obj);
+                weapons.add(br);
+
             default :
                 
             break;	

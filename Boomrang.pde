@@ -3,9 +3,9 @@ import java.util.List;
 public class Boomrang extends Weapon {
     float projSpeed;
     float projRadius;
-    float PROJ_SPEED = 500;
-    float PROJ_RADIUS = 20;
-    float PROJ_RANGE = 700;
+    float PROJ_SPEED = 600;
+    float PROJ_RADIUS = 30;
+    float PROJ_RANGE = 450;
     
     public Boomrang(Player player) {
         super(player);
@@ -13,7 +13,7 @@ public class Boomrang extends Weapon {
         shootCount = 0;
         level = 1;
         ATTACK_MULTIPLIER = 1.0;
-        BASE_SHOOT_INTERVAL = 1.5;
+        BASE_SHOOT_INTERVAL = 2.5;
         projSpeed = PROJ_SPEED;
         projRadius = PROJ_RADIUS;
         TYPE = WeaponType.BOOMRANG;
@@ -27,20 +27,11 @@ public class Boomrang extends Weapon {
         super.update(second);
         attack = player.ce.attack * ATTACK_MULTIPLIER;
         attackInterval = BASE_SHOOT_INTERVAL / (1 + player.ce.attackSpeed/100.0);
-<<<<<<< HEAD
         if (attackTimer <= 0) shootBoomrangs(player.findEnemies(PROJ_NUM));
-=======
-        // ADI -- Created a syntax error. Non-existent method so I am commenting it out. 
-        //if (attackTimer <= 0) shootMagicOrb();
->>>>>>> 3e2fd3a48c39d06161550be7f0819c21514e79d3
     }
 
     void shootBoomrang(PVector direction) {
         BoomrangProj br;
-<<<<<<< HEAD
-=======
-        // ADI : changed owner to player. Was causing a syntax error. 
->>>>>>> 3e2fd3a48c39d06161550be7f0819c21514e79d3
         br = new BoomrangProj(player, direction, PROJ_SPEED, PROJ_RANGE,
         PROJ_RADIUS, attack);
         br.setImage(projectileImage);
@@ -53,13 +44,13 @@ public class Boomrang extends Weapon {
         enemies.forEach((e) -> {
             PVector direction = e.position.copy().sub(player.position).normalize();
             shootBoomrang(direction);
-            shootCount++;
         });
         while(shootCount < PROJ_NUM) {
             PVector direction = PVector.fromAngle(random(0, 2*PI));
             shootBoomrang(direction);
             shootCount++;
         }
+        shootCount = 0;
     }
 
     @Override
