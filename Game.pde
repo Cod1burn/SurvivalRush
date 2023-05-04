@@ -79,16 +79,16 @@ public class Game {
     void displayInfo() {
         // exp
         textSize(16);
-        text("exp: " + player.ce.exp, 50, 50);
+        text("exp: " + player.ce.exp, 40, 50);
         // player level
-        text("level: " + player.ce.level, 50, 70);
+        text("level: " + player.ce.level, 40, 70);
         // health
-        text("health: ", 50, 90);
+        text("health: ", 40, 90);
         noStroke();
         // fill(255,0,0);
-        // bug that shifts the health bar after level up. 
-        rect(100, 80, player.ce.health, 10);
-        text((int) player.ce.health, 105 + player.ce.health, 90);
+        // bug that changes position of health bar. 
+        rect(90, 80, player.ce.health, 10);
+        text((int) player.ce.health, 95 + player.ce.health, 90);
         // weapons icons
 
         // time left
@@ -240,8 +240,8 @@ public class Game {
 
     void keyPressed(char keyChar) {
         if (!pause) {
-            if (keyChar == 'd' || keyChar == 'D' || keyCode == LEFT) player.movingDirection(1, 0);
-            if (keyChar == 'a' || keyChar == 'A' || keyCode == RIGHT) player.movingDirection(-1, 0);
+            if (keyChar == 'd' || keyChar == 'D' || keyCode == RIGHT) player.movingDirection(1, 0);
+            if (keyChar == 'a' || keyChar == 'A' || keyCode == LEFT) player.movingDirection(-1, 0);
             if (keyChar == 'w' || keyChar == 'W' || keyCode == UP) player.movingDirection(0, -1);
             if (keyChar == 's' || keyChar == 'S' || keyCode == DOWN) player.movingDirection(0, 1);
             if (keyChar == 'c') generateEnemies(EnemyType.MEGAORC, 3, 700, 2000);
@@ -258,8 +258,8 @@ public class Game {
 
     void keyReleased(char keyChar) {
         if (!pause) {
-            if (keyChar == 'd' || keyChar == 'D' || keyCode == LEFT) player.movingDirection(-1, 0);
-            if (keyChar == 'a' || keyChar == 'A' || keyCode == RIGHT) player.movingDirection(1, 0);
+            if (keyChar == 'd' || keyChar == 'D' || keyCode == RIGHT) player.movingDirection(-1, 0);
+            if (keyChar == 'a' || keyChar == 'A' || keyCode == LEFT) player.movingDirection(1, 0);
             if (keyChar == 'w' || keyChar == 'W' || keyCode == UP) player.movingDirection(0, 1);
             if (keyChar == 's' || keyChar == 'S' || keyCode == DOWN) player.movingDirection(0, -1);
         }
