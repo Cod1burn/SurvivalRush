@@ -20,6 +20,7 @@ public class Game {
     ArrayList<Item> items;
 
     LevelUpMenu lpMenu;
+    GameOverMenu goMenu;
 
     PVector camera;
 
@@ -59,8 +60,8 @@ public class Game {
         player.draw();
         // Draw UI
         textSize(20);
-        stroke(0);
-        text("fps:" + frameRate, 50, 70);
+        // stroke(0);
+        // text("fps:" + frameRate, 50, 70);
         stroke(255);
         displayInfo();
         //text("position:" + player.position, 50, 70);
@@ -72,6 +73,7 @@ public class Game {
             // Draw pause menu
             if (lpMenu != null) lpMenu.draw();
         }
+        if(goMenu != null) goMenu.draw();
     }
     // method to draw the user info
     void displayInfo() {
@@ -173,7 +175,9 @@ public class Game {
     }
 
     void playerDie() {
-
+        // implement game over menu
+        goMenu = new GameOverMenu(this);
+        isOver = true;
     }
 
     void enemyDie(Enemy enemy) {
@@ -244,6 +248,9 @@ public class Game {
             if (keyChar == 'x') addAllWeapons();
             if (keyChar == 'z') levelUpAllWeapons();
             if (keyChar == 'l' || keyChar == 'L') player.ce.levelUp(); // Press L to test level up menu
+            if(keyChar == 'g' || keyChar == 'G') playerDie(); // Press G to test game over menu
+
+            if(isOver) goMenu.keyPressed(keyChar);
         } else {
             if (lpMenu != null) lpMenu.keyPressed(keyChar);
         }

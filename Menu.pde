@@ -1,4 +1,4 @@
-class Menu {
+public class Menu {
 
     ArrayList<Button> buttons = new ArrayList<>();
     
