@@ -7,13 +7,11 @@ public class LevelUpMenu {
     String option, description; 
     ArrayList<Button> buttons; 
     ArrayList<String> options;
-    boolean selected;
-
+    
     public LevelUpMenu(Game game, Player player) {
         this.game = game;
         this.player = player;
         this.ce = player.ce;
-        selected = false;
         option = "";
         description = "";
         options = new ArrayList<>();
@@ -21,6 +19,8 @@ public class LevelUpMenu {
         values = WeaponType.values();
         setup();
     }
+    String getDescription() {return description;}
+
     void setup() {
         generateOptions();
         createButtons();
@@ -106,35 +106,6 @@ public class LevelUpMenu {
                 ce.weapons.forEach((w) -> {
                     if(w.TYPE == WeaponType.valueOf(s[1])) description = w.getDescription(w.level);
                 });
-                // switch(input) {
-                //     case 1:
-                //         MagicWand mw = new MagicWand(player);
-                //         description += mw.getDescription();
-                //     break;
-                    
-                //     case 2 :
-                //         Spikewand sw = new Spikewand(player);
-                //         description += mw.getDescription(1);
-                //     break;
-
-                //     case 3 :
-                //         AsterWand aw = new AsterWand(player);
-                //         description += mw.getDescription(1);
-                //     break;	
-
-                //     case 4 :
-                //         ShardStaff ss = new ShardStaff(player);
-                //         description += mw.getDescription(1);
-                //     break;	
-                    
-                //     case 5:
-                //         Boomrang br = new Boomrang(player);
-                //         description += mw.getDescription(1);
-                //     break;
-
-                //     default:
-                //     break;
-                // }
             break;
             
             default:
@@ -142,7 +113,6 @@ public class LevelUpMenu {
             break;
         }
         game.unpause();
-        // selected = true;
     }
     void draw() {
         background(255);

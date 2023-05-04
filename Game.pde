@@ -61,6 +61,8 @@ public class Game {
         textSize(20);
         stroke(0);
         text("fps:" + frameRate, 50, 70);
+        stroke(255);
+        displayInfo();
         //text("position:" + player.position, 50, 70);
         //text("coord: "+ player.coord, 50, 50);
         if (pause) {
@@ -71,6 +73,29 @@ public class Game {
             if (lpMenu != null) lpMenu.draw();
         }
     }
+    // method to draw the user info
+    void displayInfo() {
+        // exp
+        textSize(16);
+        text("exp: " + player.ce.exp, 50, 50);
+        // player level
+        text("level: " + player.ce.level, 50, 70);
+        // health
+        text("health: ", 50, 90);
+        noStroke();
+        // fill(255,0,0);
+        // bug that shifts the health bar after level up. 
+        rect(100, 80, player.ce.health, 10);
+        text((int) player.ce.health, 105 + player.ce.health, 90);
+        // weapons icons
+
+        // time left
+        textSize(32);
+        int timeSec = (int) gameTimer;
+        int min = (int) timeSec / 60;
+        int sec = timeSec % 60 ;
+        text(min + ":" + sec, width/2, 50);
+    }
 
     void update(int time) {
         if (pause) return;
@@ -78,7 +103,16 @@ public class Game {
         if (playerLastLevel < player.ce.level) {
             pause();
             lpMenu = new LevelUpMenu(this, player);
+            playerLastLevel++;
+            
         } else if (lpMenu != null) {
+            // recently updated
+            stroke(0);
+            int startTime = millis();
+            if(millis() - startTime < 2000) {
+                textSize(16);
+                text(lpMenu.getDescription(), width/2, 150);
+            }
             lpMenu = null;
         }
 
