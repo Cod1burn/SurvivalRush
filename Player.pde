@@ -62,6 +62,7 @@ public class Player extends MovableObject{
         image(img, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
         noTint();
         projectiles.forEach(Projectile::draw);
+        numbers.forEach(FloatingNumber::draw);
         popMatrix();
     }
 
