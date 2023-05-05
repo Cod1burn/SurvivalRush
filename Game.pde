@@ -234,7 +234,10 @@ public class Game {
         }
     }
 
-    void pause() {pause = true;}
+    void pause() {
+        pause = true;
+        player.stop();
+    }
 
     void unpause() {pause = false;}
 

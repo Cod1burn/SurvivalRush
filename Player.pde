@@ -106,6 +106,10 @@ public class Player extends MovableObject{
         if (knockBackForce != null) speed.add(knockBackForce);
     }
 
+    void stop() {
+        direction = new PVector(0, 0);
+    }
+
     void update(float second) {
         super.update(second);
         ce.update(second);
