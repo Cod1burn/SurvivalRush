@@ -37,7 +37,6 @@ public class Boomrang extends Weapon {
         br.setImage(projectileImage);
         player.projectiles.add(br);
         shootCount++;
-        if (shootCount >= PROJ_NUM) attackTimer = attackInterval;
     }
 
     void shootBoomrangs(List<Enemy> enemies) {
@@ -45,11 +44,12 @@ public class Boomrang extends Weapon {
             PVector direction = e.position.copy().sub(player.position).normalize();
             shootBoomrang(direction);
         });
+
         while(shootCount < PROJ_NUM) {
             PVector direction = PVector.fromAngle(random(0, 2*PI));
             shootBoomrang(direction);
-            shootCount++;
         }
+        attackTimer = attackInterval
         shootCount = 0;
     }
 
@@ -61,24 +61,25 @@ public class Boomrang extends Weapon {
             break;	
 
             case 3 :
-                BASE_SHOOT_INTERVAL = 0.85;
+                PROJ_SPEED = 600;
+                PROJ_RANGE = 800;
             break;
 
             case 4 :
-                PROJ_NUM++;
+                PROJ_NUM ++;
             break;
 
             case 5 :
-                ATTACK_MULTIPLIER = 1.4;
+                BASE_SHOOT_INTERVAL = 2.0;
             break;
 
             case 6 :
                 PROJ_NUM++;
-                BASE_SHOOT_INTERVAL = 0.75;
+                ATTACK_MULTIPLIER = 1.4;
             break;
 
             case 7 :
-                ATTACK_MULTIPLIER = 1.6;
+                player.ce.lifesteal += 2;
             break;
 
             case 8 :
@@ -86,13 +87,13 @@ public class Boomrang extends Weapon {
             break;	
 
             case 9 :
-                BASE_SHOOT_INTERVAL = 0.65;
+                BASE_SHOOT_INTERVAL = 1.5;
             break;	
 
             case 10:
                 PROJ_NUM++;
-                BASE_SHOOT_INTERVAL = 0.5;
-                ATTACK_MULTIPLIER = 1.8;
+                player.ce.lifesteal += 3;
+                ATTACK_MULTIPLIER = 1.6;
             break;
         }
     }
@@ -102,7 +103,7 @@ public class Boomrang extends Weapon {
         String s = "";
         switch (level) {
             case 1 :
-                s = "Fire magic orbs through your direction.";
+                s = "Throwing boomrangs that could fly back to you.";
             break;	
 
             case 2 :
@@ -110,35 +111,35 @@ public class Boomrang extends Weapon {
             break;
 
             case 3 :
-                s = "Shooting Interval -0.15s";
+                s = "Boomrang speed +150, \nBoomrang range +200";
             break;	
 
             case 4 :
-                s = "Shoot one more orb";
+                s = "Throw one more boomrang";
             break;	
 
             case 5 :
-                s = "Damage +20%";
+                s = "Throw interval -0.5s";
             break;	
 
             case 6 :
-                s = "Shoot one more orb, \n Shooting Interval -0.1s%";
+                s = "Throw one more boomrang, \nDamage +20%";
             break;
 
             case 7 :
-                s = "Damage +20%";
+                s = "Heal you 2% of all damage";
             break;		
 
             case 8 :
-                s = "Shoot one more orb";
+                s = "Throw one more boomrang";
             break; 
 
             case 9 :
-                s = "Shooting Interval -0.15s%";
+                s = "Throw interval -0.5s";
             break;	
 
             case 10 :
-                s = "Shoot one more orb, \nShooting Interval -0.15s, \nDamage +20%";
+                s = "Throw one more boomrang, \nDamage +20%, \nHeal you 2% of all damage";
             break;	
 
             default :
