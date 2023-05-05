@@ -49,7 +49,7 @@ public class Boomrang extends Weapon {
             PVector direction = PVector.fromAngle(random(0, 2*PI));
             shootBoomrang(direction);
         }
-        attackTimer = attackInterval
+        attackTimer = attackInterval;
         shootCount = 0;
     }
 

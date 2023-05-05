@@ -100,7 +100,10 @@ public class Game {
     }
 
     void update(int time) {
-        if (pause) return;
+        if (pause) {
+            player.stop();
+            return;
+        }
 
         if (playerLastLevel < player.ce.level) {
             pause();

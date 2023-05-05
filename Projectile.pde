@@ -68,7 +68,8 @@ public class Projectile extends MovableObject {
     }
 
     void hit(MovableObject obj) {
-        obj.ce.takeDamage(attack);
+        float damage = attack * (1 - ce.defence/100.0) * (1 + obj.ce.damageAmplification/100.0);
+        obj.ce.takeDamage(damage, true);
         if (knockBackTime > 0) obj.knockBack(knockBackForce, knockBackTime);
         if (!infiniteHits) {
             hits--;

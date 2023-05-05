@@ -19,6 +19,8 @@ public class CombatEntity {
     float maxExp;
     int level;
 
+    ArrayList<Aura> auras;
+
     // Only for enemy
     float attackTimer;
     EnemyType type;
@@ -53,6 +55,7 @@ public class CombatEntity {
 
         absorbRadius = 100;
         weapons = new ArrayList<>();
+        auras = new ArrayList<>();
     }
 
     /**
@@ -60,6 +63,7 @@ public class CombatEntity {
     **/
     public CombatEntity() {
         isPlayer = false;
+        auras = new ArrayList<>();
     }
 
     CombatEntity copy(int copyLevel) {
@@ -113,13 +117,14 @@ public class CombatEntity {
 
     void attack(CombatEntity ce) {
         float damage = attack * (1 - ce.defence/100.0);
-        ce.takeDamage(damage);
+        ce.takeDamage(damage, true);
         attackTimer = baseAttackInterval * (1 + attackSpeed/100.0);
     }
 
+    
     void hit(CombatEntity ce) {
         float damage = attack * (1 - ce.defence/100.0) * (1 + damageAmplification/100.0);
-        ce.takeDamage(damage * (1 + damageAmplification/100.0));
+        ce.takeDamage(damage * (1 + damageAmplification/100.0), true);
         if (lifesteal > 0) heal(damage * lifesteal, true);
     }
 
@@ -129,18 +134,20 @@ public class CombatEntity {
         if(showing) obj.addFloatingNumber(new FloatingNumber("HEALING",value, 1.0));
     }
 
-    void takeDamage(float damage) {
-        takeDamage(damage, 1.0);
+    void takeDamage(float damage, boolean showing) {
+        if (showing) takeDamage(damage, 1.0);
+        else takeDamage(damage, 0.0);
     }
 
     void takeDamage(float damage, float floatNumMultiplier) {
         health -= damage;
         obj.getHurt();
-        obj.addFloatingNumber(new FloatingNumber("DAMAGE", damage, floatNumMultiplier));
+        if (floatNumMultiplier > 0) obj.addFloatingNumber(new FloatingNumber("DAMAGE", damage, floatNumMultiplier));
         if (health <= 0) obj.die();
     }
 
     void update(float second) {
+        auras.forEach((a) -> {a.update(second);});
         heal(healthRegen * second, false);
 
         if (attackTimer > 0) attackTimer -= second;
@@ -190,5 +197,9 @@ public class CombatEntity {
         weapons.forEach((w) -> {
             if (w.TYPE == type) w.levelUp();
         });
+    }
+
+    void applyAura(Aura a) {
+        auras.add(a);
     }
 }
