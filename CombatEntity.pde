@@ -28,7 +28,7 @@ public class CombatEntity {
 
 
     ArrayList<Weapon> weapons;
-    static final int MAX_WEAPONS = 5;
+    static final int MAX_WEAPONS = 6;
 
     /**
         For Player
