@@ -1,9 +1,7 @@
 boolean isMenu;
 boolean inGame;
-Menu menu;
-ArrayList<Button> buttons;
 Game game;
-LevelUpMenu lpMenu;
+Menu menu;
 int millis;
 
 // For test only
@@ -11,6 +9,8 @@ void setup() {
   size(1720, 1080, P2D);
   frameRate(60);
   game = new Game();
+  menu = new Menu(game);
+  isMenu = false;
   inGame = true;
   millis = millis();
 }
@@ -18,7 +18,8 @@ void setup() {
 void draw() {
   int time = millis() - millis;
   millis = millis();
-  if (inGame) {
+  if (isMenu) menu.draw();
+  else if (inGame) {
     game.update(time);
     pushMatrix();
     game.draw();
@@ -26,55 +27,16 @@ void draw() {
   }
 }
 
-/*
-
-void setup() {
-  fullScreen();
-  isMenu = true;
-  menu = new Menu();
-  buttons = menu.getButtons();
-}
-
-
-void draw() {
-  // draw menu
-  if (isMenu) menu.draw();
-  // draw main game.
-  else {
-    background(255);
-    fill(0);
-    textSize(64);
-    textAlign(CENTER);
-    text("GAME", width/2, height/2);
-  }
-}
-
-
-
-void mousePressed() {
-  for (Button button : buttons) {
-    if (button.contains(mouseX, mouseY)) {
-      if(button.bText.equals("Exit")) {
-        System.exit(0); // exit the game
-      }
-      // use input to select template. 
-      // template = button.bText.toInt();
-      print(button.bText); // just temporary. can delete if not needed for button verification
-    }
-  }
-}
-*/
-
 void keyPressed() {
   // game starts with menu. 
   // space or ENTER to pause or unpause game. 
   // can change if needed. 
-  if (key == ' ' || key == ENTER) isMenu = !isMenu;
-  if (inGame) game.keyPressed(key);
-  // level up menu
-  else {
-    lpMenu.keyPressed(key);
+  if (key == ' ' || key == ENTER) {
+    isMenu = !isMenu;
+    inGame = !inGame;
   }
+  if (inGame) game.keyPressed(key);
+  else if (isMenu) menu.keyPressed(key);
 }
 
 void keyReleased() {

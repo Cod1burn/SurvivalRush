@@ -1,15 +1,10 @@
 public class Menu {
-
-    ArrayList<Button> buttons = new ArrayList<>();
+    Game game;
+    Player player;
     
-    
-    public Menu() {
-        buttons = new ArrayList<>();
-        createButtons();
-    }
-    
-    ArrayList<Button> getButtons() {
-        return buttons;
+    public Menu(Game game) {
+        this.game = game;
+        this.player = game.player;
     }
 
     void draw() {
@@ -17,32 +12,35 @@ public class Menu {
         fill(0);
         textSize(64);
         textAlign(CENTER);
-        text("MENU", width/2, height/6);
+        text("Game Paused", width/2, height/6);
         textSize(32);
-        text("Choose a template", width/2, height/6 + 100);
-        drawButtons();
-    }
-
-    void createButtons() {
+        // user info from combat entity
+        // health as percent of maxHealth
+        int percHealth = (int) ((player.ce.health / player.ce.maxHealth) * 100);
+        text("Health: " + percHealth + "%", width/2, height/6 + 50);
+        // attack
+        text("Attack: " + player.ce.attack, width/2, height/6 + 100);
+        // defence
+        text("Defence: " + player.ce.defence, width/2, height/6 + 150);
+        // level
+        text("Level: " + player.ce.level, width/2, height/6 + 200);
+        // weapons and their levels.
+        int w = width/2;
+        int h = height/6 + 200;
         
-        Button button1 = new Button(width/2 - 50, height/6 + 200, 100, 50, "1");
-        Button button2 = new Button(width/2 - 50, height/6 + 300, 100, 50, "2");
-        Button button3 = new Button(width/2 - 50, height/6 + 400, 100, 50, "3");
-        Button button4 = new Button(width/2 -50, height/6 + 600, 250, 100, "Exit");
-
-        buttons.add(button1);
-        buttons.add(button2);
-        buttons.add(button3);
-        buttons.add(button4);
-
-        // I am not sure if you want to remove the return value or change function return type,
-        // so i just comment it.
-        // -- Yiran
-        // return buttons; 
+        ArrayList<Weapon> weapons = player.ce.weapons;
+        if(weapons.size() == 0) {
+            text("No weapons acquired yet.", w, h + 50);
+        }
+        else {
+            for(int i = 0; i < weapons.size(); i++) {
+                Weapon weapon = weapons.get(i); 
+                text(weapon.TYPE.name() + ": LEVEL " + weapon.level, w, h + (50 * (i + 1)));
+            }
+        }
     }
 
-    void drawButtons(){
-        for (Button button : buttons) 
-            button.draw();   
+    void keyPressed(char keyChar) {
+        print(keyChar);
     }
 }
