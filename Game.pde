@@ -81,10 +81,22 @@ public class Game {
         // health
         text("health: ", 50, 90);
         noStroke();
-        rect(90, 80, player.ce.health, 10);
-        text((int) player.ce.health + "%", 95 + player.ce.health, 90);
+        rect(100, 80, player.ce.health, 10);
+        text((int) player.ce.health + "%", 105 + player.ce.health, 90);
         // weapons icons
-
+        text("Weapons: ", 50, 120);
+        
+        if(player.ce.weapons.size() == 0) {
+            text("NONE", 120, 120);
+        }
+        else {
+            int w = 100;
+            int h = 110;
+            for (int i = 0; i < player.ce.weapons.size(); i++) {
+                Weapon weapon = player.ce.weapons.get(i);
+                image(weapon.projectileImage, w + (20 * (i+1)) , h);
+            }
+        }
         // time left
         textSize(32);
         int timeSec = (int) gameTimer;
