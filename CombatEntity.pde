@@ -9,6 +9,9 @@ public class CombatEntity {
     float healthRegen;
     float moveSpeed;
     float attackSpeed;
+    float lifesteal;
+    float expRate;
+    float damageAmplification;
     float baseAttackInterval;
     float radius;
         
@@ -40,6 +43,9 @@ public class CombatEntity {
         healthRegen = 1.0;
         attack = 10.0;
         defence = 0.0;
+        lifesteal = 0.0;
+        expRate = 100.0;
+        damageAmplification = 0.0;
 
         exp = 0.0;
         maxExp = 50.0;
@@ -91,8 +97,9 @@ public class CombatEntity {
     }
 
     void getExp(float value) {
+        obj.addFloatingNumber(new FloatingNumber("EXP", value, 1.0));
         if (value < maxExp - exp) {
-            exp += value;
+            exp += value * (expRate/100);
         } else {
             value -= maxExp;
             levelUp();
@@ -111,19 +118,30 @@ public class CombatEntity {
     }
 
     void hit(CombatEntity ce) {
-        float damage = attack * (1 - ce.defence/100.0);
-        ce.takeDamage(damage);
+        float damage = attack * (1 - ce.defence/100.0) * (1 + damageAmplification/100.0);
+        ce.takeDamage(damage * (1 + damageAmplification/100.0));
+        if (lifesteal > 0) heal(damage * lifesteal, true);
+    }
+
+    void heal(float value, boolean showing) {
+        health += value;
+        if (health >= maxHealth) health = maxHealth;
+        if(showing) obj.addFloatingNumber(new FloatingNumber("HEALING",value, 1.0));
     }
 
     void takeDamage(float damage) {
+        takeDamage(damage, 1.0);
+    }
+
+    void takeDamage(float damage, float floatNumMultiplier) {
         health -= damage;
         obj.getHurt();
+        obj.addFloatingNumber(new FloatingNumber("DAMAGE", damage, floatNumMultiplier));
         if (health <= 0) obj.die();
     }
 
     void update(float second) {
-        health += healthRegen * second;
-        if (health >= maxHealth) health = maxHealth;
+        heal(healthRegen * second, false);
 
         if (attackTimer > 0) attackTimer -= second;
 

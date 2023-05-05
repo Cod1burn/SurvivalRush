@@ -50,6 +50,7 @@ public class Enemy extends MovableObject {
         if (hurtTimer > 0) tint(255, 255, 255, 150);
         if (animationTimer > ANIMATION_INTERVAL/2.0) image(img1, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
         else image(img2, -RADIUS/2.0, -RADIUS/2.0, RADIUS, RADIUS);
+        numbers.forEach(FloatingNumber::draw);
         noTint();
         popMatrix();
 

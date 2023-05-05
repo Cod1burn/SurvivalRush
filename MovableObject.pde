@@ -17,11 +17,14 @@ public abstract class MovableObject{
 
     boolean alive;
 
+    ArrayList<FloatingNumber> numbers;
+
     public MovableObject() {
         knockBackForce = null;
         knockBackTimer = 0.0;
         lastDirection = new PVector(0.0, 1.0);
         alive = true;
+        numbers = new ArrayList<>();
     }
 
     void knockBack(PVector force, float time) {
@@ -31,6 +34,9 @@ public abstract class MovableObject{
     }
 
     void update(float second) {
+        numbers.forEach((n) -> {n.update(second);});
+        numbers.removeIf(n -> !n.alive);
+        
         if (knockBackTimer > 0) {
             knockBackTimer -= second;
             if (knockBackTimer <= 0) knockBackForce = null;
@@ -46,5 +52,9 @@ public abstract class MovableObject{
 
     void die() {
         alive = false;
+    }
+
+    void addFloatingNumber(FloatingNumber fltNum) {
+        numbers.add(fltNum);
     }
 }
