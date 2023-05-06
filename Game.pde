@@ -94,7 +94,7 @@ public class Game {
             int h = 110;
             for (int i = 0; i < player.ce.weapons.size(); i++) {
                 Weapon weapon = player.ce.weapons.get(i);
-                image(weapon.projectileImage, w + (20 * (i+1)) , h);
+                image(weapon.projectileImage, w + (30 * (i+1)) , h, 25, 25);
             }
         }
         // time left
