@@ -69,14 +69,15 @@ public class Game {
         }
         if(goMenu != null) goMenu.draw();
     }
-    
+
     // method to draw the user info
     void displayInfo() {
         textSize(16);
         textAlign(LEFT);
         stroke(0);
+        fill(0);
         // exp
-        text("exp: " + player.ce.exp, 50, 50);
+        text("exp: " + player.ce.exp + "/" + player.ce.maxExp, 50, 50);
         // player level
         text("level: " + player.ce.level, 50, 70);
         // health
@@ -246,10 +247,12 @@ public class Game {
 
     void pause() {
         pause = true;
-        player.stop();
     }
 
-    void unpause() {pause = false;}
+    void unpause() {
+        pause = false;
+        player.stop();
+    }
 
     void keyPressed(char keyChar) {
         if (!pause) {

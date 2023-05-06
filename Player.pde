@@ -108,6 +108,7 @@ public class Player extends MovableObject{
 
     void stop() {
         direction = new PVector(0, 0);
+        speed = new PVector(0, 0);
     }
 
     void update(float second) {
