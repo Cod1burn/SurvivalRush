@@ -28,7 +28,7 @@ public class LevelUpMenu {
 
     void createButtons() {
         for(int i = 0; i < options.size(); i++) {
-            Button button = new Button(350 + 250 * i, (height/2 + 200), 150, 50, options.get(i));
+            Button button = new Button(350 + 250 * i, height/2, 150, 50, options.get(i));
             buttons.add(button);
         }
     }
@@ -44,19 +44,13 @@ public class LevelUpMenu {
 
     // generate the options for the player.
     void generateOptions() { 
-
-        ArrayList<WeaponType> valuesArray = new ArrayList<>();
-        for (int i = 0 ; i < values.length; i++) {
-            valuesArray.add(i, values[i]);
-        }
-        // upgrade options
-        for(Weapon w : ce.weapons) {
-            options.add("upgrade " + w.TYPE.name());
-            valuesArray.remove(w.TYPE);
-        }
-        // add options
-        for(WeaponType wt : valuesArray) {
-            options.add("add " + wt.name());
+        for(int i = 0; i < values.length; i++) {
+            boolean contains = false;
+            for (Weapon w: ce.weapons) {
+                if(w.TYPE == values[i]) contains = true;
+            }
+            if(contains) options.add("upgrade " + values[i].name());
+            else options.add("add " + values[i].name());
         }
     }
 
@@ -72,16 +66,16 @@ public class LevelUpMenu {
                         MagicWand mw = new MagicWand(player);
                         description = mw.getDescription(1);
                     break;
-                    
-                    case 2 :
-                        Spikewand sw = new Spikewand(player);
-                        description = sw.getDescription(1);
-                    break;
 
-                    case 3 :
+                    case 2 :
                         AsterWand aw = new AsterWand(player);
                         description = aw.getDescription(1);
                     break;	
+
+                    case 3 :
+                        Spikewand sw = new Spikewand(player);
+                        description = sw.getDescription(1);
+                    break;
 
                     case 4 :
                         ShardStaff ss = new ShardStaff(player);
@@ -115,15 +109,17 @@ public class LevelUpMenu {
         game.unpause();
     }
     void draw() {
-        background(255);
-        fill(0);
+        background(0);
+        PImage img = loadImage("MapImgs/Map0/wholemap.jpg");
+        img.resize(width, height);
+        image(img, 0, 0);
+        
         textSize(64);
-        textAlign(CENTER);
-        text("Congratulations you have levelled up!", width/2, height/2);
+        textAlign(CENTER, CENTER);
+        text("Congratulations you have levelled up!", width/2, height/4);
         textSize(32);
-        text("Select one of the options. Add a new weapon to your arsenal or upgrade an existing weapon.", width/2, height/2 + 100);
-        textSize(16);
-        text("Use the numbers 1-5 for the corresponding option", width/2, height/2 + 150);
+        text("Select one of the options. Add a new weapon to your arsenal or upgrade an existing weapon.", width/2, height/4 + 100);
+        text("Use the numbers 1-5 for the corresponding option or click on the buttons.", width/2, height/4 + 175);
         drawButtons();
     }
 
@@ -141,6 +137,13 @@ public class LevelUpMenu {
 
     }
 
-    void mouseClicked() {
+    void mouseClicked(int mouseX, int mouseY) {
+        for(int i = 0 ; i < buttons.size(); i++) {
+            if(buttons.get(i).contains(mouseX, mouseY)){
+                option = options.get(i);
+                System.out.println("Clicked: " + option);
+                selectOption(i + 1);
+            } 
+        }
     }
 }

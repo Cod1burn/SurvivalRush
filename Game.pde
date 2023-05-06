@@ -59,13 +59,7 @@ public class Game {
         items.forEach(Item::draw);
         player.draw();
         // Draw UI
-        textSize(20);
-        // stroke(0);
-        // text("fps:" + frameRate, 50, 70);
-        stroke(255);
         displayInfo();
-        //text("position:" + player.position, 50, 70);
-        //text("coord: "+ player.coord, 50, 50);
         if (pause) {
             textSize(80);
             textAlign(CENTER, CENTER);
@@ -77,20 +71,32 @@ public class Game {
     }
     // method to draw the user info
     void displayInfo() {
-        // exp
         textSize(16);
-        text("exp: " + player.ce.exp, 40, 50);
+        textAlign(LEFT);
+        stroke(0);
+        // exp
+        text("exp: " + player.ce.exp, 50, 50);
         // player level
-        text("level: " + player.ce.level, 40, 70);
+        text("level: " + player.ce.level, 50, 70);
         // health
-        text("health: ", 40, 90);
+        text("health: ", 50, 90);
         noStroke();
-        // fill(255,0,0);
-        // bug that changes position of health bar. 
-        rect(90, 80, player.ce.health, 10);
-        text((int) player.ce.health, 95 + player.ce.health, 90);
+        rect(100, 80, player.ce.health, 10);
+        text((int) player.ce.health + "%", 105 + player.ce.health, 90);
         // weapons icons
-
+        text("Weapons: ", 50, 120);
+        
+        if(player.ce.weapons.size() == 0) {
+            text("NONE", 120, 120);
+        }
+        else {
+            int w = 100;
+            int h = 110;
+            for (int i = 0; i < player.ce.weapons.size(); i++) {
+                Weapon weapon = player.ce.weapons.get(i);
+                image(weapon.projectileImage, w + (20 * (i+1)) , h);
+            }
+        }
         // time left
         textSize(32);
         int timeSec = (int) gameTimer;
@@ -269,5 +275,10 @@ public class Game {
             if (keyChar == 'w' || keyChar == 'W' || keyCode == UP) player.movingDirection(0, 1);
             if (keyChar == 's' || keyChar == 'S' || keyCode == DOWN) player.movingDirection(0, -1);
         }
+    }
+
+    void mouseClicked(int mouseX, int mouseY) {
+        if(pause && lpMenu != null) lpMenu.mouseClicked(mouseX, mouseY);
+        if(isOver) goMenu.mouseClicked(mouseX, mouseY);
     }
 }

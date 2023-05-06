@@ -42,3 +42,7 @@ void keyPressed() {
 void keyReleased() {
   if (inGame) game.keyReleased(key);
 }
+
+void mouseClicked() {
+  if(inGame) game.mouseClicked(mouseX, mouseY);
+}
