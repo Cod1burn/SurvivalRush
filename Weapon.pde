@@ -30,7 +30,7 @@ public class Weapon {
 
     void levelUp() {
         if (level < MAX_LEVEL) {
-            level ++;
+            level++;
             getLevelBonus();
         }
     }

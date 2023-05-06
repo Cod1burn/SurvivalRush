@@ -112,7 +112,7 @@ public class CombatEntity {
     }
 
     void levelUp() {
-        level ++;
+        level++;
     }
 
     void attack(CombatEntity ce) {

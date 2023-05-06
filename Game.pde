@@ -276,4 +276,8 @@ public class Game {
             if (keyChar == 's' || keyChar == 'S' || keyCode == DOWN) player.movingDirection(0, -1);
         }
     }
+
+    void mouseClicked(int mouseX, int mouseY) {
+        if(pause && lpMenu != null) lpMenu.mouseClicked(mouseX, mouseY);
+    }
 }

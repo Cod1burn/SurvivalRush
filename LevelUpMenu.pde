@@ -44,19 +44,13 @@ public class LevelUpMenu {
 
     // generate the options for the player.
     void generateOptions() { 
-
-        ArrayList<WeaponType> valuesArray = new ArrayList<>();
-        for (int i = 0 ; i < values.length; i++) {
-            valuesArray.add(i, values[i]);
-        }
-        // upgrade options
-        for(Weapon w : ce.weapons) {
-            options.add("upgrade " + w.TYPE.name());
-            valuesArray.remove(w.TYPE);
-        }
-        // add options
-        for(WeaponType wt : valuesArray) {
-            options.add("add " + wt.name());
+        for(int i = 0; i < values.length; i++) {
+            boolean contains = false;
+            for (Weapon w: ce.weapons) {
+                if(w.TYPE == values[i]) contains = true;
+            }
+            if(contains) options.add("upgrade " + values[i].name());
+            else options.add("add " + values[i].name());
         }
     }
 
@@ -72,16 +66,16 @@ public class LevelUpMenu {
                         MagicWand mw = new MagicWand(player);
                         description = mw.getDescription(1);
                     break;
-                    
-                    case 2 :
-                        Spikewand sw = new Spikewand(player);
-                        description = sw.getDescription(1);
-                    break;
 
-                    case 3 :
+                    case 2 :
                         AsterWand aw = new AsterWand(player);
                         description = aw.getDescription(1);
                     break;	
+
+                    case 3 :
+                        Spikewand sw = new Spikewand(player);
+                        description = sw.getDescription(1);
+                    break;
 
                     case 4 :
                         ShardStaff ss = new ShardStaff(player);
@@ -133,6 +127,7 @@ public class LevelUpMenu {
         if(keyChar >= '1' && keyChar <= '5') {
             input = int(keyChar) - int('1');
             option = options.get(input);
+            System.out.println("Input: " + input);
             selectOption(input);
         }    
     }
@@ -141,6 +136,13 @@ public class LevelUpMenu {
 
     }
 
-    void mouseClicked() {
+    void mouseClicked(int mouseX, int mouseY) {
+        for(int i = 0 ; i < buttons.size(); i++) {
+            if(buttons.get(i).contains(mouseX, mouseY)){
+                option = options.get(i);
+                System.out.println("Clicked: " + option);
+                selectOption(i + 1);
+            } 
+        }
     }
 }
