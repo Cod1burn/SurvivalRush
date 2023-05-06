@@ -28,7 +28,7 @@ public class LevelUpMenu {
 
     void createButtons() {
         for(int i = 0; i < options.size(); i++) {
-            Button button = new Button(350 + 250 * i, (height/2 + 200), 150, 50, options.get(i));
+            Button button = new Button(350 + 250 * i, height/2, 150, 50, options.get(i));
             buttons.add(button);
         }
     }
@@ -109,15 +109,17 @@ public class LevelUpMenu {
         game.unpause();
     }
     void draw() {
-        background(255);
-        fill(0);
+        background(0);
+        PImage img = loadImage("MapImgs/Map0/wholemap.jpg");
+        img.resize(width, height);
+        image(img, 0, 0);
+        
         textSize(64);
-        textAlign(CENTER);
-        text("Congratulations you have levelled up!", width/2, height/2);
+        textAlign(CENTER, CENTER);
+        text("Congratulations you have levelled up!", width/2, height/4);
         textSize(32);
-        text("Select one of the options. Add a new weapon to your arsenal or upgrade an existing weapon.", width/2, height/2 + 100);
-        textSize(16);
-        text("Use the numbers 1-5 for the corresponding option or click on the buttons.", width/2, height/2 + 150);
+        text("Select one of the options. Add a new weapon to your arsenal or upgrade an existing weapon.", width/2, height/4 + 100);
+        text("Use the numbers 1-5 for the corresponding option or click on the buttons.", width/2, height/4 + 175);
         drawButtons();
     }
 
@@ -127,7 +129,6 @@ public class LevelUpMenu {
         if(keyChar >= '1' && keyChar <= '5') {
             input = int(keyChar) - int('1');
             option = options.get(input);
-            System.out.println("Input: " + input);
             selectOption(input);
         }    
     }

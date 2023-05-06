@@ -13,16 +13,16 @@ public class GameOverMenu {
     }
 
     void draw() {
+        background(0);
+        PImage img = loadImage("MapImgs/Map0/wholemap.jpg");
+        img.resize(width, height);
+        image(img, 0, 0);
         // if else is temporary. Implement restart and only else remains.
         if(restart) {
-            background(255);
-            fill(0);
             textSize(64);
             text("RESTART", width/2, height/2);
         } 
         else {
-            background(255);
-            fill(0);
             textSize(64);
             textAlign(CENTER);
             text("GAME OVER!", width/2, height/2);
