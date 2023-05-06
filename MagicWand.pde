@@ -23,7 +23,6 @@ public class MagicWand extends Weapon {
     @Override
     void update(float second) {
         super.update(second);
-        attack = player.ce.attack * ATTACK_MULTIPLIER;
         attackInterval = BASE_SHOOT_INTERVAL / (1 + player.ce.attackSpeed/100.0);
         if (attackTimer <= 0) shootMagicOrb();
     }

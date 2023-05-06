@@ -29,8 +29,7 @@ public class Fire extends Projectile {
     @Override
     void draw() {
         if(alive) { 
-            
-            if (animationTImer > ANIMATION_INTERVAL/2.0) image(img1, relatedPosition.x - RADIUS/2.0, relatedPosition.y - RADIUS/2.0, RADIUS, RADIUS);
+            if (animationTimer > ANIMATION_INTERVAL/2.0) image(img1, relatedPosition.x - RADIUS/2.0, relatedPosition.y - RADIUS/2.0, RADIUS, RADIUS);
             else image(img2, relatedPosition.x - RADIUS/2.0, relatedPosition.y - RADIUS/2.0, RADIUS, RADIUS);
         }
     }

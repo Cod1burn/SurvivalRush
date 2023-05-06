@@ -3,5 +3,6 @@ public enum WeaponType {
     ASTERWAND,
     SPIKEWAND,
     SHARDSTAFF,
-    BOOMRANG;
+    BOOMRANG,
+    FIREPATH;
 }

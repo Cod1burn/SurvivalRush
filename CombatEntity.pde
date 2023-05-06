@@ -68,6 +68,7 @@ public class CombatEntity {
     public CombatEntity() {
         isPlayer = false;
         auras = new ArrayList<>();
+        damageAmplification = 0.0;
     }
 
     CombatEntity copy(int copyLevel) {
@@ -80,6 +81,7 @@ public class CombatEntity {
         ce.healthRegen = healthRegen * pow(1.2, copyLevel);
         ce.attack = attack * pow(1.2, copyLevel);
         ce.defence = defence * (1 + 0.2 * copyLevel);
+        ce.damageAmplification = 0.0;
         ce.moveSpeed = moveSpeed;
         ce.radius = radius;
         ce.attackSpeed = attackSpeed;
@@ -191,6 +193,9 @@ public class CombatEntity {
                 Boomrang br = new Boomrang((Player)obj);
                 weapons.add(br);
 
+            case FIREPATH:
+                FirePath fp = new FirePath((Player)obj);
+                weapons.add(fp);
             default :
                 
             break;	
