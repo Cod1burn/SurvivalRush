@@ -69,6 +69,7 @@ public class Game {
         }
         if(goMenu != null) goMenu.draw();
     }
+    
     // method to draw the user info
     void displayInfo() {
         textSize(16);
