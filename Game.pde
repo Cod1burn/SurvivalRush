@@ -279,5 +279,6 @@ public class Game {
 
     void mouseClicked(int mouseX, int mouseY) {
         if(pause && lpMenu != null) lpMenu.mouseClicked(mouseX, mouseY);
+        if(isOver) goMenu.mouseClicked(mouseX, mouseY);
     }
 }

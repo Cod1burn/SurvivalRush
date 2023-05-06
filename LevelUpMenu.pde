@@ -117,7 +117,7 @@ public class LevelUpMenu {
         textSize(32);
         text("Select one of the options. Add a new weapon to your arsenal or upgrade an existing weapon.", width/2, height/2 + 100);
         textSize(16);
-        text("Use the numbers 1-5 for the corresponding option", width/2, height/2 + 150);
+        text("Use the numbers 1-5 for the corresponding option or click on the buttons.", width/2, height/2 + 150);
         drawButtons();
     }
 
