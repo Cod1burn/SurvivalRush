@@ -6,5 +6,7 @@ public class Spike extends Projectile {
         this.attack = attack;
         this.hitInterval = hitInterval;
         infiniteHits = true;
+
+        floatNumMultiplier = 0.8;
     }
 }

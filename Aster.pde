@@ -11,6 +11,7 @@ public class Aster extends Projectile {
         this.angularSpeed = PI;
         this.spinRadius = spinRadius;
         infiniteHits = true;
+        floatNumMultiplier = 0.8;
     }
 
     @Override

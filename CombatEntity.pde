@@ -123,26 +123,21 @@ public class CombatEntity {
 
     void attack(CombatEntity ce) {
         float damage = attack * (1 - ce.defence/100.0);
-        ce.takeDamage(damage, true);
+        ce.takeDamage(damage, 1.0);
         attackTimer = baseAttackInterval * (1 + attackSpeed/100.0);
     }
 
     
     void hit(CombatEntity ce) {
         float damage = attack * (1 - ce.defence/100.0) * (1 + damageAmplification/100.0);
-        ce.takeDamage(damage * (1 + damageAmplification/100.0), true);
-        if (lifesteal > 0) heal(damage * lifesteal, true);
+        ce.takeDamage(damage * (1 + damageAmplification/100.0), 1.0);
+        if (lifesteal > 0) heal(damage * lifesteal, 0.0);
     }
 
-    void heal(float value, boolean showing) {
+    void heal(float value, float floatNumMultiplier) {
         health += value;
         if (health >= maxHealth) health = maxHealth;
-        if(showing) obj.addFloatingNumber(new FloatingNumber("HEALING",value, 1.0));
-    }
-
-    void takeDamage(float damage, boolean showing) {
-        if (showing) takeDamage(damage, 1.0);
-        else takeDamage(damage, 0.0);
+        if(floatNumMultiplier > 0) obj.addFloatingNumber(new FloatingNumber("HEALING",value, floatNumMultiplier));
     }
 
     void takeDamage(float damage, float floatNumMultiplier) {
@@ -154,7 +149,7 @@ public class CombatEntity {
 
     void update(float second) {
         auras.forEach((a) -> {a.update(second);});
-        heal(healthRegen * second, false);
+        heal(healthRegen * second, 0.0);
 
         if (attackTimer > 0) attackTimer -= second;
 

@@ -14,6 +14,8 @@ public class Shard extends Projectile {
 
         knockBackForce = direction.copy().mult(0.6 * scalarSpeed);
         knockBackTime = 0.08;
+
+        floatNumMultiplier = 0.6;
     }
 
     @Override

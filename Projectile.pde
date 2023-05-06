@@ -19,6 +19,8 @@ public class Projectile extends MovableObject {
     float lifeTimer;
     float hitTimer;
 
+    float floatNumMultiplier;
+
     PImage img;
 
     public Projectile(Player owner, PVector direction, float radius) {
@@ -33,6 +35,8 @@ public class Projectile extends MovableObject {
         knockBackTime = 0.0;
         infiniteHits = false;
         hasHit = false;
+        
+        floatNumMultiplier = 1.0;
         
         position = owner.position.copy();
         relatedPosition = new PVector(0,0);
@@ -69,7 +73,7 @@ public class Projectile extends MovableObject {
 
     void hit(MovableObject obj) {
         float damage = attack * (1 - obj.ce.defence/100.0) * (1 + owner.ce.damageAmplification/100.0);
-        obj.ce.takeDamage(damage, true);
+        obj.ce.takeDamage(damage, floatNumMultiplier);
         if (knockBackTime > 0) obj.knockBack(knockBackForce, knockBackTime);
         if (!infiniteHits) {
             hits--;

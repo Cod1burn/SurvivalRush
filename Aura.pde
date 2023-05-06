@@ -25,8 +25,8 @@ public Aura(CombatEntity ce, String name, AuraType type , float value, float dur
 void update(float second) {
     timer += second;
     if (timer >= duration) expire();
-    if (type == AuraType.DOT) ce.takeDamage(value * second * (1 - ce.defence/100.0) * (1 + ce.damageAmplification/100.0), false);
-    if (type == AuraType.HOT) ce.heal(value * second, false);
+    if (type == AuraType.DOT) ce.takeDamage(value * second * (1 - ce.defence/100.0) * (1 + ce.damageAmplification/100.0), 0.0);
+    if (type == AuraType.HOT) ce.heal(value * second, 0.0);
 }
 
 void apply() {

@@ -30,21 +30,21 @@ public class FloatingNumber {
             case "HEALING" :
                     this.speed = 80 * multiplier;
                     this.range = 50 * multiplier;
-                    this.size = (int)(17 * multiplier);
+                    this.size = (int)(20 * multiplier);
                     this.c = color(40,235,25);
             break;	
 
             case "DAMAGE":
                     this.speed = 75 * multiplier;
                     this.range = 35 * multiplier;
-                    this.size = (int)(14 * multiplier);
+                    this.size = (int)(18 * multiplier);
                     this.c = color(235, 20, 20);
             break;
 
             case "EXP":
                     this.speed = 60 * multiplier;
                     this.range = 50 * multiplier;
-                    this.size = (int)(20 * multiplier);
+                    this.size = (int)(23 * multiplier);
                     this.c = color(25, 255, 255);
             break;
 
