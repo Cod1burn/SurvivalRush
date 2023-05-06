@@ -42,7 +42,15 @@ void apply() {
         case ATKSPDAMP :
             ce.attackSpeed *= (1+(value/100.0));
         break;	
+
+        case EXPAMP :
+            ce.expRate += value;
+        break;
         
+        case EXTRAPROJS:
+            ce.extraProjs += value;
+        break;
+
         default :
         break;	
     }
@@ -61,6 +69,14 @@ void expire() {
         case ATKSPDAMP :
             ce.attackSpeed *= (1 / (1+(value/100.0)) );
         break;	
+
+        case EXPAMP :
+            ce.expRate -= value;
+        break;
+
+        case EXTRAPROJS:
+            ce.extraProjs -= value;
+        break;
         
         default :
         break;	

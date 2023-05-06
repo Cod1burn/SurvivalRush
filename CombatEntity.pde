@@ -12,6 +12,8 @@ public class CombatEntity {
     float lifesteal;
     float expRate;
     float damageAmplification;
+    int extraProjs;
+
     float baseAttackInterval;
     float radius;
         
@@ -48,6 +50,8 @@ public class CombatEntity {
         lifesteal = 0.0;
         expRate = 100.0;
         damageAmplification = 0.0;
+        extraProjs = 0;
+        
 
         exp = 0.0;
         maxExp = 50.0;
