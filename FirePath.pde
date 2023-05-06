@@ -15,7 +15,7 @@ public class FirePath extends Weapon{
         PROJ_NUM = 1;
         shootCount = 0;
         
-        ATTACK_MULTIPLIER = 0.4;
+        ATTACK_MULTIPLIER = 0.25;
         BASE_SHOOT_INTERVAL = 4.0;
         PROJ_DURATION = 2.5;
         PROJ_RADIUS = 40;
@@ -62,7 +62,7 @@ public class FirePath extends Weapon{
     void getLevelBonus() {
         switch (this.level) {
             case 2 :
-                ATTACK_MULTIPLIER = 0.5;
+                ATTACK_MULTIPLIER = 0.3;
             break;	
 
             case 3 :
@@ -75,11 +75,11 @@ public class FirePath extends Weapon{
             break;
 
             case 5 :
-                PROJ_DURATION = 3.0;
+                PROJ_DURATION = 3.5;
             break;
 
             case 6 :
-                ATTACK_MULTIPLIER = 0.6;
+                ATTACK_MULTIPLIER = 0.35;
                 PROJ_NUM ++;
             break;
 
@@ -93,10 +93,11 @@ public class FirePath extends Weapon{
 
             case 9 :
                 PROJ_RADIUS = 60;
+                PROJ_DURATION = 5.0;
             break;	
 
             case 10:
-                ATTACK_MULTIPLIER = 0.75;
+                ATTACK_MULTIPLIER = 0.4;
                 PROJ_NUM += 2;
             break;
         }
@@ -111,7 +112,7 @@ public class FirePath extends Weapon{
             break;	
 
             case 2 :
-                s = "Damage +25%";
+                s = "Damage +20%";
             break;
 
             case 3 :
@@ -123,11 +124,11 @@ public class FirePath extends Weapon{
             break;	
 
             case 5 :
-                s = "Fire path duration +0.5s";
+                s = "Fire path duration +1.0s";
             break;	
 
             case 6 :
-                s = "Damage +25%, \nSummon one more fire path";
+                s = "Damage +20%, \nSummon one more fire path";
             break;
 
             case 7 :
@@ -139,11 +140,11 @@ public class FirePath extends Weapon{
             break; 
 
             case 9 :
-                s = "Fire path radius +10";
+                s = "Fire path radius +10, \nFire path duration +1.5s";
             break;	
 
             case 10 :
-                s = "Damage +37.5% , \nSummon two more fire paths";
+                s = "Damage +20% , \nSummon two more fire paths";
             break;
 
             default:
