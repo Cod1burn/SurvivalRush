@@ -24,7 +24,7 @@ public class Spikewand extends Weapon {
     void update(float second) {
         super.update(second);
         attackInterval = BASE_SHOOT_INTERVAL / (1 + player.ce.attackSpeed / 100.0);
-        if (attackTimer <= 0) shootSpikes(player.findEnemies(PROJ_NUM));
+        if (attackTimer <= 0) shootSpikes(player.findEnemies(PROJ_NUM + player.ce.extraProjs));
     }
 
     void shootSpikes(List<Enemy> enemies) {
@@ -32,15 +32,13 @@ public class Spikewand extends Weapon {
 
         for (Enemy enemy: enemies) {
             shootSpike(enemy.position);
-            shootCount ++;
         }
 
         // If enemies are less than shoots number, shoot at random visible positions.
-        for (int i = 0; i < PROJ_NUM - shootCount; i ++) {
+        while (shootCount < PROJ_NUM + player.ce.extraProjs) {
             shootSpike(player.position.copy()
                 .add(random(-width/2.0, width/2.0), random(-height/2.0, height/2.0)));
         }
-
         attackTimer = attackInterval;
     }
 
@@ -48,6 +46,7 @@ public class Spikewand extends Weapon {
         Spike spike = new Spike(player, position, PROJ_RADIUS, PROJ_DURATION, attack, PROJ_HIT_INTERVAL);
         spike.setImage(projectileImage);
         player.projectiles.add(spike);
+        shootCount ++;
     }
 
     @Override

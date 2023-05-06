@@ -27,7 +27,7 @@ public class Boomrang extends Weapon {
         super.update(second);
         attack = player.ce.attack * ATTACK_MULTIPLIER;
         attackInterval = BASE_SHOOT_INTERVAL / (1 + player.ce.attackSpeed/100.0);
-        if (attackTimer <= 0) shootBoomrangs(player.findEnemies(PROJ_NUM));
+        if (attackTimer <= 0) shootBoomrangs(player.findEnemies(PROJ_NUM + player.ce.extraProjs));
     }
 
     void shootBoomrang(PVector direction) {
@@ -45,7 +45,7 @@ public class Boomrang extends Weapon {
             shootBoomrang(direction);
         });
 
-        while(shootCount < PROJ_NUM) {
+        while(shootCount < PROJ_NUM + player.ce.extraProjs) {
             PVector direction = PVector.fromAngle(random(0, 2*PI));
             shootBoomrang(direction);
         }

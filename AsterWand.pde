@@ -50,7 +50,7 @@ public class AsterWand extends Weapon {
 
     void resetAsters() {
         player.projectiles.removeIf(p -> p instanceof Aster);
-        summonAsters(PROJ_NUM);
+        summonAsters(PROJ_NUM + player.ce.extraProjs);
     }
 
     @Override

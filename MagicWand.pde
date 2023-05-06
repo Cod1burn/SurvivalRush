@@ -39,7 +39,7 @@ public class MagicWand extends Weapon {
         orb.setImage(projectileImage);
         player.projectiles.add(orb);
         shootCount++;
-        if (shootCount < PROJ_NUM) {
+        if (shootCount < PROJ_NUM + player.ce.extraProjs) {
             attackTimer = MINIMAL_SHOOT_INTERVAL;
         } else {
             shootCount = 0;

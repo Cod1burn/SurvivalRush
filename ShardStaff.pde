@@ -36,7 +36,7 @@ public class ShardStaff extends Weapon {
     }
 
     void shootShards() {
-        for (int i = 0; i < PROJ_NUM; i++) {
+        for (int i = 0; i < PROJ_NUM + player.ce.extraProjs; i++) {
             PVector direction;
             if (player.direction.mag() != 0) direction = player.direction.copy().rotate(random(-PI/8.0, PI/8.0));
             else direction = player.lastDirection.copy().rotate(random(-PI/8.0, PI/8.0));
