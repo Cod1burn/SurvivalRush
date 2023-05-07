@@ -77,14 +77,21 @@ public class Game {
         stroke(0);
         fill(0);
         // exp
-        text("exp: " + player.ce.exp + "/" + player.ce.maxExp, 50, 50);
+        // text("exp: " + player.ce.exp + "/" + player.ce.maxExp, 50, 50);
+        text("level: ", 50, 50);
+        noFill();
+        rect(100, 40, player.ce.maxExp, 10);
+        fill(0);
+        rect(100, 40, player.ce.exp, 10);
+        text(player.ce.level, 105 + player.ce.maxExp, 50);
         // player level
-        text("level: " + player.ce.level, 50, 70);
+        // text("level: " + player.ce.level, 50, 70);
         // health
-        text("health: ", 50, 90);
+        text("health: ", 50, 70);
         noStroke();
-        rect(100, 80, player.ce.health, 10);
-        text((int) player.ce.health + "%", 105 + player.ce.health, 90);
+        fill(0);
+        rect(100, 60, player.ce.health, 10);
+        text((int) player.ce.health + "%", 105 + player.ce.health, 70);
         // weapons icons
         text("Weapons: ", 50, 120);
         
