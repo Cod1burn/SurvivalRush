@@ -119,7 +119,7 @@ public class Game {
                 fill(0);
                 float time = aura.duration - aura.timer; 
                 if(time < 0) time = 0;
-                rect(w + 25, h, time, 10);
+                rect(w + 25, h + (25 * i), time, 10);
             }
         }
         // time left
