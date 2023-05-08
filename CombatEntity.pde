@@ -204,6 +204,12 @@ public class CombatEntity {
     }
 
     void applyAura(Aura a) {
+        auras.forEach((aura) -> {
+            if (aura.type == a.type) {
+                aura.duration = a.duration;
+                return;
+            }
+        });
         auras.add(a);
     }
 }

@@ -113,6 +113,9 @@ public class Enemy extends MovableObject {
     @Override
     void die() {
         super.die();
-        game.generateItem(ItemType.EXPORB, 30, position.copy());
+        float ran = random(0, 100);
+        if (ran < 33) game.generateItem(ItemType.HEART, 30, position.copy());
+        if (ran > 66) game.generateItem(ItemType.ATTACK, 3, position.copy());
+        if (ran >= 33 && ran <= 66) game.generateItem(ItemType.SPEED, 30, position.copy());
     }
 }

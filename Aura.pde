@@ -20,6 +20,9 @@ public Aura(CombatEntity ce, String name, AuraType type , float value, float dur
     this.timer = 0.0;
     
     alive = true;
+
+    ce.applyAura(this);
+    apply();
 }
 
 void update(float second) {
@@ -48,7 +51,7 @@ void apply() {
         break;
         
         case EXTRAPROJS:
-            ce.extraProjs += value;
+            ce.extraProjs += (int)(value);
         break;
 
         default :
@@ -88,7 +91,8 @@ void setDescription(String description) {
     this.description = description;
 }
 
-void setIcon(PImage icon) {
-    this.icon = icon;
+PImage getIcon() {
+    PImage icon = loadImage("Icons/auras/"+type.imgPath+".png");
+    return icon;
 }
 }

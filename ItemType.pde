@@ -1,8 +1,8 @@
 public enum ItemType {
     EXPORB ("exporb"),
-    POTION("potion"),
-    FEATHER("feather"),
-    BOOK ("book");
+    HEART("heart"),
+    ATTACK("attack"),
+    SPEED ("speedCrystal");
     
     String imagePath;
     private ItemType(String imagePath) {

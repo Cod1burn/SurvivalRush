@@ -23,6 +23,21 @@ public class ItemGenerator {
                 item = new ExpOrb(position, value);
                 item.setImage(imageMap.get(it));
             break;	
+
+            case ATTACK:
+                item = new AttackCrystal(position);
+                item.setImage(imageMap.get(it));
+            break;
+
+            case HEART:
+                item = new Heart(position, value);
+                item.setImage(imageMap.get(it));
+            break;
+
+            case SPEED:
+                item = new SpeedUp(position);
+                item.setImage(imageMap.get(it));
+            break;
             
             default:
             break;

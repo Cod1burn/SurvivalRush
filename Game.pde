@@ -121,10 +121,16 @@ public class Game {
         }
 
         if (playerLastLevel < player.ce.level) {
-            pause();
-            lpMenu = new LevelUpMenu(this, player);
-            playerLastLevel++;
+            boolean upgradable = false;
+            for (Weapon w : player.ce.weapons) {
+                if (w.level < w.MAX_LEVEL) upgradable = true;
+            }
             
+            if (upgradable) {
+                pause();
+                lpMenu = new LevelUpMenu(this, player);
+            }
+            playerLastLevel++;
         } else if (lpMenu != null) {
             // recently updated
             stroke(0);
