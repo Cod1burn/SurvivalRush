@@ -26,6 +26,7 @@ public class CombatEntity {
     // Only for enemy
     float attackTimer;
     EnemyType type;
+    int difficulty;
 
     // Only for player
     float absorbRadius; 
@@ -45,7 +46,7 @@ public class CombatEntity {
         health = 100;
         maxHealth = 100;
         healthRegen = 1.0;
-        attack = 10.0;
+        attack = 12.0;
         defence = 0.0;
         lifesteal = 0.0;
         expRate = 100.0;
@@ -76,16 +77,17 @@ public class CombatEntity {
         CombatEntity ce = new CombatEntity();
         ce.type = type;
         ce.isPlayer = isPlayer;
-        ce.maxHealth = maxHealth * pow(1.2, copyLevel);
+        ce.maxHealth = maxHealth * pow(1.5, copyLevel);
         ce.health = ce.maxHealth;  
-        ce.healthRegen = healthRegen * pow(1.2, copyLevel);
-        ce.attack = attack * pow(1.2, copyLevel);
-        ce.defence = defence * (1 + 0.2 * copyLevel);
+        ce.healthRegen = healthRegen * pow(1.5, copyLevel);
+        ce.attack = attack * pow(1.5, copyLevel);
+        ce.defence = defence * (1 + 3 * copyLevel);
         ce.damageAmplification = 0.0;
         ce.moveSpeed = moveSpeed;
         ce.radius = radius;
         ce.attackSpeed = attackSpeed;
         ce.baseAttackInterval = baseAttackInterval;
+        ce.difficulty = difficulty;
         return ce;
     }
 
@@ -119,6 +121,11 @@ public class CombatEntity {
 
     void levelUp() {
         level++;
+        maxExp += 100;
+        maxHealth += 5;
+        attack += 1;
+        healthRegen += 0.1;
+
     }
 
     void attack(CombatEntity ce) {

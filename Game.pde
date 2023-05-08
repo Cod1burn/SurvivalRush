@@ -15,6 +15,10 @@ public class Game {
     int enemiesKilled;
     boolean isOver;
 
+    float ENEMY_GENERATION_INTERVAL = 5.0;
+    float enemyTimer;
+    int sumDifficulty;
+
     EnemyGenerator eg;
     ItemGenerator ig;
     ArrayList<Enemy> enemies;
@@ -38,6 +42,8 @@ public class Game {
 
         enemiesKilled = 0;
 
+        enemyTimer = ENEMY_GENERATION_INTERVAL;
+
         camera = new PVector(0,0);
 
         eg = new EnemyGenerator(this);
@@ -45,6 +51,13 @@ public class Game {
 
         enemies = new ArrayList<>();
         items = new ArrayList<>();
+
+        initialWeapon();
+    }
+
+    void initialWeapon() {
+        int i = (int)(random(0, WeaponType.values().length));
+        player.ce.addWeapon(WeaponType.values()[i]);
     }
 
     void draw() {
@@ -145,12 +158,22 @@ public class Game {
             lpMenu = null;
         }
 
+        
+        
         float second = time / 1000.0;
 
         gameTimer -= second;
+        
         gameLevel = 1 + (int)((MAX_TIME - gameTimer) / 180);
 
         if (gameTimer <= 0) timeOut();
+
+        enemyTimer -= second;
+        if (enemyTimer <= 0) {
+            sumDifficulty += 6 + gameLevel * gameLevel * 4;
+            while(sumDifficulty > 0) generateAGroupEnemies();
+            enemyTimer = ENEMY_GENERATION_INTERVAL;
+        }
 
         player.update(second);
         enemies.forEach((e) -> {
@@ -236,6 +259,15 @@ public class Game {
 
     void generateEnemies(EnemyType et, int num, float minDistance, float maxDistance) {
         map.getAvailablePositions(player.position, num, minDistance, maxDistance).forEach((p) -> {generateEnemy(et, p);});
+    }
+
+    void generateAGroupEnemies() {
+        int ran = (int)(random(0, EnemyType.values().length));
+        EnemyType et = EnemyType.values()[ran];
+        int num = sumDifficulty / et.difficulty;
+        if (num == 0) num = 1;
+        generateEnemies(et, num, 300, 600);
+        sumDifficulty -= et.difficulty * num;
     }
 
     void addWeapon(WeaponType type) {

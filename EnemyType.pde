@@ -1,10 +1,12 @@
 public enum EnemyType {
-    ORC ("orc"),
-    VAMPIRE ("vampire"),
-    MEGAORC ("megaOrc");
+    ORC ("orc", 3),
+    VAMPIRE ("vampire", 3),
+    MEGAORC ("megaOrc", 10);
 
     String label;
-    EnemyType(String label) {
+    int difficulty;
+    EnemyType(String label, int difficulty) {
         this.label = label;
+        this.difficulty = difficulty;
     }
 }

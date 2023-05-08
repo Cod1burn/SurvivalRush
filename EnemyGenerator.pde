@@ -35,6 +35,7 @@ public class EnemyGenerator {
             ce.moveSpeed = enemyXML.getChildren("moveSpeed")[0].getFloatContent();
             ce.baseAttackInterval = enemyXML.getChildren("attackInterval")[0].getFloatContent();
             ce.attackSpeed = enemyXML.getChildren("attackSpeed")[0].getFloatContent();
+            ce.difficulty = enemyXML.getChildren("difficulty")[0].getIntContent();
             ceMap.put(et, ce);
 
             String imgPath = "ObjectImgs/Enemies/" + enemyXML.getChildren("image")[0].getContent();

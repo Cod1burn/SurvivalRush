@@ -11,6 +11,7 @@
         <moveSpeed>60</moveSpeed>
         <attackInterval>1.0</attackInterval>
         <attackSpeed>0.0</attackSpeed>
+        <difficulty>3</difficulty>
     </orc>
 
     <vampire>
@@ -23,6 +24,7 @@
         <moveSpeed>45</moveSpeed>
         <attackInterval>1.0</attackInterval>
         <attackSpeed>0.0</attackSpeed>
+        <difficulty>3</difficulty>
     </vampire>
 
     <megaOrc>
@@ -35,5 +37,6 @@
         <moveSpeed>50</moveSpeed>
         <attackInterval>1.0</attackInterval>
         <attackSpeed>0.0</attackSpeed>
+        <difficulty>15</difficulty>
     </megaOrc>
 </enemies>

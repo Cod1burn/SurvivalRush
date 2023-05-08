@@ -114,9 +114,15 @@ public class Enemy extends MovableObject {
     void die() {
         super.die();
         float ran = random(0, 100);
-        if (ran < 33) game.generateItem(ItemType.HEART, 30, position.copy());
-        if (ran > 66) game.generateItem(ItemType.ATTACK, 3, position.copy());
-        if (ran >= 33 && ran <= 66) game.generateItem(ItemType.SPEED, 30, position.copy());
+        if (ran < 50) game.generateItem(ItemType.EXPORB, ce.difficulty * 10, position.copy());
+        // 2% chance drop buff items
+        if (ran > 96 && ran < 98) game.generateItem(ItemType.ATTACK, 3, position.copy());
+        if (ran >= 98 && ran < 100) game.generateItem(ItemType.SPEED, 30, position.copy());
+        
+        // 3% chance drop heart
+        ran = random(0, 100);
+        if (ran > 97) game.generateItem(ItemType.HEART, 25, position.copy());
+
         game.enemiesKilled ++;
     }
 }
