@@ -116,9 +116,9 @@ public class Game {
                 image(aura.getIcon(), w, h + (25 * i), 25, 25);
                 noFill();
                 rect(w + 25, h + (25 * i), aura.duration, 10);
-                fill(0);
                 float time = aura.duration - aura.timer; 
                 if(time < 0) time = 0;
+                fill(0);
                 rect(w + 25, h + (25 * i), time, 10);
             }
         }
