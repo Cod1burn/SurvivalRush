@@ -144,7 +144,7 @@ public class Game {
     }
 
     void update(int time) {
-        if (pause) {
+        if (pause || goMenu != null) {
             player.stop();
             return;
         }
@@ -330,6 +330,7 @@ public class Game {
             if (keyChar == 'x') addAllWeapons();
             if (keyChar == 'z') levelUpAllWeapons();
             if (keyChar == 'l' || keyChar == 'L') player.ce.levelUp(); // Press L to test level up menu
+            if (keyChar == 't') gameTimer -= 60; // Press T to move 1 minute forward.
             if(keyChar == 'g' || keyChar == 'G') playerDie(); // Press G to test game over menu
 
             if(isOver) goMenu.keyPressed(keyChar);
