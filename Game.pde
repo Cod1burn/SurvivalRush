@@ -29,7 +29,6 @@ public class Game {
 
     PVector camera;
 
-
     public Game () {
         int template = 0; // Test template
         player = new Player(this, new PVector(600, 600));
@@ -67,7 +66,6 @@ public class Game {
         camera.y %= map.blockHeight;
         camera.y = camera.y < 0 ? map.blockHeight + camera.y : camera.y;
 
-
         background(0);
         // Draw map
         map.draw(camera);
@@ -92,16 +90,13 @@ public class Game {
         textAlign(LEFT);
         stroke(0);
         fill(0);
-        // exp
-        // text("exp: " + player.ce.exp + "/" + player.ce.maxExp, 50, 50);
+        // exp and level
         text("level: ", 50, 50);
         noFill();
         rect(100, 40, player.ce.maxExp, 10);
         fill(0);
         rect(100, 40, player.ce.exp, 10);
         text(player.ce.level, 105 + player.ce.maxExp, 50);
-        // player level
-        // text("level: " + player.ce.level, 50, 70);
         // health
         text("health: ", 50, 70);
         noStroke();
@@ -109,17 +104,35 @@ public class Game {
         rect(100, 60, player.ce.health, 10);
         text((int) player.ce.health + "%", 105 + player.ce.health, 70);
         // weapons icons
-        text("Weapons: ", 50, 120);
-        
+        text("Weapons: ", 50, 100);
         if(player.ce.weapons.size() == 0) {
-            text("NONE", 120, 120);
+            text("NONE", 120, 100);
         }
         else {
             int w = 100;
-            int h = 110;
+            int h = 90;
             for (int i = 0; i < player.ce.weapons.size(); i++) {
                 Weapon weapon = player.ce.weapons.get(i);
                 image(weapon.projectileImage, w + (30 * (i+1)) , h, 25, 25);
+            }
+        }
+        // auras
+        text("Auras: ", 50, 125);
+        if (player.ce.auras.size() == 0) {
+            text("NONE", 100, 125);
+        }
+        else {
+            int w = 100; 
+            int h = 115;
+            for(int i = 0; i < player.ce.auras.size(); i++) {
+                Aura aura = player.ce.auras.get(i);
+                image(aura.getIcon(), w, h + (25 * i), 25, 25);
+                noFill();
+                rect(w + 25, h + (25 * i), aura.duration, 10);
+                float time = aura.duration - aura.timer; 
+                if(time < 0) time = 0;
+                fill(0);
+                rect(w + 25, h + (25 * i), time, 10);
             }
         }
         // time left
