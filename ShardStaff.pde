@@ -57,7 +57,7 @@ public class ShardStaff extends Weapon {
     void getLevelBonus() {
         switch (this.level) {
             case 2 :
-                ATTACK_MULTIPLIER = 0.2;
+                ATTACK_MULTIPLIER = 0.25;
             break;	
 
             case 3 :
@@ -78,7 +78,7 @@ public class ShardStaff extends Weapon {
             break;
 
             case 7 :
-                ATTACK_MULTIPLIER = 0.25;
+                ATTACK_MULTIPLIER = 0.3;
             break;
 
             case 8 :
@@ -91,7 +91,7 @@ public class ShardStaff extends Weapon {
 
             case 10:
                 PROJ_NUM ++;
-                ATTACK_MULTIPLIER = 0.3;
+                ATTACK_MULTIPLIER = 0.35;
                 player.ce.attackSpeed += 10;
             break;
         }
@@ -102,43 +102,43 @@ public class ShardStaff extends Weapon {
         String s = "";
         switch (level) {
             case 1 :
-                s = "Summon spikes attack enemies.";
+                s = "Shoot lots of shards in one time.";
             break;	
 
             case 2 :
-                s = "Damage +20%";
+                s = "Damage +25%";
             break;
 
             case 3 :
-                s = "Summon one more spike";
+                s = "2 more shoots per second";
             break;	
 
             case 4 :
-                s = "Spike duration +0.5s, \nSpike Radius +20%";
+                s = "Shard speed +200, \nShard range +100";
             break;	
 
             case 5 :
-                s = "Spike damage interval -0.1s";
+                s = "Shoot time +0.25s";
             break;	
 
             case 6 :
-                s = "Damage +10%, \nSummon one more spike";
+                s = "One more shard per shoot";
             break;
 
             case 7 :
-                s = "Spike Radius +20";
+                s = "Damage +25%";
             break;		
 
             case 8 :
-                s = "Spike damage interval -0.1s";
+                s = "Shoot time +0.25s";
             break; 
 
             case 9 :
-                s = "Summon one more spike";
+                s = "3 more shoots per second";
             break;	
 
             case 10 :
-                s = "defence +10, \nSpike duration +0.5s, \nDamage +30%";
+                s = "One more shard per shoot, \nDamage +25%, \nAttack Speed +10";
             break;
 
             default:

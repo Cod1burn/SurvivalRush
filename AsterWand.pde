@@ -111,43 +111,43 @@ public class AsterWand extends Weapon {
         String s = "";
         switch (level) {
             case 1 :
-                s = "Summon spikes attack enemies.";
+                s = "Summon asters surrounding you.";
             break;	
 
             case 2 :
-                s = "Damage +20%";
+                s = "Summon one more aster";
             break;
 
             case 3 :
-                s = "Summon one more spike";
+                s = "Damage +16%";
             break;	
 
             case 4 :
-                s = "Spike duration +0.5s, \nSpike Radius +20%";
+                s = "Summon one more aster";
             break;	
 
             case 5 :
-                s = "Spike damage interval -0.1s";
+                s = "Aster radius +5, \nAster spin radius +15";
             break;	
 
             case 6 :
-                s = "Summon Interval -0.5s, \nSummon one more spike";
+                s = "Damage +16%, \nSummon two more asters";
             break;
 
             case 7 :
-                s = "Damage +10%, \nSpike Radius +20";
+                s = "Move speed +50";
             break;		
 
             case 8 :
-                s = "Spike damage interval -0.1s";
+                s = "Damage +16%, \nSummon one more aster";
             break; 
 
             case 9 :
-                s = "Summon Interval -0.5";
+                s = "SAster radius +5, \nAster spin radius +15";
             break;	
 
             case 10 :
-                s = "Summon one more spike, \nSpike duration +0.5s, \nDamage +30%";
+                s = "Summon two more asters, \nDamage +16%, \nMove speed +50";
             break;
 
             default:
