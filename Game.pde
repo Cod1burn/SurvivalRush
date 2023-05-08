@@ -113,7 +113,7 @@ public class Game {
             int h = 115;
             for(int i = 0; i < player.ce.auras.size(); i++) {
                 Aura aura = player.ce.auras.get(i);
-                image(aura.getIcon(), w, h, 25, 25);
+                image(aura.getIcon(), w, h + (25 * i), 25, 25);
                 noFill();
                 rect(w + 25, h + (25 * i), aura.duration, 10);
                 fill(0);
