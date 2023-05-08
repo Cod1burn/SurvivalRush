@@ -151,8 +151,12 @@ public class Game {
 
         if (playerLastLevel < player.ce.level) {
             boolean upgradable = false;
-            for (Weapon w : player.ce.weapons) {
-                if (w.level < w.MAX_LEVEL) upgradable = true;
+            if (player.ce.weapons.size() < CombatEntity.MAX_WEAPONS) {
+                upgradable = true;
+            } else {
+                for (Weapon w : player.ce.weapons) {
+                    if (w.level < w.MAX_LEVEL) upgradable = true;
+                }
             }
 
             if (upgradable) {
