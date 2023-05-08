@@ -16,7 +16,7 @@
 
     <berserk>
         <image>berserk</image>
-        <radius>35</radius>
+        <radius>40</radius>
         <health>10</health>
         <healthRegen>0.0</healthRegen>
         <attack>3.0</attack>
