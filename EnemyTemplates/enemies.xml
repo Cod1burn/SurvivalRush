@@ -14,18 +14,31 @@
         <difficulty>3</difficulty>
     </orc>
 
-    <vampire>
-        <image>vampire</image>
-        <radius>60</radius>
-        <health>35</health>
+    <berserk>
+        <image>berserk</image>
+        <radius>35</radius>
+        <health>10</health>
         <healthRegen>0.0</healthRegen>
-        <attack>7.5</attack>
+        <attack>3.0</attack>
         <defence>0.0</defence>
-        <moveSpeed>45</moveSpeed>
+        <moveSpeed>80</moveSpeed>
         <attackInterval>1.0</attackInterval>
         <attackSpeed>0.0</attackSpeed>
-        <difficulty>3</difficulty>
-    </vampire>
+        <difficulty>1</difficulty>
+    </berserk>
+
+    <robot>
+        <image>robot</image>
+        <radius>50</radius>
+        <health>35</health>
+        <healthRegen>5</healthRegen>
+        <attack>10.0</attack>
+        <defence>0.0</defence>
+        <moveSpeed>100</moveSpeed>
+        <attackInterval>1.0</attackInterval>
+        <attackSpeed>0.0</attackSpeed>
+        <difficulty>5</difficulty>
+    </robot>
 
     <megaOrc>
         <image>orc</image>
