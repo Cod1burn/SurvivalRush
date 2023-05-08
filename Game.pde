@@ -12,6 +12,7 @@ public class Game {
     static final float MAX_TIME = 15 * 60.0;
     float gameTimer;
     int gameLevel;
+    int enemiesKilled;
     boolean isOver;
 
     EnemyGenerator eg;
@@ -34,6 +35,8 @@ public class Game {
         player.setMap(map);
         gameTimer = MAX_TIME;
         gameLevel = 1;
+
+        enemiesKilled = 0;
 
         camera = new PVector(0,0);
 
@@ -125,7 +128,7 @@ public class Game {
             for (Weapon w : player.ce.weapons) {
                 if (w.level < w.MAX_LEVEL) upgradable = true;
             }
-            
+
             if (upgradable) {
                 pause();
                 lpMenu = new LevelUpMenu(this, player);
@@ -195,7 +198,8 @@ public class Game {
     }
 
     void timeOut() {
-
+        goMenu = new GameOverMenu(this);
+        isOver = true;
     }
 
     void playerDie() {

@@ -117,5 +117,6 @@ public class Enemy extends MovableObject {
         if (ran < 33) game.generateItem(ItemType.HEART, 30, position.copy());
         if (ran > 66) game.generateItem(ItemType.ATTACK, 3, position.copy());
         if (ran >= 33 && ran <= 66) game.generateItem(ItemType.SPEED, 30, position.copy());
+        game.enemiesKilled ++;
     }
 }

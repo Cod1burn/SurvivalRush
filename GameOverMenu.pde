@@ -27,7 +27,7 @@ public class GameOverMenu {
             textAlign(CENTER);
             text("GAME OVER!", width/2, height/2);
             textSize(32);
-            text("You gained " + ce.exp + " exp.", width/2, height/2 + 100);
+            text("You Killed " + game.enemiesKilled + " enemies.", width/2, height/2 + 100);
             text("You reached level " + ce.level, width/2, height/2 + 150);
 
             // restart
