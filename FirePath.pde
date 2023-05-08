@@ -14,7 +14,7 @@ public class FirePath extends Weapon{
         super(player);
         PROJ_NUM = 1;
         shootCount = 0;
-        
+        TYPE = WeaponType.FIREPATH;
         ATTACK_MULTIPLIER = 0.25;
         BASE_SHOOT_INTERVAL = 4.0;
         PROJ_DURATION = 2.5;
