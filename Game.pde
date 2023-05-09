@@ -324,11 +324,11 @@ public class Game {
             if (keyChar == 'a' || keyChar == 'A' || keyCode == LEFT) player.movingDirection(-1, 0);
             if (keyChar == 'w' || keyChar == 'W' || keyCode == UP) player.movingDirection(0, -1);
             if (keyChar == 's' || keyChar == 'S' || keyCode == DOWN) player.movingDirection(0, 1);
-            if (keyChar == 'c') generateEnemies(EnemyType.MEGAORC, 3, 700, 2000);
-            if (keyChar == 'x') addAllWeapons();
-            if (keyChar == 'z') levelUpAllWeapons();
+            // Cheat Codes
+            if (keyChar == 'x' || keyChar == 'X') addAllWeapons(); // Press X to add all weapons
+            if (keyChar == 'z' || keyChar == 'Z') levelUpAllWeapons(); // Press Z to upgrade all weapons
             if (keyChar == 'l' || keyChar == 'L') player.ce.levelUp(); // Press L to test level up menu
-            if (keyChar == 't') gameTimer -= 60; // Press T to move 1 minute forward.
+            if (keyChar == 't' || keyChar == 'T') gameTimer -= 60; // Press T to move 1 minute forward
             if(keyChar == 'g' || keyChar == 'G') playerDie(); // Press G to test game over menu
 
             if(isOver) goMenu.keyPressed(keyChar);
