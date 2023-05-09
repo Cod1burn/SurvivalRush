@@ -258,6 +258,7 @@ public class Game {
         Get a Specific number of random visible enemies from enemies list.
     **/
     List<Enemy> getRandomEnemies(int num) {
+        if (num < 0) return new ArrayList<Enemy>();
         List<Enemy> visibleEnemies = enemies.stream()
             .filter(e -> e.inCamera)
             .collect(Collectors.toList());
