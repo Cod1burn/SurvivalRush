@@ -25,13 +25,18 @@ public class Button extends InteractableObject{
             else bColor = max(0, bColor-30);
         }
         stroke(255 - bColor);
-        fill(bColor);
+        fill(90,90,0);
         rect(x, y, w, h, min(w, h)/5);
         fill((1-bColor/128)*255);
         textAlign(CENTER,CENTER);
         int fontNum = min(w, h)/3;
-        textSize(fontNum);
-        text(bText, x + w/2, y + h/2 - fontNum/4);
+        PFont font;
+        font = createFont("Serif.bold", fontNum);
+        //printArray(PFont.list());
+
+         //textSize(fontNum);
+        textFont(font);
+        text(bText.toUpperCase(), x + w/2, y + h/2 - fontNum/4);
     }
     
     boolean contains(int mx, int my) {

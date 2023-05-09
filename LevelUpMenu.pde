@@ -28,7 +28,7 @@ public class LevelUpMenu {
 
     void createButtons() {
         for(int i = 0; i < options.size(); i++) {
-            Button button = new Button(350 + 250 * i, height/2, 150, 50, options.get(i));
+            Button button = new Button(250 + 250 * i, height/2, 195, 50, options.get(i));
             buttons.add(button);
         }
     }
@@ -113,20 +113,22 @@ public class LevelUpMenu {
         PImage img = loadImage("MapImgs/Map0/wholemap.jpg");
         img.resize(width, height);
         image(img, 0, 0);
-        
+        PFont font; 
+        font = createFont("Serif", 30);
+        textFont(font);
         textSize(64);
         textAlign(CENTER, CENTER);
         text("Congratulations you have levelled up!", width/2, height/4);
         textSize(32);
         text("Select one of the options. Add a new weapon to your arsenal or upgrade an existing weapon.", width/2, height/4 + 100);
-        text("Use the numbers 1-5 for the corresponding option or click on the buttons.", width/2, height/4 + 175);
+        text("Use the numbers 1-6 for the corresponding option or click on the buttons.", width/2, height/4 + 175);
         drawButtons();
     }
 
     void keyPressed(char keyChar) {
         
         int input = 100;
-        if(keyChar >= '1' && keyChar <= '5') {
+        if(keyChar >= '1' && keyChar <= '6') {
             input = int(keyChar) - int('1');
             option = options.get(input);
             selectOption(input);

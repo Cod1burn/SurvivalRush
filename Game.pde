@@ -86,6 +86,7 @@ public class Game {
 
     // method to draw the user info
     void displayInfo() {
+        int barWidth = 100;
         textSize(16);
         textAlign(LEFT);
         stroke(0);
@@ -93,16 +94,19 @@ public class Game {
         // exp and level
         text("level: ", 50, 50);
         noFill();
-        rect(100, 40, player.ce.maxExp, 10);
+        rect(100, 40, barWidth, 10);
         fill(0);
-        rect(100, 40, player.ce.exp, 10);
-        text(player.ce.level, 105 + player.ce.maxExp, 50);
+        int exp = (int) ((player.ce.exp / player.ce.maxExp) * 100);
+        rect(100, 40, exp, 10);
+        text(player.ce.level, 105 + barWidth, 50);
         // health
         text("health: ", 50, 70);
-        noStroke();
+        int health = (int) ((player.ce.health / player.ce.maxHealth) * 100);
+        noFill();
+        rect(100, 60, barWidth, 10);
         fill(0);
-        rect(100, 60, player.ce.health, 10);
-        text((int) player.ce.health + "%", 105 + player.ce.health, 70);
+        rect(100, 60, health, 10);
+        text((int) health + "%", 105 + barWidth, 70);
         // weapons icons
         text("Weapons: ", 50, 100);
         if(player.ce.weapons.size() == 0) {
@@ -117,13 +121,13 @@ public class Game {
             }
         }
         // auras
-        text("Auras: ", 50, 125);
+        text("Auras: ", 50, 150);
         if (player.ce.auras.size() == 0) {
-            text("NONE", 100, 125);
+            text("NONE", 100, 150);
         }
         else {
             int w = 100; 
-            int h = 115;
+            int h = 140;
             for(int i = 0; i < player.ce.auras.size(); i++) {
                 Aura aura = player.ce.auras.get(i);
                 image(aura.getIcon(), w, h + (25 * i), 25, 25);

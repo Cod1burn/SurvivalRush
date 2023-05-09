@@ -33,7 +33,7 @@ public class GameOverMenu {
             // restart
             // text("To restart the game, press R or click the button", width/2, height/2 + 250);
             // button
-            button = new Button(width/2, height/2 + 250, 350, 50, "To restart, press R or click this button.");
+            button = new Button(width/2, height/2 + 250, 450, 50, "To restart, press R or click this button.");
             button.draw();
         }
 
