@@ -200,9 +200,9 @@ public class LevelUpMenu {
         pg.background(255);
         pg.fill(0);
         pg.stroke(0);
-        // PImage img = loadImage("MapImgs/Map0/wholemap.jpg");
-        // img.resize(pg.width, pg.height);
-        // pg.image(img, width - pg.width, height - pg.height);
+        PImage img = loadImage("MapImgs/Map0/levelUp.jpg");
+        img.resize(width/2, height/2);
+        pg.image(img, 0, 0);
         pg.textAlign(CENTER, TOP);
         pg.textSize(20);
         pg.text("You have reached level " + player.ce.level, pg.width/2, 0);

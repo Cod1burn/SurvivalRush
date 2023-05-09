@@ -62,7 +62,7 @@ public class Button extends InteractableObject{
         } else pg.text(lp.getDescription(WeaponType.valueOf(st[1]), false), x + w/2, y + h/2 + 40);
         // add weapon icon
         PImage img = lp.getImage(WeaponType.valueOf(st[1]));
-        img.resize(20,20); 
+        img.resize(30,30); 
         pg.image(img, x - 50, y + h/2);
 
     }
