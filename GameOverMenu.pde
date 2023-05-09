@@ -19,6 +19,10 @@ public class GameOverMenu {
         textSize(64);
         textAlign(CENTER);
         text("GAME OVER!", width/2, height/2);
+        if(game.gameTimer <= 0) {
+            textAlign(CENTER, TOP);
+            text("YOU WON!!!!!", width/2, 100);
+        }
         textSize(32);
         text("You Killed " + game.enemiesKilled + " enemies.", width/2, height/2 + 100);
         text("You reached level " + ce.level, width/2, height/2 + 150);
