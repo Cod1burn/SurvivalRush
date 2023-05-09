@@ -49,3 +49,4 @@ To test the full game functionalities in a convenient way, here is some cheat co
 2. Press 'Z' to upgrade all weapons for 1 level.
 3. Press 'L' to level up your character
 4. Press 'T' to move the game timer 1 minute forward.
+5. Press 'G' to kill your character!
