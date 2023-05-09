@@ -9,7 +9,7 @@ public class Game {
     Player player;
     int playerLastLevel;
 
-    static final float MAX_TIME = 15 * 60.0;
+    static final float MAX_TIME = 5 * 60.0; // changed to 5 in video recording.
     float gameTimer;
     int gameLevel;
     int enemiesKilled;
