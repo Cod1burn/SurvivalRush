@@ -8,8 +8,10 @@ public class Menu {
     }
 
     void draw() {
-        background(255);
-        fill(0);
+        background(0);
+        PImage img = loadImage("MapImgs/Map0/wholemap.jpg");
+        img.resize(width, height);
+        image(img, 0, 0);
         textSize(64);
         textAlign(CENTER);
         text("Game Paused", width/2, height/6);
@@ -25,8 +27,9 @@ public class Menu {
         // level
         text("Level: " + player.ce.level, width/2, height/6 + 200);
         // weapons and their levels.
+        text("Weapons: ", width/2, height/6 + 250);
         int w = width/2;
-        int h = height/6 + 200;
+        int h = height/6 + 250;
         
         ArrayList<Weapon> weapons = player.ce.weapons;
         if(weapons.size() == 0) {
