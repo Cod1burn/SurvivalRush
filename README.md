@@ -2,8 +2,10 @@
 
 ## Player's Guide 
 
-### Movement
+### Controls
 The player can move using the arrow keys and the WASD keys. 
+
+Press the SPACE or ESC keys to pause/unpause the game.
 
 ### Rules
 The game lasts as long as the health of the player lasts or they survive the time limit. 
