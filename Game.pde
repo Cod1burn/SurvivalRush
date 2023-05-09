@@ -75,9 +75,9 @@ public class Game {
         // Draw UI
         displayInfo();
         if (pause) {
-            textSize(80);
-            textAlign(CENTER, CENTER);
-            text("PAUSE", width/2, height/2);
+            // textSize(80);
+            // textAlign(CENTER, CENTER);
+            // text("PAUSE", width/2, height/2);
             // Draw pause menu
             if (lpMenu != null) lpMenu.draw();
         }
@@ -169,13 +169,6 @@ public class Game {
             }
             playerLastLevel++;
         } else if (lpMenu != null) {
-            // recently updated
-            stroke(0);
-            int startTime = millis();
-            if(millis() - startTime < 2000) {
-                textSize(16);
-                text(lpMenu.getDescription(), width/2, 150);
-            }
             lpMenu = null;
         }
 
