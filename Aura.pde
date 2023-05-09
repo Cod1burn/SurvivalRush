@@ -78,7 +78,7 @@ void expire() {
         break;
 
         case EXTRAPROJS:
-            ce.extraProjs -= value;
+            ce.extraProjs -= (int)(value);
         break;
         
         default :
