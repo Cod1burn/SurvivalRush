@@ -43,6 +43,7 @@ public class GameOverMenu {
         if(keyChar == 'r' || keyChar == 'R') {
             restart = true; 
             // implement RESTART
+            setup();
         }
     }
 
